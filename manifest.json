@@ -1,0 +1,24 @@
+{
+  "name": "Crime Zoo - অপরাধ অনুসন্ধান ও জনসচেতনতা পোর্টাল",
+  "short_name": "Crime Zoo",
+  "description": "লাইভ অপরাধ প্রতিবেদন, মাল্টি-মিডিয়া প্রমাণ, সত্যতা যাচাই ও হুইসেলব্লোয়ার প্ল্যাটফর্ম",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#060911",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

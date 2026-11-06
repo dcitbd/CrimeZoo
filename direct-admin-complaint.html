@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সরাসরি এডমিন অভিযোগ ফর্ম | Crime Zoo</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#dc2626">
+  <link rel="icon" href="./assets/icons/logo.png">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/security.css">
+</head>
+<body>
+
+  <div class="alert-ticker-bar">
+    <div class="container alert-ticker-container">
+      <span class="ticker-label">🚨 Crime Zoo লাইভ</span>
+      <div class="ticker-content" id="tickerText">
+        <span>Crime Zoo ফরেনসিক ও ইনভেস্টিগেশন সেল দ্বারা যাচাইকৃত অপরাধ প্রতিবেদন ও জনসচেতনতা বুলেটিন...</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand-logo">
+        <img src="./assets/icons/logo.png" alt="Crime Zoo" class="brand-logo-img">
+        <div>
+          <span>Crime Zoo</span>
+          <span class="brand-text-sub">অপরাধ অনুসন্ধান ও সত্যতা যাচাই পোর্টাল</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="./index.html" class="nav-link ">মূল পাতা</a>
+        <a href="./all-reports.html" class="nav-link ">সকল রিপোর্ট (৫০+)</a>
+        <a href="./submit-report.html" class="nav-link ">পোস্ট / রিপোর্ট</a>
+        <a href="./direct-admin-complaint.html" class="nav-link active">এডমিন অভিযোগ</a>
+        <a href="./track-report.html" class="nav-link ">সত্যতা ট্র্যাকার</a>
+        <a href="./emergency-helpline.html" class="nav-link ">জরুরি নম্বর (৩২+)</a>
+        <a href="./contact.html" class="nav-link ">যোগাযোগ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="triggerPwaInstall()" style="display: none;">
+          📲 Install App
+        </button>
+        <a href="./reporter-login.html" class="btn btn-outline btn-sm">
+          🎙️ রিপোর্টার ডেস্ক
+        </a>
+        <a href="./submit-report.html" class="btn btn-primary btn-sm">
+          ✍️ অপরাধ রিপোর্ট
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:0.5rem;">
+      <div style="display:flex; align-items:center; gap:0.6rem;">
+        <img src="./assets/icons/logo.png" style="width:36px; height:36px; object-fit:contain;">
+        <strong style="color:#fff; font-size:1.1rem;">Crime Zoo</strong>
+      </div>
+      <button class="modal-close-btn" id="mobileDrawerClose" style="width:32px; height:32px;">✕</button>
+    </div>
+    <a href="./index.html" class="nav-link ">🏠 মূল পাতা</a>
+    <a href="./all-reports.html" class="nav-link ">📑 সকল রিপোর্ট (১ পেজে ৫০+)</a>
+    <a href="./submit-report.html" class="nav-link ">✍️ অপরাধ রিপোর্ট করুন</a>
+    <a href="./direct-admin-complaint.html" class="nav-link active">🛡️ সরাসরি এডমিনের কাছে অভিযোগ</a>
+    <a href="./track-report.html" class="nav-link ">🔍 সত্যতা ট্র্যাকার (রিপোর্টার)</a>
+    <a href="./emergency-helpline.html" class="nav-link ">🚨 ৩২+ সরকারি জরুরি নম্বর</a>
+    <a href="./contact.html" class="nav-link ">📩 যোগাযোগ ও বার্তা</a>
+    <a href="./reporter-login.html" class="nav-link ">🎙️ রিপোর্টার লগইন</a>
+    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্ট্রেশন</a>
+    <a href="./admin/login.html" class="nav-link">🔐 এডমিন গেটওয়ে</a>
+    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color);">
+      <button class="btn btn-install btn-sm" style="width:100%;" onclick="triggerPwaInstall()">📲 অ্যাপ ইনস্টল করুন</button>
+    </div>
+  </aside>
+
+  <main class="container">
+    <div class="form-card" style="border-color: rgba(220, 38, 38, 0.55);">
+      <div class="form-header">
+        <span class="badge badge-official" style="margin-bottom: 0.5rem;">🛡️ ডিরেক্ট সুপার এডমিন এনক্রিপ্টেড ভল্ট</span>
+        <h1 class="form-title">সরাসরি এডমিনের কাছে অভিযোগ দাখিল</h1>
+        <p style="color: var(--text-secondary); font-size: 0.92rem;">
+          অতি সংবেদনশীল অপরাধের তথ্য যা পাবলিক ফিডে না গিয়ে সরাসরি সুপার এডমিন ডেস্কে জমা হবে।
+        </p>
+      </div>
+
+      <div class="reporter-type-toggle">
+        <div class="toggle-option-card active" id="toggleAnonymous">
+          <div style="font-size: 1.75rem; margin-bottom: 0.25rem;">🕵️</div>
+          <div style="font-weight: 700; color: #fff; font-size: 1.05rem;">১. পরিচয় গোপন রেখে এডমিনকে জানান</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">জিরো-লগ এনক্রিপশন; আপনার পরিচয় সম্পূর্ণ সুরক্ষিত।</div>
+        </div>
+        <div class="toggle-option-card" id="toggleIdentified">
+          <div style="font-size: 1.75rem; margin-bottom: 0.25rem;">👤</div>
+          <div style="font-weight: 700; color: #fff; font-size: 1.05rem;">২. পরিচয় উল্লেখ করে জানান</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">সরাসরি এডমিন তদন্তকারী আপনার সাথে যোগাযোগ করবেন।</div>
+        </div>
+      </div>
+
+      <form id="crimeReportForm">
+        <div id="identifiedFields" style="display: none; background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.28); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.35rem;">
+          <div style="font-weight: 700; color: #38bdf8; margin-bottom: 0.75rem;">অভিযোগকারীর পরিচয়</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">আপনার পূর্ণ নাম</label><input type="text" id="reporterName" class="form-control" placeholder="নাম লিখুন"></div>
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">যোগাযোগ নম্বর</label><input type="text" id="reporterPhone" class="form-control" placeholder="০১৭XXXXXXXX"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>অভিযোগের শিরোনাম *</span>
+            <span style="font-size:0.78rem; color:#38bdf8;">কপি-পেস্ট নিষিদ্ধ | স্বহস্তে টাইপ করুন</span>
+          </label>
+          <input type="text" id="reportTitle" class="form-control" placeholder="অভিযোগের শিরোনাম লিখুন..." required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">অভিযোগের ধরন / ক্যাটাগরি *</label>
+            <select id="reportCategory" class="form-control" required>
+              <option value="টপ সিক্রেট ক্রাইম">টপ সিক্রেট ক্রাইম (সরাসরি এডমিন)</option>
+              <option value="আর্থিক প্রতারণা">আর্থিক প্রতারণা ও ব্যাংকিং ফ্রড</option>
+              <option value="সাইবার ক্রাইম">সাইবার ক্রাইম ও ব্ল্যাকমেইল</option>
+              <option value="চোরাচালান">চোরাচালান ও শুল্ক ফাঁকি</option>
+              <option value="সন্ত্রাস ও সহিংসতা">সন্ত্রাস, চাঁদাবাজি ও হুমকি</option>
+              <option value="নিয়োগ দুর্নীতি">নিয়োগ দুর্নীতি ও ঘুষ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ঘটনাস্থল / থানা ও জেলা *</label>
+            <input type="text" id="reportDistrict" class="form-control" placeholder="যেমন: ধানমন্ডি, ঢাকা" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>অভিযোগের পূর্ণ বিবরণ ও ক্যাপশন *</span>
+            <span style="font-size:0.78rem; color:#f87171;">🔒 কপি-পেস্ট ব্লককৃত | অটো AI ডিটেক্টর সক্রিয়</span>
+          </label>
+          <textarea id="reportDescription" class="form-control" style="min-height: 145px;" placeholder="ঘটনার প্রেক্ষাপট, অভিযুক্তের বিবরণ স্বহস্তে টাইপ করুন..." required></textarea>
+          <div id="aiDetectorStatus" class="ai-detector-status"><span id="aiDetectorText"></span></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <span>গোপন প্রমাণ সংযুক্তি (ছবি ৫-১০টি, ভিডিও, অডিও অথবা PDF — যেকোনো ১টি দিলেই চলবে)</span>
+          </label>
+          <div class="multi-upload-grid">
+            <div class="media-slot-card">
+              <div style="font-weight:700; color:#38bdf8; margin-bottom:0.45rem;">📷 ১. ছবি (Photo Evidence - ৫-১০টি)</div>
+              <input type="file" id="photoFileInput" class="form-control" multiple accept="image/*" style="margin-bottom:0.45rem; font-size:0.82rem;">
+              <input type="url" id="photoUrlInput" class="form-control" placeholder="অথবা ছবির ডিরেক্ট লিংক" style="font-size:0.84rem;">
+              <div id="photoPreviewStatus" style="font-size:0.76rem; margin-top:4px;"></div>
+              <div id="photoThumbGrid" style="display:flex; flex-wrap:wrap; margin-top:4px;"></div>
+            </div>
+            <div class="media-slot-card">
+              <div style="font-weight:700; color:#f59e0b; margin-bottom:0.45rem;">🎥 ২. ভিডিও ফুটেজ</div>
+              <input type="file" id="videoFileInput" class="form-control" accept="video/*" style="margin-bottom:0.45rem; font-size:0.82rem;">
+              <input type="url" id="videoUrlInput" class="form-control" placeholder="অথবা ভিডিও লিংক" style="font-size:0.84rem;">
+              <div id="videoPreviewStatus" style="font-size:0.76rem; color:#34d399; margin-top:4px;"></div>
+            </div>
+            <div class="media-slot-card">
+              <div style="font-weight:700; color:#c084fc; margin-bottom:0.45rem;">🎙️ ৩. অডিও কল রেকর্ড</div>
+              <input type="file" id="audioFileInput" class="form-control" accept="audio/*" style="margin-bottom:0.45rem; font-size:0.82rem;">
+              <input type="url" id="audioUrlInput" class="form-control" placeholder="অথবা অডিও লিংক" style="font-size:0.84rem;">
+              <div id="audioPreviewStatus" style="font-size:0.76rem; color:#34d399; margin-top:4px;"></div>
+            </div>
+            <div class="media-slot-card">
+              <div style="font-weight:700; color:#34d399; margin-bottom:0.45rem;">📄 ৪. পিডিএফ দলিল</div>
+              <input type="file" id="pdfFileInput" class="form-control" accept=".pdf,application/pdf" style="margin-bottom:0.45rem; font-size:0.82rem;">
+              <input type="url" id="pdfUrlInput" class="form-control" placeholder="অথবা PDF লিংক" style="font-size:0.84rem;">
+              <div id="pdfPreviewStatus" style="font-size:0.76rem; color:#34d399; margin-top:4px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="submitReportBtn" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: 1.05rem; margin-top: 0.75rem;">
+          🚨 সরাসরি এডমিন ভল্টে পাঠান
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="submitSuccessModal">
+    <div class="modal-container" style="max-width: 540px; text-align: center; padding: 2rem;">
+      <div style="font-size: 3.2rem; margin-bottom: 0.5rem;">🛡️</div>
+      <h2 style="font-size: 1.45rem; color: #fff; margin-bottom: 0.5rem;">এডমিনের কাছে অভিযোগ প্রেরিত হয়েছে!</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem;">
+        আপনার গোপন অভিযোগটি সরাসরি সুপার এডমিন ইনবক্সে জমা হয়েছে এবং স্বয়ংক্রিয় নোটিফিকেশন মেইল পাঠানো হয়েছে।
+      </p>
+      <div style="background: rgba(220, 38, 38, 0.12); border: 1px dashed var(--accent-red); border-radius: 12px; padding: 1.15rem; margin-bottom: 1.35rem;">
+        <div style="margin-bottom: 0.6rem;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);">ট্র্যাকিং কেস আইডি</span>
+          <div style="font-size: 1.65rem; font-weight: 800; color: #f87171;" id="resCaseId">CZ-2026-0000</div>
+        </div>
+        <div>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">গোপন পিন কোড</span>
+          <div style="font-size: 1.45rem; font-weight: 800; color: #34d399;" id="resPin">0000</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='./index.html'">মূল পাতায় ফিরে যান</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 0.85rem;">
+            <img src="./assets/icons/logo.png" alt="Crime Zoo" class="brand-logo-img">
+            <div>
+              <span>Crime Zoo</span>
+              <span class="brand-text-sub">সত্যের অনুসন্ধানে নির্ভীক ডিজিটাল ফরেনসিক পোর্টাল</span>
+            </div>
+          </div>
+          <p style="line-height: 1.7; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+            নাগরিক নিরাপত্তা, হুইসেলব্লোয়ার সুরক্ষা এবং সাইবার ও মাঠপর্যায়ের অপরাধ প্রতিরোধে পরিচালিত স্বয়ংসম্পূর্ণ মাল্টি-মিডিয়া অনুসন্ধান প্ল্যাটফর্ম।
+          </p>
+          <div style="font-size: 0.82rem; color: #38bdf8;">
+            🔒 জিরো-ট্রেস আইপি ও অ্যান্টি-ট্র্যাকিং শিল্ড সক্রিয়
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">জরুরি সরকারি সেবা (৩২+)</h4>
+          <ul class="footer-links">
+            <li><a href="tel:999">জাতীয় জরুরি সেবা (৯৯৯)</a></li>
+            <li><a href="tel:106">দুর্নীতি দমন কমিশন (১০৬)</a></li>
+            <li><a href="tel:109">নারী ও শিশু হেল্পলাইন (১০৯)</a></li>
+            <li><a href="tel:1098">চাইল্ড হেল্পলাইন (১০৯৮)</a></li>
+            <li><a href="./emergency-helpline.html">সকল সরকারি হটলাইন দেখুন →</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">নেভিগেশন ও রিপোর্ট</h4>
+          <ul class="footer-links">
+            <li><a href="./all-reports.html">সকল রিপোর্ট (৫০+ পোস্ট ভিউ)</a></li>
+            <li><a href="./submit-report.html">অপরাধ রিপোর্ট ও প্রমাণ দাখিল</a></li>
+            <li><a href="./direct-admin-complaint.html">সরাসরি এডমিন অভিযোগ ফর্ম</a></li>
+            <li><a href="./track-report.html">সত্যতা যাচাই ট্র্যাকার</a></li>
+            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">অ্যাপ ইনস্টল ও এক্সেস</h4>
+          <p style="font-size: 0.84rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0.85rem;">
+            সরাসরি ব্রাউজার থেকে ইনস্টল বাটনে চাপ দিয়ে মোবাইলে অ্যাপ আইকন যুক্ত করুন।
+          </p>
+          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="triggerPwaInstall()">
+            📲 সরাসরি অ্যাপ ইনস্টল করুন
+          </button>
+          <a href="./reporter-register.html" class="btn btn-secondary btn-sm" style="width: 100%;">
+            📝 রিপোর্টার রেজিস্ট্রেশন
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© ২০২৬ <strong>Crime Zoo</strong>। সর্বস্বত্ব সংরক্ষিত • কপি, প্রিন্ট ও ডাউনলোড সম্পূর্ণ নিষিদ্ধ।</div>
+        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
+          <a href="./privacy-policy.html">হুইসেলব্লোয়ার সুরক্ষা নীতি</a>
+          <a href="./terms.html">ব্যবহারের শর্তাবলী</a>
+          <a href="./admin/login.html">এডমিন গেটওয়ে</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="bottom-app-nav">
+    <a href="./index.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+      <span>ফিড</span>
+    </a>
+    <a href="./all-reports.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+      <span>সকল রিপোর্ট</span>
+    </a>
+    <a href="./submit-report.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
+      <span>পোস্ট</span>
+    </a>
+    <a href="./emergency-helpline.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+      <span>জরুরি ৩২+</span>
+    </a>
+    <a href="./reporter-dashboard.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+      <span>ড্যাশবোর্ড</span>
+    </a>
+  </nav>
+
+  <script src="./assets/js/mailer.js"></script>
+  <script src="./assets/js/data.js"></script>
+  <script src="./assets/js/security.js"></script>
+  <script src="./assets/js/submit.js"></script>
+  <script src="./assets/js/pwa.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সিকিউরিটি ও টাইম-লক অডিট লগ | Crime Zoo এডমিন</title>
+  <link rel="icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/security.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <div style="display:flex; align-items:center; gap:0.65rem;">
+          <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
+          <div>
+            <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+          </div>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+<li><a href="contacts.html" class="sidebar-link"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
+<li><a href="users.html" class="sidebar-link"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+<li><a href="media-forensics.html" class="sidebar-link"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
+<li><a href="inbox.html" class="sidebar-link"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+<li><a href="audit-logs.html" class="sidebar-link active"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
+
+      </ul>
+      <div class="sidebar-footer">
+        <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
+          🌐 মূল সাইট ভিউ দেখুন
+        </a>
+        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="adminLogout()">
+          🚪 সিকিউর লগআউট
+        </button>
+      </div>
+    </aside>
+    
+
+    <main class="admin-main">
+      
+      <div class="admin-topbar">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
+          <h1 class="admin-page-title">সিস্টেম সিকিউরিটি, টাইম-লক ও মডারেশন অডিট লগ</h1>
+        </div>
+        <div class="admin-user-profile">
+          <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
+          <div style="text-align: right;">
+            <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+          </div>
+          <div class="admin-avatar">CZ</div>
+        </div>
+      </div>
+    
+
+      <div class="admin-content">
+        <div class="data-card">
+          <div class="table-header-bar">
+            <h3 style="font-size: 1.15rem; color: #fff;">অপরিবর্তনযোগ্য সিকিউরিটি অডিট রেকর্ড</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>লগ আইডি</th><th>লগইন/ইভেন্ট টাইপ</th>
+                  <th>অ্যাকশন</th>
+                  <th>টার্গেট</th>
+                  <th>সম্পাদনকারী</th>
+                  <th>সময়</th>
+                  <th>বিবরণ</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/security.js"></script>
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const logs = StorageManager.getAuditLogs();
+      document.getElementById("auditTableBody").innerHTML = logs.map(function(l) {
+        return '<tr>' +
+          '<td><strong>' + l.id + '</strong></td>' +
+          '<td><span class="badge badge-official">' + l.action + '</span></td>' +
+          '<td><strong style="color:#38bdf8;">' + l.target + '</strong></td>' +
+          '<td>' + l.admin + '</td>' +
+          '<td>' + l.time + '</td>' +
+          '<td style="color:#cbd5e1;">' + l.detail + '</td>' +
+        '</tr>';
+      }).join("");
+    });
+  </script>
+</body>
+</html>
