@@ -3,39 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>৪. কন্টাক্ট লিস্ট ব্যবস্থাপনা | Crime Zoo এডমিন</title>
+  <title>৪. কন্টাক্ট লিস্ট ও ফর্ম ব্যবস্থাপনা | Crime Zoo এডমিন</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>html { visibility: hidden; }</style>
+  <script>
+    (function() {
+      var s1 = sessionStorage.getItem("cz_admin_step1") === "true";
+      var s2 = sessionStorage.getItem("cz_admin_timelock") === "true";
+      var tk = sessionStorage.getItem("cz_admin_auth_token");
+      if (!s1 || !s2 || !tk) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="admin-layout">
-    
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <div style="display:flex; align-items:center; gap:0.65rem;">
           <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
           <div>
             <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
-            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">সিকিউর কমান্ড ও ফরেনসিক সেল</div>
           </div>
         </div>
       </div>
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
-<li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
-<li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
-<li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+        <li><a href="index.html" class="sidebar-link "><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link "><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link "><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link "><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
 <li><a href="contacts.html" class="sidebar-link active"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
-<li><a href="users.html" class="sidebar-link"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
-<li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
-<li><a href="media-forensics.html" class="sidebar-link"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
-<li><a href="inbox.html" class="sidebar-link"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
-<li><a href="audit-logs.html" class="sidebar-link"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
-
+<li><a href="users.html" class="sidebar-link "><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link "><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+<li><a href="media-forensics.html" class="sidebar-link "><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
+<li><a href="inbox.html" class="sidebar-link "><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+<li><a href="audit-logs.html" class="sidebar-link "><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
       </ul>
       <div class="sidebar-footer">
+        <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="EmailNotifier.openEmailPreviewModal()">
+          📧 প্রেরিত মেইল নোটিফিকেশন
+        </button>
         <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
           🌐 মূল সাইট ভিউ দেখুন
         </a>
@@ -44,57 +58,74 @@
         </button>
       </div>
     </aside>
-    
-
     <main class="admin-main">
-      
       <div class="admin-topbar">
         <div style="display:flex; align-items:center; gap:0.75rem;">
           <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
-          <h1 class="admin-page-title">৪. অফিশিয়াল ও জরুরি কন্টাক্ট লিস্ট (Add / Edit / Delete)</h1>
+          <h1 class="admin-page-title">৪. অফিশিয়াল ও ইউজার কন্টাক্ট লিস্ট (Add / Edit / Active-Deactive / Delete)</h1>
         </div>
         <div class="admin-user-profile">
+          <button class="btn btn-install btn-sm" onclick="EmailNotifier.openEmailPreviewModal()">📧 মেইল লগ</button>
           <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
           <div style="text-align: right;">
             <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
-            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● ভেরিফাইড সেশন</div>
           </div>
           <div class="admin-avatar">CZ</div>
         </div>
       </div>
-    
-
       <div class="admin-content">
-        
-        <!-- Digital Counter Cards for Contacts -->
-        <div class="stats-grid" style="margin-bottom: 1.35rem;">
-          <div class="stat-card stat-red" style="cursor:pointer;" onclick="filterContactsByDist('all')">
+        <!-- Digital Counter Filters for Contacts (Requirement #13) -->
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 1.35rem;">
+          <div class="stat-card stat-red" style="cursor:pointer;" onclick="setContactFilter('all', this)">
             <div class="stat-icon">📇</div>
-            <div class="stat-info"><span class="stat-number" id="cntTotalStat">০</span><span class="stat-label">সর্বমোট কন্টাক্ট</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="cntStatTotal">০</span>
+              <span class="stat-label">মোট কন্টাক্ট (সকল)</span>
+            </div>
           </div>
-          <div class="stat-card stat-green" style="cursor:pointer;" onclick="filterContactsByDist('ঢাকা')">
-            <div class="stat-icon">🏢</div>
-            <div class="stat-info"><span class="stat-number" id="cntDhakaStat">০</span><span class="stat-label">ঢাকা জোন কন্টাক্ট</span></div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setContactFilter('active', this)">
+            <div class="stat-icon">✓</div>
+            <div class="stat-info">
+              <span class="stat-number" id="cntStatActive">০</span>
+              <span class="stat-label">সক্রিয় (Active)</span>
+            </div>
           </div>
-          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="filterContactsByDist('চট্টগ্রাম')">
-            <div class="stat-icon">⚓</div>
-            <div class="stat-info"><span class="stat-number" id="cntCtgStat">০</span><span class="stat-label">চট্টগ্রাম জোন</span></div>
+          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="setContactFilter('deactive', this)">
+            <div class="stat-icon">🚫</div>
+            <div class="stat-info">
+              <span class="stat-number" id="cntStatDeactive">০</span>
+              <span class="stat-label">ডিএক্টিভ (Inactive)</span>
+            </div>
           </div>
-          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="filterContactsByDist('অন্যান্য')">
-            <div class="stat-icon">📍</div>
-            <div class="stat-info"><span class="stat-number" id="cntOtherStat">০</span><span class="stat-label">আঞ্চলিক হটলাইন</span></div>
+          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="setContactFilter('official', this)">
+            <div class="stat-icon">🏛️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="cntStatOfficial">০</span>
+              <span class="stat-label">অফিশিয়াল ইউনিট</span>
+            </div>
+          </div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setContactFilter('user_form', this)">
+            <div class="stat-icon">📩</div>
+            <div class="stat-info">
+              <span class="stat-number" id="cntStatUserForm">০</span>
+              <span class="stat-label">যোগাযোগ ফর্ম থেকে প্রাপ্ত</span>
+            </div>
           </div>
         </div>
 
         <div class="data-card">
           <div class="table-header-bar">
             <div>
-              <h3 style="font-size: 1.15rem; color: #fff;">কন্টাক্ট ডিরেক্টরি লিস্ট (<span id="contactCountBadge" style="color:#38bdf8;">০</span>)</h3>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">নতুন কন্টাক্ট যুক্ত, এডিট, ডিলিট ও সার্চ করুন</p>
+              <h3 style="font-size: 1.15rem; color: #fff;">কন্টাক্ট ডিরেক্টরি ও যোগাযোগ তালিকা</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">নতুন কন্টাক্ট যুক্ত, এডিট, এক্টিভ/ডিএক্টিভ, ডিলিট ও কাউন্টার ফিল্টার করুন</p>
             </div>
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <input type="text" id="contactSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 কন্টাক্ট খুঁজুন..." oninput="renderContactsList()">
-              <button class="btn btn-primary btn-sm" onclick="openContactModal()">➕ নতুন কন্টাক্ট এড করুন</button>
+              <input type="text" id="contactSearchInp" class="form-control" style="width:230px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 নাম, ফোন বা জেলা খুঁজুন..." oninput="renderContactsList()">
+              <button class="btn btn-secondary btn-sm" onclick="setContactFilter('all')">সকল</button>
+              <button class="btn btn-secondary btn-sm" onclick="setContactFilter('active')">সক্রিয়</button>
+              <button class="btn btn-secondary btn-sm" onclick="setContactFilter('deactive')">ডিএক্টিভ</button>
+              <button class="btn btn-primary btn-sm" onclick="openContactModal()">➕ নতুন কন্টাক্ট যুক্ত করুন</button>
             </div>
           </div>
 
@@ -102,12 +133,13 @@
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>আইডি</th>
+                  <th>আইডি ও সোর্স</th>
                   <th>নাম ও দপ্তর/পদবী</th>
+                  <th>ক্যাটাগরি</th>
                   <th>ফোন নম্বর ও ইমেইল</th>
-                  <th>জেলা / কর্মস্থল</th>
+                  <th>জেলা ও নোট</th>
                   <th>স্ট্যাটাস</th>
-                  <th>অ্যাকশন (এডিট / ডিলিট)</th>
+                  <th>অ্যাকশন (এডিট / এক্টিভ-ডিএক্টিভ / ডিলিট)</th>
                 </tr>
               </thead>
               <tbody id="contactsTableBody"></tbody>
@@ -118,36 +150,66 @@
     </main>
   </div>
 
+  <!-- Upgraded Contact Add/Edit Form Modal (Requirement #13) -->
   <div class="modal-backdrop" id="contactCrudModal">
-    <div class="modal-container" style="max-width: 520px; padding: 1.75rem;">
-      <h3 style="color:#fff; font-size:1.25rem; margin-bottom:1rem;" id="contactModalHeading">নতুন কন্টাক্ট যুক্ত করুন</h3>
+    <div class="modal-container" style="max-width: 620px; padding: 1.85rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:1rem;">
+        <h3 style="color:#fff; font-size:1.25rem;" id="contactModalHeading">➕ নতুন কন্টাক্ট যুক্ত করুন</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('contactCrudModal').classList.remove('active')">✕</button>
+      </div>
       <form onsubmit="event.preventDefault(); saveContactCrud();">
         <input type="hidden" id="editContactId">
-        <div class="form-group">
-          <label class="form-label">নাম / ইউনিটের নাম *</label>
-          <input type="text" id="cNameInp" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">দপ্তর বা পদবী *</label>
-          <input type="text" id="cRoleInp" class="form-control" required>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">নাম / ইউনিটের নাম *</label>
+            <input type="text" id="cNameInp" class="form-control" placeholder="নাম বা দপ্তরের নাম..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">দপ্তর বা পদবী *</label>
+            <input type="text" id="cRoleInp" class="form-control" placeholder="পদবী বা বিভাগ..." required>
+          </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
           <div class="form-group">
-            <label class="form-label">ফোন নম্বর *</label>
-            <input type="text" id="cPhoneInp" class="form-control" required>
+            <label class="form-label">ক্যাটাগরি / সেক্টর *</label>
+            <select id="cCatInp" class="form-control">
+              <option value="আইনশৃঙ্খলা ও পুলিশ">আইনশৃঙ্খলা ও পুলিশ</option>
+              <option value="সাইবার ও গোয়েন্দা">সাইবার ও গোয়েন্দা</option>
+              <option value="ফরেনসিক ল্যাব">ফরেনসিক ল্যাব</option>
+              <option value="শুল্ক ও চোরাচালান">শুল্ক ও চোরাচালান</option>
+              <option value="জরুরি সেবা ও প্রশাসন">জরুরি সেবা ও প্রশাসন</option>
+              <option value="নাগরিক যোগাযোগ">নাগরিক যোগাযোগ</option>
+            </select>
           </div>
           <div class="form-group">
-            <label class="form-label">ইমেইল</label>
-            <input type="text" id="cEmailInp" class="form-control">
+            <label class="form-label">স্ট্যাটাস *</label>
+            <select id="cStatusInp" class="form-control">
+              <option value="active">সক্রিয় (Active)</option>
+              <option value="deactive">ডিএক্টিভ (Inactive)</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">মোবাইল / হটলাইন নম্বর *</label>
+            <input type="text" id="cPhoneInp" class="form-control" placeholder="০১৭XXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ইমেইল অ্যাড্রেস</label>
+            <input type="text" id="cEmailInp" class="form-control" placeholder="email@gov.bd">
+          </div>
+          <div class="form-group">
+            <label class="form-label">জেলা / কর্মস্থল *</label>
+            <input type="text" id="cDistInp" class="form-control" placeholder="ঢাকা" required>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">জেলা / এলাকা *</label>
-          <input type="text" id="cDistInp" class="form-control" required>
+          <label class="form-label">বিস্তারিত নোট / দায়িত্ব বিবরণী (ঐচ্ছিক)</label>
+          <textarea id="cNoteInp" class="form-control" style="min-height:75px;" placeholder="কন্টাক্ট সম্পর্কে অতিরিক্ত তথ্য..."></textarea>
         </div>
         <div style="display:flex; gap:0.75rem;">
           <button type="button" class="btn btn-outline" style="flex:1;" onclick="document.getElementById('contactCrudModal').classList.remove('active')">বাতিল</button>
-          <button type="submit" class="btn btn-primary" style="flex:1;">💾 সেভ করুন</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">💾 কন্টাক্ট সেভ করুন</button>
         </div>
       </form>
     </div>
@@ -157,31 +219,64 @@
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
   <script>
-    
-    let currentContactZoneFilter = "all";
-    function filterContactsByDist(zone) {
-      currentContactZoneFilter = zone;
+    let currentContactFilter = "all";
+
+    function setContactFilter(f, cardEl) {
+      currentContactFilter = f;
+      document.querySelectorAll(".admin-content .stats-grid .stat-card").forEach(c => {
+        c.style.outline = "none";
+      });
+      if (cardEl) cardEl.style.outline = "2px solid #38bdf8";
       renderContactsList();
     }
 
     function renderContactsList() {
+      const allContacts = StorageManager.getContacts();
+      const isAct = c => c.status === "active" || c.status === "সক্রিয়";
+
+      document.getElementById("cntStatTotal").innerText = allContacts.length.toLocaleString("bn-BD");
+      document.getElementById("cntStatActive").innerText = allContacts.filter(isAct).length.toLocaleString("bn-BD");
+      document.getElementById("cntStatDeactive").innerText = allContacts.filter(c => !isAct(c)).length.toLocaleString("bn-BD");
+      document.getElementById("cntStatOfficial").innerText = allContacts.filter(c => c.source !== "user_form").length.toLocaleString("bn-BD");
+      document.getElementById("cntStatUserForm").innerText = allContacts.filter(c => c.source === "user_form").length.toLocaleString("bn-BD");
+
+      let list = [...allContacts];
+      if (currentContactFilter === "active") list = list.filter(isAct);
+      else if (currentContactFilter === "deactive") list = list.filter(c => !isAct(c));
+      else if (currentContactFilter === "official") list = list.filter(c => c.source !== "user_form");
+      else if (currentContactFilter === "user_form") list = list.filter(c => c.source === "user_form");
+
       const q = (document.getElementById("contactSearchInp")?.value || "").toLowerCase();
-      const list = StorageManager.getContacts().filter(function(c) {
-        return !q || c.name.toLowerCase().includes(q) || c.role.toLowerCase().includes(q) || c.phone.includes(q) || c.district.toLowerCase().includes(q);
-      });
-      document.getElementById("contactCountBadge").innerText = list.length.toLocaleString("bn-BD");
+      if (q) {
+        list = list.filter(c =>
+          (c.name && c.name.toLowerCase().includes(q)) ||
+          (c.role && c.role.toLowerCase().includes(q)) ||
+          (c.phone && c.phone.toLowerCase().includes(q)) ||
+          (c.district && c.district.toLowerCase().includes(q)) ||
+          (c.category && c.category.toLowerCase().includes(q))
+        );
+      }
+
       const tbody = document.getElementById("contactsTableBody");
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো কন্টাক্ট পাওয়া যায়নি।</td></tr>';
+        return;
+      }
+
       tbody.innerHTML = list.map(function(c) {
+        const activeState = isAct(c);
         return '<tr>' +
-          '<td><strong>' + c.id + '</strong></td>' +
+          '<td><strong>' + c.id + '</strong><br><span style="font-size:0.72rem; color:#38bdf8;">' + (c.source === 'user_form' ? '📩 ওয়েব ফর্ম' : '🏛️ অফিশিয়াল') + '</span></td>' +
           '<td><div style="font-weight:700; color:#fff;">' + c.name + '</div><div style="font-size:0.8rem; color:#94a3b8;">' + c.role + '</div></td>' +
-          '<td><div style="color:#38bdf8; font-weight:600;">📞 ' + c.phone + '</div><div style="font-size:0.78rem; color:#cbd5e1;">✉️ ' + c.email + '</div></td>' +
-          '<td>📍 ' + c.district + '</td>' +
-          '<td><span class="badge badge-verified">' + c.status + '</span></td>' +
+          '<td><span class="badge badge-identified">' + (c.category || 'সাধারণ') + '</span></td>' +
+          '<td><div style="color:#38bdf8; font-weight:600;">📞 ' + c.phone + '</div><div style="font-size:0.78rem; color:#cbd5e1;">✉️ ' + (c.email || 'N/A') + '</div></td>' +
+          '<td><div>📍 ' + c.district + '</div><div style="font-size:0.75rem; color:#94a3b8;">' + (c.note || '') + '</div></td>' +
+          '<td>' + (activeState ? '<span class="badge badge-verified">✓ সক্রিয়</span>' : '<span class="badge badge-fake">🚫 ডিএক্টিভ</span>') + '</td>' +
           '<td>' +
             '<div class="table-actions">' +
-              '<button class="btn-action btn-action-verify" onclick="editContactItem('' + c.id + '')">✏️ এডিট</button>' +
-              '<button class="btn-action btn-action-delete" onclick="deleteContactItem('' + c.id + '')">🗑️ ডিলিট</button>' +
+              '<button class="btn-action btn-action-verify" onclick="editContactItem(\'' + c.id + '\')">✏️ এডিট</button>' +
+              '<button class="btn-action btn-action-view" onclick="StorageManager.toggleContactStatus(\'' + c.id + '\'); renderContactsList();">' + (activeState ? '🚫 ডিএক্টিভ' : '✅ এক্টিভ') + '</button>' +
+              '<button class="btn-action btn-action-delete" onclick="deleteContactItem(\'' + c.id + '\')">🗑️ ডিলিট</button>' +
             '</div>' +
           '</td>' +
         '</tr>';
@@ -193,9 +288,12 @@
       document.getElementById("contactModalHeading").innerText = "➕ নতুন কন্টাক্ট যুক্ত করুন";
       document.getElementById("cNameInp").value = "";
       document.getElementById("cRoleInp").value = "";
+      document.getElementById("cCatInp").value = "আইনশৃঙ্খলা ও পুলিশ";
+      document.getElementById("cStatusInp").value = "active";
       document.getElementById("cPhoneInp").value = "";
       document.getElementById("cEmailInp").value = "";
       document.getElementById("cDistInp").value = "";
+      document.getElementById("cNoteInp").value = "";
       document.getElementById("contactCrudModal").classList.add("active");
     }
 
@@ -204,11 +302,14 @@
       if (!c) return;
       document.getElementById("editContactId").value = c.id;
       document.getElementById("contactModalHeading").innerText = "✏️ কন্টাক্ট এডিট করুন (" + c.id + ")";
-      document.getElementById("cNameInp").value = c.name;
-      document.getElementById("cRoleInp").value = c.role;
-      document.getElementById("cPhoneInp").value = c.phone;
-      document.getElementById("cEmailInp").value = c.email;
-      document.getElementById("cDistInp").value = c.district;
+      document.getElementById("cNameInp").value = c.name || "";
+      document.getElementById("cRoleInp").value = c.role || "";
+      document.getElementById("cCatInp").value = c.category || "আইনশৃঙ্খলা ও পুলিশ";
+      document.getElementById("cStatusInp").value = (c.status === "deactive") ? "deactive" : "active";
+      document.getElementById("cPhoneInp").value = c.phone || "";
+      document.getElementById("cEmailInp").value = c.email || "";
+      document.getElementById("cDistInp").value = c.district || "";
+      document.getElementById("cNoteInp").value = c.note || "";
       document.getElementById("contactCrudModal").classList.add("active");
     }
 
@@ -217,33 +318,25 @@
       const payload = {
         name: document.getElementById("cNameInp").value.trim(),
         role: document.getElementById("cRoleInp").value.trim(),
+        category: document.getElementById("cCatInp").value,
+        status: document.getElementById("cStatusInp").value,
         phone: document.getElementById("cPhoneInp").value.trim(),
         email: document.getElementById("cEmailInp").value.trim() || "N/A",
         district: document.getElementById("cDistInp").value.trim(),
-        status: "সক্রিয়"
+        note: document.getElementById("cNoteInp").value.trim()
       };
       if (editId) {
         StorageManager.updateContact(editId, payload);
       } else {
-        StorageManager.addContact({ id: "CNT-" + Math.floor(10 + Math.random() * 90), ...payload });
-      if (window.MailerService) {
-        MailerService.sendNotification("CONTACT_DIRECTORY_UPDATE", `কন্টাক্ট লিস্টে আপডেট: ${payload.name}`, {
-          "নাম": payload.name,
-          "দপ্তর": payload.role,
-          "ফোন": payload.phone,
-          "জেলা": payload.district
-        });
-      }
+        StorageManager.addContact({ id: "CNT-" + Math.floor(100 + Math.random() * 900), source: "official", ...payload });
       }
       document.getElementById("contactCrudModal").classList.remove("active");
       renderContactsList();
     }
 
     function deleteContactItem(id) {
-      if (confirm("এই কন্টাক্টটি মুছে ফেলতে চান?")) {
-        StorageManager.deleteContact(id);
-        renderContactsList();
-      }
+      StorageManager.deleteContact(id);
+      renderContactsList();
     }
 
     document.addEventListener("DOMContentLoaded", renderContactsList);

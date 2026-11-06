@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crime Zoo | অপরাধ অনুসন্ধান, মাল্টি-মিডিয়া প্রমাণ ও সত্যতা যাচাই পোর্টাল</title>
+  <meta name="description" content="Crime Zoo - লাইভ অপরাধ প্রতিবেদন, নাগরিক অভিযোগ, হুইসেলব্লোয়ার সুরক্ষা ও ফরেনসিক সত্যতা যাচাই প্ল্যাটফর্ম।">
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#dc2626">
   <link rel="icon" href="./assets/icons/logo.png">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/security.css">
 </head>
-<body>
-
+<body data-page-size="12">
+  <!-- Breaking Crime Alert Ticker -->
   <div class="alert-ticker-bar">
     <div class="container alert-ticker-container">
       <span class="ticker-label">🚨 Crime Zoo লাইভ</span>
@@ -21,6 +22,7 @@
     </div>
   </div>
 
+  <!-- Main Site Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="./index.html" class="brand-logo">
@@ -33,20 +35,20 @@
 
       <nav class="main-nav">
         <a href="./index.html" class="nav-link active">মূল পাতা</a>
-        <a href="./all-reports.html" class="nav-link ">সকল রিপোর্ট (৫০+)</a>
-        <a href="./submit-report.html" class="nav-link ">পোস্ট / রিপোর্ট</a>
-        <a href="./direct-admin-complaint.html" class="nav-link ">এডমিন অভিযোগ</a>
-        <a href="./track-report.html" class="nav-link ">সত্যতা ট্র্যাকার</a>
-        <a href="./emergency-helpline.html" class="nav-link ">জরুরি নম্বর (৩২+)</a>
-        <a href="./contact.html" class="nav-link ">যোগাযোগ</a>
+        <a href="./all-reports.html" class="nav-link">সকল রিপোর্ট (৫০+)</a>
+        <a href="./submit-report.html" class="nav-link">পোস্ট / রিপোর্ট</a>
+        <a href="./track-report.html" class="nav-link">সত্যতা ট্র্যাকার</a>
+        <a href="./emergency-helpline.html" class="nav-link">জরুরি নম্বর</a>
+        <a href="./direct-admin-complaint.html" class="nav-link">এডমিন অভিযোগ</a>
+        <a href="./contact.html" class="nav-link">যোগাযোগ</a>
       </nav>
 
       <div class="header-actions">
-        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="triggerPwaInstall()" style="display: none;">
-          📲 Install App
+        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="openDirectAppInstallerModal()" style="display: inline-flex;">
+          📲 সরাসরি অ্যাপ ইনস্টল
         </button>
         <a href="./reporter-login.html" class="btn btn-outline btn-sm">
-          🎙️ রিপোর্টার ডেস্ক
+          🎙️ রিপোর্টার প্যানেল
         </a>
         <a href="./submit-report.html" class="btn btn-primary btn-sm">
           ✍️ অপরাধ রিপোর্ট
@@ -56,6 +58,7 @@
     </div>
   </header>
 
+  <!-- Mobile Slide-Out Drawer Menu -->
   <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
   <aside class="mobile-drawer" id="mobileDrawer">
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:0.5rem;">
@@ -65,66 +68,97 @@
       </div>
       <button class="modal-close-btn" id="mobileDrawerClose" style="width:32px; height:32px;">✕</button>
     </div>
-    <a href="./index.html" class="nav-link active">🏠 মূল পাতা</a>
-    <a href="./all-reports.html" class="nav-link ">📑 সকল রিপোর্ট (১ পেজে ৫০+)</a>
-    <a href="./submit-report.html" class="nav-link ">✍️ অপরাধ রিপোর্ট করুন</a>
-    <a href="./direct-admin-complaint.html" class="nav-link ">🛡️ সরাসরি এডমিনের কাছে অভিযোগ</a>
-    <a href="./track-report.html" class="nav-link ">🔍 সত্যতা ট্র্যাকার (রিপোর্টার)</a>
-    <a href="./emergency-helpline.html" class="nav-link ">🚨 ৩২+ সরকারি জরুরি নম্বর</a>
-    <a href="./contact.html" class="nav-link ">📩 যোগাযোগ ও বার্তা</a>
-    <a href="./reporter-login.html" class="nav-link ">🎙️ রিপোর্টার লগইন</a>
-    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্ট্রেশন</a>
-    <a href="./admin/login.html" class="nav-link">🔐 এডমিন গেটওয়ে</a>
-    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color);">
-      <button class="btn btn-install btn-sm" style="width:100%;" onclick="triggerPwaInstall()">📲 অ্যাপ ইনস্টল করুন</button>
+    <a href="./index.html" class="nav-link active">🏠 মূল পাতা (ফিড)</a>
+    <a href="./all-reports.html" class="nav-link">📚 সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a>
+    <a href="./submit-report.html" class="nav-link">✍️ অপরাধ রিপোর্ট / পোস্ট করুন</a>
+    <a href="./direct-admin-complaint.html" class="nav-link">🛡️ এডমিন অভিযোগ ফর্ম</a>
+    <a href="./track-report.html" class="nav-link">🔍 সত্যতা ট্র্যাকিং (শুধু রিপোর্টার)</a>
+    <a href="./emergency-helpline.html" class="nav-link">🚨 সকল সরকারি জরুরি নম্বর</a>
+    <a href="./contact.html" class="nav-link">📩 যোগাযোগ ফর্ম</a>
+    <a href="./reporter-login.html" class="nav-link">🔐 রিপোর্টার লগইন</a>
+    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্টার</a>
+    <a href="./admin/login.html" class="nav-link">🛡️ এডমিন কন্ট্রোল প্যানেল</a>
+    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color); display:flex; flex-direction:column; gap:0.45rem;">
+      <button class="btn btn-install btn-sm" style="width:100%;" onclick="openDirectAppInstallerModal()">📲 সরাসরি অ্যাপ ইনস্টল করুন</button>
+      <button class="btn btn-secondary btn-sm" style="width:100%;" onclick="downloadDesktopMobileShortcut()">🔖 ক্রিয়েট শর্টকাট</button>
     </div>
   </aside>
 
   <main>
     <section class="hero-counter-section">
       <div class="container">
-        <div id="pwaInstallBanner" class="pwa-install-banner">
+        <!-- Direct App Install & Shortcut Banner (Requirement #3) -->
+        <div id="pwaInstallBanner" class="pwa-install-banner" style="display:flex; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:0.85rem;">
             <img src="./assets/icons/logo.png" style="width:46px; height:46px; object-fit:contain; border-radius:10px;">
             <div>
-              <div style="font-weight:700; color:#fff; font-size:0.95rem;">Crime Zoo অ্যাপ সরাসরি ইনস্টল করুন</div>
-              <div style="font-size:0.8rem; color:#cbd5e1;">ব্রাউজার থেকে সরাসরি অ্যাপ আইকন হিসেবে ইনস্টল করে অফলাইন সুবিধা নিন।</div>
+              <div style="font-weight:700; color:#fff; font-size:0.95rem;">Crime Zoo অ্যাপ আপনার মোবাইল বা কম্পিউটারে সরাসরি ইনস্টল করুন</div>
+              <div style="font-size:0.8rem; color:#cbd5e1;">সরাসরি ওয়েবসাইট থেকে ওয়ান-ক্লিক App Install অথবা Create Shortcut ব্যবহার করুন।</div>
             </div>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="triggerPwaInstall()">📲 সরাসরি ইনস্টল</button>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm" onclick="openDirectAppInstallerModal()">📲 সরাসরি অ্যাপ ইনস্টল</button>
+            <button class="btn btn-secondary btn-sm" onclick="downloadDesktopMobileShortcut()">🔖 ক্রিয়েট শর্টকাট</button>
+          </div>
         </div>
 
+        <!-- Hero Showcase Banner -->
         <div class="hero-showcase-banner">
           <div style="max-width: 720px;">
             <span class="badge badge-official" style="margin-bottom: 0.6rem;">🛡️ জিরো-ট্রেস এনক্রিপ্টেড ক্রাইম পোর্টাল</span>
             <h1 style="font-size: 1.95rem; font-weight: 800; color: #fff; line-height: 1.3; margin-bottom: 0.5rem;">
-              Crime Zoo — অপরাধের বিরুদ্ধে নির্ভীক মাল্টি-মিডিয়া অনুসন্ধান নেটওয়ার্ক
+              Crime Zoo — অপরাধের বিরুদ্ধে নির্ভীক মাল্টি-মিডিয়া অনুসন্ধান ও সত্যতা যাচাই নেটওয়ার্ক
             </h1>
             <p style="color: #cbd5e1; font-size: 0.94rem;">
-              ছবি, ভিডিও, অডিও ও PDF দলিলসহ অপরাধের তথ্য দিন। প্রতিটি পোস্ট পপআপ জুম ভিউ, অটো স্লাইড শো ও ফরেনসিক সত্যতা রেটিংযুক্ত।
+              নিজের পরিচয় গোপন রেখে অথবা পরিচয় প্রকাশ করে ছবি (৫-১০টি অটো স্লাইড), ভিডিও, অডিও বা পিডিএফ দলিলসহ অপরাধের তথ্য দিন। এডমিন অনুমোদনের সাথে সাথেই আপনার প্রতিবেদন লাইভ প্রকাশিত হবে।
             </p>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 0.6rem; min-width: 220px;">
-            <a href="./submit-report.html" class="btn btn-primary">✍️ অপরাধ রিপোর্ট / পোস্ট করুন</a>
-            <a href="./direct-admin-complaint.html" class="btn btn-secondary">🛡️ সরাসরি এডমিন অভিযোগ</a>
+          <div style="display: flex; flex-direction: column; gap: 0.6rem; min-width: 230px;">
+            <a href="./submit-report.html" class="btn btn-primary">✍️ নতুন পোস্ট / রিপোর্ট করুন</a>
+            <a href="./all-reports.html" class="btn btn-secondary">📚 সকল রিপোর্ট দেখুন (৫০+ পোস্ট)</a>
           </div>
         </div>
 
         <div class="stats-grid">
-          <div class="stat-card stat-red"><div class="stat-icon">📑</div><div class="stat-info"><span class="stat-number" id="statTotal">০</span><span class="stat-label">মোট দাখিলকৃত রিপোর্ট</span></div></div>
-          <div class="stat-card stat-green"><div class="stat-icon">✓</div><div class="stat-info"><span class="stat-number" id="statVerified">০</span><span class="stat-label">ভেরিফাইড অনুসন্ধান</span></div></div>
-          <div class="stat-card stat-purple"><div class="stat-icon">🕵️</div><div class="stat-info"><span class="stat-number" id="statAnonymous">০</span><span class="stat-label">বেনামি হুইসেলব্লোয়ার পোস্ট</span></div></div>
-          <div class="stat-card stat-gold"><div class="stat-icon">⚠️</div><div class="stat-info"><span class="stat-number" id="statFake">০</span><span class="stat-label">শনাক্তকৃত ভুয়া পোস্ট</span></div></div>
+          <div class="stat-card stat-red">
+            <div class="stat-icon">📑</div>
+            <div class="stat-info">
+              <span class="stat-number" id="statTotal">০</span>
+              <span class="stat-label">মোট লাইভ রিপোর্ট (ফিল্টার)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-green">
+            <div class="stat-icon">✓</div>
+            <div class="stat-info">
+              <span class="stat-number" id="statVerified">০</span>
+              <span class="stat-label">ভেরিফাইড অনুসন্ধান (ফিল্টার)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-purple">
+            <div class="stat-icon">🕵️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="statAnonymous">০</span>
+              <span class="stat-label">বেনামি হুইসেলব্লোয়ার (ফিল্টার)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-gold">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="statFake">০</span>
+              <span class="stat-label">শনাক্তকৃত ভুয়া পোস্ট (ফিল্টার)</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Search & Category Filter Bar -->
     <section class="feed-controls-section">
       <div class="container">
         <div class="controls-bar">
           <div class="search-box">
             <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="শিরোনাম, এলাকা বা কেস আইডি দিয়ে খুঁজুন...">
+            <input type="text" id="searchInput" placeholder="শিরোনাম, এলাকা, ক্যাটাগরি বা কেস আইডি (CZ-2026-...) দিয়ে খুঁজুন...">
           </div>
           <div class="category-tabs">
             <button class="cat-btn active" data-category="all">সকল পোস্ট</button>
@@ -133,19 +167,22 @@
             <button class="cat-btn" data-category="চোরাচালান">চোরাচালান</button>
             <button class="cat-btn" data-category="ডাকাতি ও ছিনতাই">ডাকাতি ও ছিনতাই</button>
             <button class="cat-btn" data-category="নিয়োগ দুর্নীতি">নিয়োগ দুর্নীতি</button>
+            <button class="cat-btn" data-category="সন্ত্রাস ও সহিংসতা">সন্ত্রাস ও সহিংসতা</button>
             <button class="cat-btn" data-category="ভেজাল ও জনস্বাস্থ্য">ভেজাল ও জনস্বাস্থ্য</button>
-            <a href="./all-reports.html" class="cat-btn" style="background:#dc2626; color:#fff;">📑 সকল রিপোর্ট (৫০+) →</a>
+            <button class="cat-btn" data-category="গুজব ও বিভ্রান্তি">গুজব ও বিভ্রান্তি</button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Main Crime Feed & Numbered Pagination -->
     <section class="container" style="padding-top: 0.75rem;">
       <div class="feed-grid" id="feedGrid"></div>
       <div class="pagination-wrapper" id="paginationBar"></div>
     </section>
   </main>
 
+  <!-- SINGLE-PAGE POPUP QUICK VIEW WITH AUTO SLIDE VIEW, IMAGE ZOOM, VIDEO/AUDIO RUNNER & PDF PREVIEW -->
   <div class="modal-backdrop" id="postQuickModal">
     <div class="modal-container">
       <div class="modal-header">
@@ -154,40 +191,66 @@
       </div>
 
       <div class="modal-body">
+        <!-- Multi-Media Switcher Tabs (Auto Slide Photo / Video / Audio / PDF) -->
         <div class="evidence-tabs-bar" id="modalEvidenceTabs"></div>
+
+        <!-- Media Stage (Auto Slide Carousel renders here) -->
         <div class="modal-media-stage" id="modalMediaWrapper"></div>
+
         <h2 class="modal-title" id="modalTitle" style="font-size:1.45rem; color:#fff; margin-bottom:0.85rem;"></h2>
 
         <div class="modal-details-grid">
-          <div><div class="detail-item-title">তারিখ ও সময়</div><div class="detail-item-value" id="modalDate"></div></div>
-          <div><div class="detail-item-title">ঘটনাস্থল / এলাকা</div><div class="detail-item-value" id="modalLocation"></div></div>
-          <div><div class="detail-item-title">ক্যাটাগরি ও কেস আইডি</div><div class="detail-item-value"><span id="modalCategory"></span> (<span id="modalCaseId" style="color:#38bdf8;"></span>)</div></div>
+          <div>
+            <div class="detail-item-title">তারিখ ও সময়</div>
+            <div class="detail-item-value" id="modalDate"></div>
+          </div>
+          <div>
+            <div class="detail-item-title">ঘটনাস্থল / এলাকা</div>
+            <div class="detail-item-value" id="modalLocation"></div>
+          </div>
+          <div>
+            <div class="detail-item-title">ক্যাটাগরি ও কেস আইডি</div>
+            <div class="detail-item-value"><span id="modalCategory"></span> (<span id="modalCaseId" style="color:#38bdf8;"></span>)</div>
+          </div>
         </div>
 
+        <!-- Truth Score Meter -->
         <div class="verification-truth-meter">
           <div class="meter-header">
             <span>Crime Zoo ফরেনসিক সত্যতা রেটিং</span>
             <span id="truthScorePercent" style="color: #34d399;">০%</span>
           </div>
-          <div class="meter-bar-outer"><div class="meter-bar-inner meter-bar-verified" id="truthScoreBar" style="width: 0%;"></div></div>
+          <div class="meter-bar-outer">
+            <div class="meter-bar-inner meter-bar-verified" id="truthScoreBar" style="width: 0%;"></div>
+          </div>
           <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.55rem;" id="truthScoreNote"></div>
         </div>
 
         <div class="modal-content-text" id="modalText"></div>
 
+        <!-- Modal Actions Bar -->
         <div class="modal-actions-bar">
           <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
-            <button class="modal-action-btn" id="modalLikeBtn" onclick="handleModalLike()">❤️ <span id="modalLikeCount">০</span> লাইক</button>
-            <div class="modal-action-btn" style="cursor: default;">👁️ <span id="modalViews">০</span> ভিউ</div>
+            <button class="modal-action-btn" id="modalLikeBtn" onclick="handleModalLike()">
+              ❤️ <span id="modalLikeCount">০</span> লাইক
+            </button>
+            <div class="modal-action-btn" style="cursor: default;">
+              👁️ <span id="modalViews">০</span> ভিউ
+            </div>
           </div>
-          <a href="./track-report.html" class="modal-action-btn">🔍 কেস ট্র্যাক করুন</a>
+          <a href="./track-report.html" class="modal-action-btn">
+            🔍 সত্যতা ট্র্যাকিং
+          </a>
         </div>
 
+        <!-- Comments Section -->
         <div class="comments-section">
-          <div style="font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:0.85rem;">নাগরিক মতামত ও আলোচনা</div>
+          <div style="font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:0.85rem;">নাগরিক মতামত ও তথ্যের সংযুক্তি</div>
           <div class="comment-input-box">
-            <div class="comment-author-row"><input type="text" id="commentAuthorInput" placeholder="আপনার নাম (ঐচ্ছিক)"></div>
-            <textarea id="commentTextInput" placeholder="মন্তব্য বা অতিরিক্ত তথ্য লিখুন..."></textarea>
+            <div class="comment-author-row">
+              <input type="text" id="commentAuthorInput" placeholder="আপনার নাম (ঐচ্ছিক / পরিচয় গোপন রাখতে ফাঁকা রাখুন)">
+            </div>
+            <textarea id="commentTextInput" placeholder="এই ঘটনার বিষয়ে আপনার মতামত বা অতিরিক্ত তথ্য লিখুন..."></textarea>
             <button class="btn btn-primary btn-sm" onclick="submitModalComment()" style="align-self: flex-end;">মন্তব্য প্রকাশ করুন</button>
           </div>
           <div class="comment-list" id="modalCommentsList"></div>
@@ -195,7 +258,7 @@
       </div>
     </div>
   </div>
-
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -216,37 +279,41 @@
         </div>
 
         <div>
-          <h4 class="footer-col-title">জরুরি সরকারি সেবা (৩২+)</h4>
+          <h4 class="footer-col-title">জরুরি সরকারি সেবা</h4>
           <ul class="footer-links">
             <li><a href="tel:999">জাতীয় জরুরি সেবা (৯৯৯)</a></li>
             <li><a href="tel:106">দুর্নীতি দমন কমিশন (১০৬)</a></li>
             <li><a href="tel:109">নারী ও শিশু হেল্পলাইন (১০৯)</a></li>
-            <li><a href="tel:1098">চাইল্ড হেল্পলাইন (১০৯৮)</a></li>
-            <li><a href="./emergency-helpline.html">সকল সরকারি হটলাইন দেখুন →</a></li>
+            <li><a href="tel:333">জাতীয় তথ্য ও সেবা বাতায়ন (৩৩৩)</a></li>
+            <li><a href="./emergency-helpline.html">সকল ৪৮+ সরকারি জরুরি নম্বর →</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-col-title">নেভিগেশন ও রিপোর্ট</h4>
+          <h4 class="footer-col-title">নেভিগেশন ও প্যানেল</h4>
           <ul class="footer-links">
-            <li><a href="./all-reports.html">সকল রিপোর্ট (৫০+ পোস্ট ভিউ)</a></li>
-            <li><a href="./submit-report.html">অপরাধ রিপোর্ট ও প্রমাণ দাখিল</a></li>
+            <li><a href="./all-reports.html">সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a></li>
+            <li><a href="./submit-report.html">বেনামি বা পরিচয়সহ পোস্ট</a></li>
             <li><a href="./direct-admin-complaint.html">সরাসরি এডমিন অভিযোগ ফর্ম</a></li>
-            <li><a href="./track-report.html">সত্যতা যাচাই ট্র্যাকার</a></li>
-            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a></li>
+            <li><a href="./track-report.html">রিপোর্টার সত্যতা ট্র্যাকিং</a></li>
+            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a> | <a href="./reporter-register.html">রেজিস্টার</a></li>
+            <li><a href="./admin/login.html">এডমিন কন্ট্রোল প্যানেল</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-col-title">অ্যাপ ইনস্টল ও এক্সেস</h4>
+          <h4 class="footer-col-title">সরাসরি অ্যাপ ইনস্টল ও শর্টকাট</h4>
           <p style="font-size: 0.84rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0.85rem;">
-            সরাসরি ব্রাউজার থেকে ইনস্টল বাটনে চাপ দিয়ে মোবাইলে অ্যাপ আইকন যুক্ত করুন।
+            ওয়েবসাইট থেকে সরাসরি অ্যাপ ইনস্টল করুন অথবা ডেস্কটপ/মোবাইল শর্টকাট তৈরি করুন।
           </p>
-          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="triggerPwaInstall()">
-            📲 সরাসরি অ্যাপ ইনস্টল করুন
+          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="openDirectAppInstallerModal()">
+            📲 সরাসরি ওয়েবসাইট থেকে অ্যাপ ইনস্টল
           </button>
-          <a href="./reporter-register.html" class="btn btn-secondary btn-sm" style="width: 100%;">
-            📝 রিপোর্টার রেজিস্ট্রেশন
+          <button class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="downloadDesktopMobileShortcut()">
+            🔖 ক্রিয়েট শর্টকাট (Create Shortcut)
+          </button>
+          <a href="./direct-admin-complaint.html" class="btn btn-outline btn-sm" style="width: 100%;">
+            🛡️ গোপন টিপ-অফ পাঠান
           </a>
         </div>
       </div>
@@ -256,12 +323,14 @@
         <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
           <a href="./privacy-policy.html">হুইসেলব্লোয়ার সুরক্ষা নীতি</a>
           <a href="./terms.html">ব্যবহারের শর্তাবলী</a>
-          <a href="./admin/login.html">এডমিন গেটওয়ে</a>
+          <a href="./reporter-login.html">রিপোর্টার ডেস্ক</a>
+          <a href="./admin/login.html">এডমিন লগইন</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Mobile Bottom App Navigation -->
   <nav class="bottom-app-nav">
     <a href="./index.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -273,19 +342,18 @@
     </a>
     <a href="./submit-report.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
-      <span>পোস্ট</span>
+      <span>পোস্ট করুন</span>
     </a>
     <a href="./emergency-helpline.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-      <span>জরুরি ৩২+</span>
+      <span>জরুরি নম্বর</span>
     </a>
-    <a href="./reporter-dashboard.html" class="bottom-nav-item">
+    <a href="./reporter-login.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-      <span>ড্যাশবোর্ড</span>
+      <span>রিপোর্টার</span>
     </a>
   </nav>
 
-  <script src="./assets/js/mailer.js"></script>
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/security.js"></script>
   <script src="./assets/js/app.js"></script>

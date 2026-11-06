@@ -1,37 +1,72 @@
 /**
- * CRIME ZOO - RESTRICTED CASE TRACKING ENGINE
- * Rule 6: শুধুমাত্র যারা রিপোর্টার হিসেবে লগইন করেছেন তারাই ট্র্যাকিং কোড দিয়ে স্ট্যাটাস যাচাই করতে পারবেন।
+ * CRIME ZOO - REPORTER-EXCLUSIVE TRUTH TRACKING CONTROLLER (Requirement #6)
+ * Only users who are logged in as a Reporter (or Admin) can access Truth Tracking
+ * and view/use Secret Tracking Codes.
  */
 
 document.addEventListener("DOMContentLoaded", function () {
-  checkReporterTrackingAuth();
+  enforceReporterTrackingAccess();
 });
 
-function checkReporterTrackingAuth() {
-  const repStr = sessionStorage.getItem("cz_logged_reporter");
-  const authGate = document.getElementById("trackerAuthGate");
-  const formBox = document.getElementById("trackerFormContainer");
+function enforceReporterTrackingAccess() {
+  const repRaw = sessionStorage.getItem("cz_logged_reporter");
+  const isAdmin = sessionStorage.getItem("cz_admin_timelock") === "true";
+  const gateBox = document.getElementById("reporterOnlyGateBox");
+  const trackerWorkspace = document.getElementById("reporterTrackerWorkspace");
 
-  if (!repStr) {
-    if (authGate) authGate.style.display = "block";
-    if (formBox) formBox.style.display = "none";
+  if (!repRaw && !isAdmin) {
+    if (gateBox) gateBox.style.display = "block";
+    if (trackerWorkspace) trackerWorkspace.style.display = "none";
     return;
   }
 
-  // Reporter is authenticated
-  if (authGate) authGate.style.display = "none";
-  if (formBox) formBox.style.display = "block";
+  if (gateBox) gateBox.style.display = "none";
+  if (trackerWorkspace) trackerWorkspace.style.display = "block";
 
-  const rep = JSON.parse(repStr);
-  const repBanner = document.getElementById("loggedReporterBanner");
-  if (repBanner) {
-    repBanner.innerHTML = `✓ ভেরিফাইড রিপোর্টার মোড: <strong>${rep.name}</strong> (${rep.badgeNo}) হিসেবে ট্র্যাকিং পোর্টালে সংযুক্ত।`;
-    repBanner.style.display = "block";
+  let currentReporter = null;
+  if (repRaw) {
+    try { currentReporter = JSON.parse(repRaw); } catch (e) {}
   }
 
+  renderReporterSecretCodesList(currentReporter, isAdmin);
   initUrlParams();
   initTrackerForm();
 }
+
+function renderReporterSecretCodesList(rep, isAdmin) {
+  const listContainer = document.getElementById("mySecretCodesContainer");
+  if (!listContainer) return;
+
+  const allReports = StorageManager.getReports();
+  const myReports = isAdmin
+    ? allReports.slice(0, 8)
+    : allReports.filter(r => (rep && (r.reporterId === rep.id || r.reporterName === rep.name)));
+
+  if (myReports.length === 0) {
+    listContainer.innerHTML = `<div style="font-size:0.85rem; color:var(--text-muted);">আপনার অ্যাকাউন্ট থেকে এখনো কোনো পোস্ট জমা দেওয়া হয়নি। নতুন পোস্ট করলে এখানে গোপন ট্র্যাকিং কোড দেখতে পাবেন।</div>`;
+    return;
+  }
+
+  listContainer.innerHTML = myReports.map(r => `
+    <div onclick="fillAndTrack('${r.id}', '${r.pin}')" style="background:rgba(15,23,42,0.9); border:1px solid rgba(56,189,248,0.3); border-radius:10px; padding:0.7rem 1rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:0.75rem; transition:all 0.2s;">
+      <div>
+        <div style="font-weight:700; color:#fff; font-size:0.88rem;">${r.id} — ${r.title.slice(0, 42)}...</div>
+        <div style="font-size:0.75rem; color:#94a3b8;">📍 ${r.location} • স্ট্যাটাস: ${r.approvalStatus === 'approved' ? '<span style="color:#34d399;">লাইভ (Approved)</span>' : '<span style="color:#fbbf24;">এডমিন অনুমোদনের অপেক্ষায়</span>'}</div>
+      </div>
+      <div style="text-align:right; flex-shrink:0;">
+        <span class="badge badge-verified" style="font-size:0.8rem;">🔑 পিন: ${r.pin}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.fillAndTrack = function (id, pin) {
+  const idInput = document.getElementById("trackCaseId");
+  const pinInput = document.getElementById("trackPin");
+  if (idInput) idInput.value = id;
+  if (pinInput) pinInput.value = pin;
+  performTrackLookup(id, pin);
+};
 
 function initUrlParams() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -57,9 +92,10 @@ function initTrackerForm() {
     const pin = document.getElementById("trackPin").value.trim();
 
     if (!id || !pin) {
-      alert("অনুগ্রহ করে ট্র্যাকিং আইডি ও গোপন পিন কোড দিন।");
+      if (window.showSecurityNotice) window.showSecurityNotice("অনুগ্রহ করে ট্র্যাকিং আইডি ও গোপন পিন নম্বর প্রদান করুন।");
       return;
     }
+
     performTrackLookup(id, pin);
   });
 }
@@ -67,69 +103,76 @@ function initTrackerForm() {
 function performTrackLookup(caseId, pin) {
   const reports = StorageManager.getReports();
   const r = reports.find(item => item.id.toUpperCase() === caseId.toUpperCase() && item.pin === pin);
+
   const resultContainer = document.getElementById("trackingResultArea");
   if (!resultContainer) return;
 
   if (!r) {
     resultContainer.innerHTML = `
-      <div style="background: rgba(220, 38, 38, 0.15); border: 1px solid #dc2626; border-radius: 12px; padding: 2rem; text-align: center; color: #fca5a5;">
+      <div style="background: rgba(220, 38, 38, 0.15); border: 1px solid #dc2626; border-radius: 12px; padding: 2rem; text-align: center; color: #fca5a5; margin-top: 1.5rem;">
         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚠️</div>
         <h3>কোনো তথ্য মেলেনি!</h3>
-        <p style="margin-top: 0.5rem;">ট্র্যাকিং কেস আইডি ও গোপন পিন পুনরায় যাচাই করুন।</p>
+        <p style="margin-top: 0.5rem;">ট্র্যাকিং আইডি <strong>${caseId}</strong> এবং গোপন পিন নম্বর যাচাই করুন। সঠিক তথ্য প্রদান না করলে নিরাপত্তা রক্ষার্থে কোনো রেকর্ড প্রদর্শন করা হয় না।</p>
       </div>
     `;
     resultContainer.style.display = "block";
     return;
   }
 
+  let stage3 = (r.status === "verified" || r.status === "fake") ? "completed" : "in-progress";
+  let stage4 = (r.status === "verified" || r.status === "fake") ? "completed" : "pending";
+
   let statusBadge = "";
   if (r.status === "verified") statusBadge = `<span class="badge badge-verified">✓ সত্যতা নিশ্চিত (Verified)</span>`;
-  else if (r.status === "fake") statusBadge = `<span class="badge badge-fake">✕ প্রমাণিত ভুয়া (Fake)</span>`;
-  else if (r.status === "partially_true") statusBadge = `<span class="badge badge-partially">⚖️ সম্পূর্ণ সঠিক নয় (আংশিক সত্য)</span>`;
-  else statusBadge = `<span class="badge badge-investigating">⏳ তদন্তাধীন (Under Investigation)</span>`;
+  else if (r.status === "fake") statusBadge = `<span class="badge badge-fake">✕ প্রমাণিত মিথ্যা (Fake)</span>`;
+  else if (r.status === "investigating") statusBadge = `<span class="badge badge-investigating">⏳ তদন্ত চলছে (Investigating)</span>`;
+  else statusBadge = `<span class="badge badge-unverified">? তথ্য যাচাই প্রক্রিয়াধীন</span>`;
+
+  const approvalBadge = r.approvalStatus === "approved"
+    ? `<span class="badge badge-verified">🌐 লাইভ ফিডে প্রকাশিত (Approved)</span>`
+    : `<span class="badge badge-investigating">⏳ এডমিন অনুমোদনের অপেক্ষায় (Pending Approval)</span>`;
 
   resultContainer.innerHTML = `
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin-top: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin-top: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
         <div>
-          <span style="font-size: 0.82rem; color: var(--text-muted);">মামলা / রিপোর্ট ট্র্যাকিং আইডি</span>
-          <h2 style="font-size: 1.55rem; font-weight: 800; color: #fff; margin-top: 2px;">${r.id}</h2>
-          <div style="margin-top: 0.4rem; display: flex; gap: 0.5rem;">${statusBadge}</div>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">রিপোর্টার এক্সক্লুসিভ ট্র্যাকিং আইডি ও গোপন পিন</span>
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: #fff; margin-top: 2px;">${r.id} <span style="font-size:0.95rem; color:#34d399;">(গোপন পিন: ${r.pin})</span></h2>
+          <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">${statusBadge} ${approvalBadge}</div>
         </div>
         <div style="text-align: right;">
-          <span style="font-size: 0.82rem; color: var(--text-muted);">দাখিলের তারিখ ও সময়</span>
-          <div style="font-weight: 700; color: #cbd5e1;">${r.date} (${r.time})</div>
-          <div style="font-size: 0.8rem; color: #38bdf8;">ঘটনাস্থল: ${r.location}</div>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">দাখিলের তারিখ</span>
+          <div style="font-weight: 600; color: #cbd5e1; margin-top: 2px;">${r.date} (${r.time})</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">স্থান: ${r.location}</div>
         </div>
       </div>
 
-      <div style="margin-bottom: 1.35rem;">
-        <h4 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.4rem;">শিরোনাম: ${r.title}</h4>
-        <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.94rem;">${r.description}</p>
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">অভিযোগের শিরোনাম: ${r.title}</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">${r.description}</p>
       </div>
 
-      <div style="background:rgba(8,12,22,0.8); border:1px solid var(--border-color); border-radius:10px; padding:1rem; margin-bottom:1.5rem;">
-        <div style="font-weight:700; color:#38bdf8; font-size:0.9rem; margin-bottom:4px;">ফরেনসিক রেটিং ও তদন্ত কর্মকর্তার নোট:</div>
-        <div style="color:#f8fafc; font-size:0.92rem;">${r.statusNote || 'প্রাথমিক যাচাই সম্পন্ন।'} (সত্যতা স্কোর: ${r.truthScore || 75}%)</div>
-      </div>
-
-      <h4 style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 1rem; text-transform: uppercase;">তদন্ত অগ্রগতির টাইমলাইন</h4>
-      <div style="display: flex; flex-direction: column; gap: 1.25rem; border-left: 2px solid var(--border-color); padding-left: 1.5rem; margin-left: 0.5rem;">
-        <div>
+      <h4 style="font-size: 1rem; color: #94a3b8; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">তদন্ত ও লাইভ অনুমোদন টাইমলাইন</h4>
+      <div style="display: flex; flex-direction: column; gap: 1.25rem; border-left: 2px solid var(--border-color); padding-left: 1.5rem; margin-left: 0.5rem; position: relative;">
+        <div style="position: relative;">
+          <div style="position: absolute; left: -1.95rem; top: 0; width: 14px; height: 14px; border-radius: 50%; background: #10b981; border: 3px solid #0f172a;"></div>
           <h5 style="color: #fff; font-size: 0.95rem;">১. অভিযোগ সফলভাবে গ্রহণ ও এনক্রিপ্টকরণ</h5>
-          <p style="font-size: 0.84rem; color: var(--text-muted);">রিপোর্টটি সিস্টেমে সংরক্ষিত ও গোপন পিন কোড ইস্যু করা হয়েছে।</p>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">রিপোর্টারের দাখিলকৃত তথ্য ও মিডিয়া ডাটাবেজে সংরক্ষিত হয়েছে।</p>
         </div>
-        <div>
+        <div style="position: relative;">
+          <div style="position: absolute; left: -1.95rem; top: 0; width: 14px; height: 14px; border-radius: 50%; background: #10b981; border: 3px solid #0f172a;"></div>
           <h5 style="color: #fff; font-size: 0.95rem;">২. ডিজিটাল ফরেনসিক ও এআই ফিল্টারিং পরীক্ষা</h5>
-          <p style="font-size: 0.84rem; color: var(--text-muted);">ছবি, ভিডিও, অডিও ও পিডিএফ মেটাডাটা বিশ্লেষণ সম্পন্ন হয়েছে।</p>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">ছবি, ভিডিও ও অডিওর সত্যতা যাচাই এবং মেটাডাটা স্ক্রিনিং সম্পন্ন (স্কোর: ${r.truthScore || 78}%)।</p>
         </div>
-        <div>
-          <h5 style="color: #fff; font-size: 0.95rem;">৩. মাঠপর্যায়ে অনুসন্ধান ও সাক্ষ্যপ্রমাণ পর্যালোচনা</h5>
-          <p style="font-size: 0.84rem; color: var(--text-muted);">সংশ্লিষ্ট কর্তৃপক্ষ ও স্থানীয় তথ্যসূত্রের সঙ্গে তথ্য ক্রস-ম্যাচিং করা হচ্ছে।</p>
+        <div style="position: relative;">
+          <div style="position: absolute; left: -1.95rem; top: 0; width: 14px; height: 14px; border-radius: 50%; background: ${r.approvalStatus === 'approved' ? '#10b981' : '#f59e0b'}; border: 3px solid #0f172a;"></div>
+          <h5 style="color: #fff; font-size: 0.95rem;">৩. এডমিন অনুমোদন ও পাবলিক ফিডে প্রকাশ</h5>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">${r.approvalStatus === 'approved' ? 'এডমিন কর্তৃক অনুমোদিত হয়ে মূল ওয়েবসাইটে লাইভ প্রকাশিত হয়েছে।' : 'এডমিন প্যানেলে অনুমোদনের অপেক্ষায় রয়েছে; এপ্রুভ করলেই সাথে সাথে লাইভ হয়ে যাবে।'}</p>
         </div>
-        <div>
-          <h5 style="color: #fff; font-size: 0.95rem;">৪. চূড়ান্ত সত্যতা রায় ও স্ট্যাটাস প্রকাশ</h5>
-          <p style="font-size: 0.84rem; color: var(--text-muted);">${r.statusNote}</p>
+        <div style="position: relative;">
+          <div style="position: absolute; left: -1.95rem; top: 0; width: 14px; height: 14px; border-radius: 50%; background: ${stage4 === 'completed' ? (r.status === 'verified' ? '#10b981' : '#dc2626') : '#64748b'}; border: 3px solid #0f172a;"></div>
+          <h5 style="color: #fff; font-size: 0.95rem;">৪. চূড়ান্ত ফরেনসিক সিদ্ধান্ত</h5>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">${r.statusNote}</p>
         </div>
       </div>
     </div>

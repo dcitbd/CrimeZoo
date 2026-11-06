@@ -3,39 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>সিকিউরিটি ও টাইম-লক অডিট লগ | Crime Zoo এডমিন</title>
+  <title>সিকিউরিটি ও লগইন অডিট লগ | Crime Zoo এডমিন</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>html { visibility: hidden; }</style>
+  <script>
+    (function() {
+      var s1 = sessionStorage.getItem("cz_admin_step1") === "true";
+      var s2 = sessionStorage.getItem("cz_admin_timelock") === "true";
+      var tk = sessionStorage.getItem("cz_admin_auth_token");
+      if (!s1 || !s2 || !tk) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="admin-layout">
-    
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <div style="display:flex; align-items:center; gap:0.65rem;">
           <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
           <div>
             <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
-            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">সিকিউর কমান্ড ও ফরেনসিক সেল</div>
           </div>
         </div>
       </div>
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
-<li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
-<li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
-<li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
-<li><a href="contacts.html" class="sidebar-link"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
-<li><a href="users.html" class="sidebar-link"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
-<li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
-<li><a href="media-forensics.html" class="sidebar-link"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
-<li><a href="inbox.html" class="sidebar-link"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+        <li><a href="index.html" class="sidebar-link "><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link "><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link "><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link "><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+<li><a href="contacts.html" class="sidebar-link "><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
+<li><a href="users.html" class="sidebar-link "><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link "><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+<li><a href="media-forensics.html" class="sidebar-link "><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
+<li><a href="inbox.html" class="sidebar-link "><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
 <li><a href="audit-logs.html" class="sidebar-link active"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
-
       </ul>
       <div class="sidebar-footer">
+        <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="EmailNotifier.openEmailPreviewModal()">
+          📧 প্রেরিত মেইল নোটিফিকেশন
+        </button>
         <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
           🌐 মূল সাইট ভিউ দেখুন
         </a>
@@ -44,41 +58,88 @@
         </button>
       </div>
     </aside>
-    
-
     <main class="admin-main">
-      
       <div class="admin-topbar">
         <div style="display:flex; align-items:center; gap:0.75rem;">
           <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
-          <h1 class="admin-page-title">সিস্টেম সিকিউরিটি, টাইম-লক ও মডারেশন অডিট লগ</h1>
+          <h1 class="admin-page-title">সিকিউরিটি অডিট লগ (সকল ইউজার / এডমিন / রিপোর্টার লগইন ও অ্যাকশন)</h1>
         </div>
         <div class="admin-user-profile">
+          <button class="btn btn-install btn-sm" onclick="EmailNotifier.openEmailPreviewModal()">📧 মেইল লগ</button>
           <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
           <div style="text-align: right;">
             <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
-            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● ভেরিফাইড সেশন</div>
           </div>
           <div class="admin-avatar">CZ</div>
         </div>
       </div>
-    
-
       <div class="admin-content">
+        <!-- Digital Counter Filters for Audit Logs (Requirement #17) -->
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 1.35rem;">
+          <div class="stat-card stat-red" style="cursor:pointer;" onclick="setAuditFilter('all', this)">
+            <div class="stat-icon">📜</div>
+            <div class="stat-info">
+              <span class="stat-number" id="audStatTotal">০</span>
+              <span class="stat-label">মোট অডিট লগ</span>
+            </div>
+          </div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setAuditFilter('SUCCESS', this)">
+            <div class="stat-icon">✓</div>
+            <div class="stat-info">
+              <span class="stat-number" id="audStatSuccess">০</span>
+              <span class="stat-label">সাকসেস (Success)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="setAuditFilter('FAILED', this)">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="audStatFailed">০</span>
+              <span class="stat-label">ফেইল্ড (Failed Attempts)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="setAuditFilter('ADMIN', this)">
+            <div class="stat-icon">🛡️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="audStatAdmin">০</span>
+              <span class="stat-label">এডমিন লগইন/অ্যাকশন</span>
+            </div>
+          </div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setAuditFilter('REPORTER', this)">
+            <div class="stat-icon">🎙️</div>
+            <div class="stat-info">
+              <span class="stat-number" id="audStatReporter">০</span>
+              <span class="stat-label">রিপোর্টার/ইউজার লগইন</span>
+            </div>
+          </div>
+        </div>
+
         <div class="data-card">
           <div class="table-header-bar">
-            <h3 style="font-size: 1.15rem; color: #fff;">অপরিবর্তনযোগ্য সিকিউরিটি অডিট রেকর্ড</h3>
+            <div>
+              <h3 style="font-size: 1.15rem; color: #fff;">সকল ইউজার, রিপোর্টার ও এডমিন লগইন ইনফো (Failed / Success মেসেজসহ)</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">প্রতিটি লগইন চেষ্টা, রেজিস্ট্রেশন, পোস্ট, মেসেজ ও কন্টাক্ট আপডেটের রিয়েল-টাইম সিকিউরিটি রেকর্ড</p>
+            </div>
+            <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+              <input type="text" id="auditSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 লগ খুঁজুন..." oninput="renderAuditLogs()">
+              <button class="btn btn-secondary btn-sm" onclick="setAuditFilter('all')">সকল</button>
+              <button class="btn btn-secondary btn-sm" onclick="setAuditFilter('SUCCESS')">✓ সাকসেস</button>
+              <button class="btn btn-secondary btn-sm" onclick="setAuditFilter('FAILED')">✕ ফেইল্ড</button>
+              <button class="btn btn-secondary btn-sm" onclick="setAuditFilter('ADMIN')">এডমিন</button>
+              <button class="btn btn-secondary btn-sm" onclick="setAuditFilter('REPORTER')">রিপোর্টার/ইউজার</button>
+            </div>
           </div>
           <div class="table-responsive">
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>লগ আইডি</th><th>লগইন/ইভেন্ট টাইপ</th>
-                  <th>অ্যাকশন</th>
-                  <th>টার্গেট</th>
-                  <th>সম্পাদনকারী</th>
+                  <th>লগ আইডি</th>
+                  <th>স্ট্যাটাস (Failed / Success)</th>
+                  <th>রোল (Role)</th>
+                  <th>অ্যাকশন ও টার্গেট</th>
+                  <th>সম্পাদনকারী ( ইউজার / এডমিন / রিপোর্টার )</th>
                   <th>সময়</th>
-                  <th>বিবরণ</th>
+                  <th>বিস্তারিত মেসেজ</th>
                 </tr>
               </thead>
               <tbody id="auditTableBody"></tbody>
@@ -93,19 +154,68 @@
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const logs = StorageManager.getAuditLogs();
-      document.getElementById("auditTableBody").innerHTML = logs.map(function(l) {
-        return '<tr>' +
+    let currentAuditFilter = "all";
+
+    function setAuditFilter(f, cardEl) {
+      currentAuditFilter = f;
+      document.querySelectorAll(".admin-content .stats-grid .stat-card").forEach(c => {
+        c.style.outline = "none";
+      });
+      if (cardEl) cardEl.style.outline = "2px solid #38bdf8";
+      renderAuditLogs();
+    }
+
+    function renderAuditLogs() {
+      const allLogs = StorageManager.getAuditLogs();
+      document.getElementById("audStatTotal").innerText = allLogs.length.toLocaleString("bn-BD");
+      document.getElementById("audStatSuccess").innerText = allLogs.filter(l => l.status !== "FAILED").length.toLocaleString("bn-BD");
+      document.getElementById("audStatFailed").innerText = allLogs.filter(l => l.status === "FAILED").length.toLocaleString("bn-BD");
+      document.getElementById("audStatAdmin").innerText = allLogs.filter(l => l.role === "ADMIN").length.toLocaleString("bn-BD");
+      document.getElementById("audStatReporter").innerText = allLogs.filter(l => l.role === "REPORTER" || l.role === "USER").length.toLocaleString("bn-BD");
+
+      let logs = [...allLogs];
+      if (currentAuditFilter === "SUCCESS") logs = logs.filter(l => l.status !== "FAILED");
+      else if (currentAuditFilter === "FAILED") logs = logs.filter(l => l.status === "FAILED");
+      else if (currentAuditFilter === "ADMIN") logs = logs.filter(l => l.role === "ADMIN");
+      else if (currentAuditFilter === "REPORTER") logs = logs.filter(l => l.role === "REPORTER" || l.role === "USER");
+
+      const q = (document.getElementById("auditSearchInp")?.value || "").toLowerCase();
+      if (q) {
+        logs = logs.filter(l =>
+          (l.id && l.id.toLowerCase().includes(q)) ||
+          (l.action && l.action.toLowerCase().includes(q)) ||
+          (l.admin && l.admin.toLowerCase().includes(q)) ||
+          (l.detail && l.detail.toLowerCase().includes(q)) ||
+          (l.target && l.target.toLowerCase().includes(q))
+        );
+      }
+
+      const tbody = document.getElementById("auditTableBody");
+      if (logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো অডিট লগ পাওয়া যায়নি।</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = logs.map(function(l) {
+        const isFailed = l.status === "FAILED" || (l.action && l.action.includes("ভুল")) || (l.action && l.action.includes("ব্যর্থ"));
+        const stBadge = isFailed
+          ? '<span class="badge badge-fake">✕ FAILED (ব্যর্থ)</span>'
+          : '<span class="badge badge-verified">✓ SUCCESS (সফল)</span>';
+        const roleBadge = `<span class="badge badge-identified">${l.role || 'ADMIN'}</span>`;
+
+        return '<tr style="' + (isFailed ? 'background:rgba(220,38,38,0.08);' : '') + '">' +
           '<td><strong>' + l.id + '</strong></td>' +
-          '<td><span class="badge badge-official">' + l.action + '</span></td>' +
-          '<td><strong style="color:#38bdf8;">' + l.target + '</strong></td>' +
-          '<td>' + l.admin + '</td>' +
+          '<td>' + stBadge + '</td>' +
+          '<td>' + roleBadge + '</td>' +
+          '<td><div style="font-weight:700; color:#fff;">' + l.action + '</div><div style="font-size:0.75rem; color:#38bdf8;">Target: ' + l.target + '</div></td>' +
+          '<td><strong>' + l.admin + '</strong></td>' +
           '<td>' + l.time + '</td>' +
           '<td style="color:#cbd5e1;">' + l.detail + '</td>' +
         '</tr>';
       }).join("");
-    });
+    }
+
+    document.addEventListener("DOMContentLoaded", renderAuditLogs);
   </script>
 </body>
 </html>

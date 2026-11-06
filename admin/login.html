@@ -3,77 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>এডমিন গেটওয়ে | Crime Zoo</title>
+  <title>এডমিন সিকিউরিটি গেটওয়ে | Crime Zoo</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1.25rem;">
-  <div class="form-card" style="width: 100%; max-width: 460px; margin: 0; padding: 2.25rem;">
-    <div style="text-align: center; margin-bottom: 1.75rem;">
-      <img src="../assets/icons/logo.png" style="width: 76px; height: 76px; object-fit: contain; margin: 0 auto 0.75rem auto; border-radius: 14px; border: 1px solid rgba(220,38,38,0.45);">
-      <h2 style="font-size: 1.55rem; color: #fff; font-weight: 800; margin-top: 0.35rem;">Crime Zoo সিকিউর গেটওয়ে</h2>
+  <div class="form-card" style="width: 100%; max-width: 460px; margin: 0; padding: 2.25rem; border: 1px solid rgba(56, 189, 248, 0.35);">
+    <div style="text-align: center; margin-bottom: 1.65rem;">
+      <img src="../assets/icons/logo.png" style="width: 72px; height: 72px; object-fit: contain; margin: 0 auto 0.75rem auto; border-radius: 12px; border: 1px solid rgba(220,38,38,0.45);">
+      <span class="badge badge-official">🔒 সিকিউর এডমিন গেটওয়ে</span>
+      <h2 style="font-size: 1.55rem; color: #fff; font-weight: 800; margin-top: 0.4rem;">Crime Zoo কমান্ড প্যানেল</h2>
     </div>
 
     <!-- Permanent Lockout Banner -->
     <div id="deviceBlockedCurtain" style="display: none; background: rgba(220, 38, 38, 0.22); border: 2px solid #dc2626; border-radius: 12px; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem;">
       <div style="font-size: 2.8rem; margin-bottom: 0.5rem;">🚫</div>
-      <h3 style="color: #f87171; font-size: 1.2rem; font-weight: 800;">ডিভাইস চিরতরে লক করা হয়েছে</h3>
+      <h3 style="color: #f87171; font-size: 1.25rem; font-weight: 800;">ডিভাইস চিরতরে ব্লক করা হয়েছে!</h3>
       <p style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.6; margin-top: 0.5rem;">
-        নিরাপত্তা নীতি লঙ্ঘন: ৫ বারের বেশি ভুল কোড দেওয়ার কারণে এই ডিভাইস থেকে এডমিন প্যানেল প্রবেশাধিকার চিরতরে বন্ধ করা হয়েছে।
+        নিরাপত্তা নীতি লঙ্ঘন: এই ডিভাইস থেকে ৫ বারের বেশি ভুল ইনপুট দেওয়ার কারণে সাইবার সিকিউরিটি প্রটোকল অনুযায়ী এডমিন প্যানেল প্রবেশাধিকার স্থায়ীভাবে বন্ধ করা হয়েছে।
       </p>
     </div>
 
+    <div id="loginErrorAlert" style="display:none; background:rgba(220,38,38,0.18); border:1px solid #dc2626; color:#fca5a5; padding:0.75rem 1rem; border-radius:10px; font-size:0.84rem; font-weight:600; text-align:center; margin-bottom:1rem;"></div>
+
     <div id="loginFormsContainer">
-      <!-- STEP 1: Generic Clean Field (No Hints) -->
+      <!-- STEP 1: NO HINTS AT ALL -->
       <div id="step1Box">
-        <form onsubmit="event.preventDefault(); submitStep1();">
+        <form onsubmit="event.preventDefault(); submitStep1();" autocomplete="off">
           <div class="form-group">
             <label class="form-label">
-              <span>সিকিউরিটি পাসকোড *</span>
+              <span>অ্যাক্সেস পিন / পাসওয়ার্ড *</span>
               <span id="attemptWarning" style="font-size:0.75rem; color:#f87171;"></span>
             </label>
-            <input type="password" id="adminPassInput" class="form-control" placeholder="পাসকোড লিখুন" required autofocus autocomplete="off">
+            <input type="password" id="adminPassInput" class="form-control" placeholder="আপনার গোপন পিন বা পাসওয়ার্ড লিখুন..." required autofocus autocomplete="new-password">
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.88rem; margin-top: 0.5rem;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.88rem;">
             পরবর্তী ধাপ →
           </button>
         </form>
       </div>
 
-      <!-- STEP 2: Running Digital Clock with Seconds (No Hints) -->
+      <!-- STEP 2: RUNNING DIGITAL CLOCK WITH SECONDS ONLY — ZERO HINTS, ZERO LOCK TYPE TEXT -->
       <div id="step2TimeLockBox" style="display: none;">
-        <div style="background: rgba(8, 12, 22, 0.95); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.35rem;">
-          <div id="liveDigitalClock" style="font-size: 2rem; font-weight: 800; color: #38bdf8; font-family: 'Inter', monospace; letter-spacing: 2px;">
-            00:00:00 AM
-          </div>
+        <div style="background: rgba(6, 9, 17, 0.95); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 1.25rem; text-align: center; margin-bottom: 1.35rem; box-shadow: inset 0 0 25px rgba(56, 189, 248, 0.12);">
+          <div id="liveClockDisplay" style="font-family: 'Courier New', monospace; font-size: 2.1rem; font-weight: 800; color: #38bdf8; letter-spacing: 3px; text-shadow: 0 0 14px rgba(56, 189, 248, 0.55);">--:--:-- --</div>
         </div>
 
-        <form onsubmit="event.preventDefault(); submitStep2TimeLock();">
+        <form onsubmit="event.preventDefault(); submitStep2TimeLock();" autocomplete="off">
           <div class="form-group">
             <label class="form-label">ভেরিফিকেশন কোড *</label>
-            <input type="text" id="timeLockInput" class="form-control" placeholder="কোড লিখুন" style="text-transform: uppercase; font-weight: 700; letter-spacing: 2px; text-align: center; font-size: 1.15rem;" required autocomplete="off">
+            <input type="password" id="timeLockInput" class="form-control" placeholder="কোড লিখুন..." style="text-transform: uppercase; font-weight: 700; letter-spacing: 3px; text-align: center; font-size: 1.15rem;" required autocomplete="off">
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.88rem; margin-top: 0.5rem;">
-            প্রবেশ করুন
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.88rem;">
+            🔓 ভেরিফাই করে প্রবেশ করুন
           </button>
         </form>
       </div>
     </div>
 
-    <div style="text-align: center; margin-top: 1.5rem;">
+    <div style="text-align: center; margin-top: 1.35rem;">
       <a href="../index.html" style="font-size: 0.84rem; color: var(--text-muted);">← মূল পাতায় ফিরে যান</a>
     </div>
   </div>
 
-  <script src="../assets/js/mailer.js"></script>
   <script src="../assets/js/data.js"></script>
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
   <script>
+    function showLoginErr(msg) {
+      const box = document.getElementById("loginErrorAlert");
+      if (box) {
+        box.style.display = "block";
+        box.innerText = msg;
+      }
+    }
+
     function checkLockoutState() {
-      if (typeof checkDeviceLockout === "function" && checkDeviceLockout()) {
+      if (checkDeviceLockout()) {
         document.getElementById("deviceBlockedCurtain").style.display = "block";
         document.getElementById("loginFormsContainer").style.display = "none";
         return true;
@@ -82,43 +90,31 @@
     }
     checkLockoutState();
 
-    // Running Digital Clock with Seconds (No hint text, just clock)
-    function updateLiveClock() {
-      const now = new Date();
-      let h = now.getHours();
-      const m = now.getMinutes();
-      const s = now.getSeconds();
-      const ampm = h >= 12 ? "PM" : "AM";
-      h = h % 12;
-      if (h === 0) h = 12;
-      const hh = h < 10 ? "0" + h : "" + h;
-      const mm = m < 10 ? "0" + m : "" + m;
-      const ss = s < 10 ? "0" + s : "" + s;
-      const clockEl = document.getElementById("liveDigitalClock");
-      if (clockEl) {
-        clockEl.innerText = `${hh}:${mm}:${ss} ${ampm}`;
-      }
+    function updateClockUI() {
+      const sample = getFormattedCurrentTimeLockSample();
+      const cEl = document.getElementById("liveClockDisplay");
+      if (cEl) cEl.innerText = sample.clockWithSeconds;
     }
-    setInterval(updateLiveClock, 1000);
-    updateLiveClock();
+    setInterval(updateClockUI, 250);
+    updateClockUI();
 
     function submitStep1() {
       if (checkLockoutState()) return;
-      const val = document.getElementById("adminPassInput").value.trim();
-      if (verifyAdminStep1(val)) {
+      const pass = document.getElementById("adminPassInput").value.trim();
+      if (verifyAdminStep1(pass)) {
         resetFailedAttempts();
+        document.getElementById("loginErrorAlert").style.display = "none";
         document.getElementById("step1Box").style.display = "none";
         document.getElementById("step2TimeLockBox").style.display = "block";
-        updateLiveClock();
+        updateClockUI();
         document.getElementById("timeLockInput").focus();
       } else {
-        const res = recordFailedAttempt();
+        const res = recordFailedAttempt("Step-1 Invalid Credential");
         if (res.locked) {
           checkLockoutState();
-          alert("সতর্কবার্তা: ৫ বার ভুল কোড দেওয়ার কারণে এই ডিভাইস চিরতরে ব্লক করা হলো!");
         } else {
-          alert(`ভুল কোড! আর মাত্র ${res.remaining} বার চেষ্টা করতে পারবেন।`);
-          document.getElementById("attemptWarning").innerText = `(${res.attempts}/৫)`;
+          showLoginErr("অ্যাক্সেস পিন বা পাসওয়ার্ড সঠিক নয়! আর " + res.remaining + " বার চেষ্টা করা যাবে।");
+          document.getElementById("attemptWarning").innerText = "(ব্যর্থ চেষ্টা: " + res.attempts + "/৫)";
         }
       }
     }
@@ -128,14 +124,13 @@
       const code = document.getElementById("timeLockInput").value.trim();
       if (verifyAdminStep2TimeLock(code)) {
         resetFailedAttempts();
-        window.location.href = "index.html";
+        window.location.replace("index.html");
       } else {
-        const res = recordFailedAttempt();
+        const res = recordFailedAttempt("Step-2 Invalid Code");
         if (res.locked) {
           checkLockoutState();
-          alert("সতর্কবার্তা: ৫ বার ভুল কোড দেওয়ার কারণে এই ডিভাইস চিরতরে ব্লক করা হলো!");
         } else {
-          alert(`ভেরিফিকেশন কোড মেলেনি! আর মাত্র ${res.remaining} বার চেষ্টা করতে পারবেন।`);
+          showLoginErr("ভেরিফিকেশন কোড সঠিক নয়! আর " + res.remaining + " বার চেষ্টা করতে পারবেন।");
         }
       }
     }

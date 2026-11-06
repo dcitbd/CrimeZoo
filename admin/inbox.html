@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>সরাসরি অভিযোগ ও ইনবক্স | Crime Zoo এডমিন</title>
+  <title>সরাসরি অভিযোগ ও ইনবক্স ব্যবস্থাপনা | Crime Zoo এডমিন</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>html { visibility: hidden; }</style>
+  <script>
+    (function() {
+      var s1 = sessionStorage.getItem("cz_admin_step1") === "true";
+      var s2 = sessionStorage.getItem("cz_admin_timelock") === "true";
+      var tk = sessionStorage.getItem("cz_admin_auth_token");
+      if (!s1 || !s2 || !tk) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="admin-layout">
@@ -17,75 +30,103 @@
           <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
           <div>
             <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
-            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">সিকিউর কমান্ড ও ফরেনসিক সেল</div>
           </div>
         </div>
       </div>
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
-        <li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
-        <li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
-        <li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
-        <li><a href="contacts.html" class="sidebar-link"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
-        <li><a href="users.html" class="sidebar-link"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
-        <li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
-        <li><a href="media-forensics.html" class="sidebar-link"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
-        <li><a href="inbox.html" class="sidebar-link active"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
-        <li><a href="audit-logs.html" class="sidebar-link"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
+        <li><a href="index.html" class="sidebar-link "><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link "><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link "><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link "><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+<li><a href="contacts.html" class="sidebar-link "><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
+<li><a href="users.html" class="sidebar-link "><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link "><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+<li><a href="media-forensics.html" class="sidebar-link "><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
+<li><a href="inbox.html" class="sidebar-link active"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+<li><a href="audit-logs.html" class="sidebar-link "><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
       </ul>
       <div class="sidebar-footer">
-        <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">🌐 মূল সাইট ভিউ দেখুন</a>
-        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="adminLogout()">🚪 সিকিউর লগআউট</button>
+        <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="EmailNotifier.openEmailPreviewModal()">
+          📧 প্রেরিত মেইল নোটিফিকেশন
+        </button>
+        <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
+          🌐 মূল সাইট ভিউ দেখুন
+        </a>
+        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="adminLogout()">
+          🚪 সিকিউর লগআউট
+        </button>
       </div>
     </aside>
-
     <main class="admin-main">
       <div class="admin-topbar">
         <div style="display:flex; align-items:center; gap:0.75rem;">
           <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
-          <h1 class="admin-page-title">সরাসরি এডমিন অভিযোগ ও ইনবক্স ব্যবস্থাপনা</h1>
+          <h1 class="admin-page-title">সরাসরি এডমিন অভিযোগ ও ইনবক্স ব্যবস্থাপনা (Edit / Publish / Deactive / Delete)</h1>
         </div>
         <div class="admin-user-profile">
+          <button class="btn btn-install btn-sm" onclick="EmailNotifier.openEmailPreviewModal()">📧 মেইল লগ</button>
+          <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
           <div style="text-align: right;">
             <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
-            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● ভেরিফাইড সেশন</div>
           </div>
           <div class="admin-avatar">CZ</div>
         </div>
       </div>
-
       <div class="admin-content">
-        <!-- Digital Counter Filter Cards for Inbox -->
-        <div class="stats-grid" style="margin-bottom: 1.35rem;">
-          <div class="stat-card stat-red" style="cursor:pointer;" onclick="filterInbox('all')">
-            <div class="stat-icon">📬</div>
-            <div class="stat-info"><span class="stat-number" id="inboxTotalCount">০</span><span class="stat-label">মোট মেসেজ (সকল)</span></div>
+        <!-- Interactive Digital Counter Filters for Inbox & Complaints (Requirement #16) -->
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 1.35rem;">
+          <div class="stat-card stat-red" style="cursor:pointer;" onclick="setInboxFilter('all', this)">
+            <div class="stat-icon">📥</div>
+            <div class="stat-info">
+              <span class="stat-number" id="inbStatTotal">০</span>
+              <span class="stat-label">মোট বার্তা ও অভিযোগ</span>
+            </div>
           </div>
-          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="filterInbox('direct')">
+          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="setInboxFilter('direct_admin', this)">
             <div class="stat-icon">🛡️</div>
-            <div class="stat-info"><span class="stat-number" id="inboxDirectCount">০</span><span class="stat-label">সরাসরি এডমিন অভিযোগ</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="inbStatDirect">০</span>
+              <span class="stat-label">সরাসরি এডমিন অভিযোগ</span>
+            </div>
           </div>
-          <div class="stat-card stat-green" style="cursor:pointer;" onclick="filterInbox('published')">
-            <div class="stat-icon">📢</div>
-            <div class="stat-info"><span class="stat-number" id="inboxPublishedCount">০</span><span class="stat-label">পাবলিশড পোস্ট</span></div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setInboxFilter('contact', this)">
+            <div class="stat-icon">📩</div>
+            <div class="stat-info">
+              <span class="stat-number" id="inbStatContact">০</span>
+              <span class="stat-label">যোগাযোগ ফর্ম বার্তা</span>
+            </div>
           </div>
-          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="filterInbox('unread')">
-            <div class="stat-icon">⏳</div>
-            <div class="stat-info"><span class="stat-number" id="inboxUnreadCount">০</span><span class="stat-label">নতুন / আনরিড</span></div>
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setInboxFilter('published', this)">
+            <div class="stat-icon">🌐</div>
+            <div class="stat-info">
+              <span class="stat-number" id="inbStatPublished">০</span>
+              <span class="stat-label">পাবলিশড (লাইভ)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="setInboxFilter('deactive', this)">
+            <div class="stat-icon">🚫</div>
+            <div class="stat-info">
+              <span class="stat-number" id="inbStatDeactive">০</span>
+              <span class="stat-label">ডিএক্টিভকৃত</span>
+            </div>
           </div>
         </div>
 
         <div class="data-card">
           <div class="table-header-bar">
             <div>
-              <h3 style="font-size: 1.15rem; color: #fff;">ইনবক্স ও অভিযোগ তালিকা</h3>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">মেসেজ এডিট, ডিলিট, সরাসরি ফিডে পাবলিশ বা ডিএক্টিভ করুন</p>
+              <h3 style="font-size: 1.15rem; color: #fff;">সরাসরি অভিযোগ ও ইনবক্স বার্তা তালিকা</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">যেকোনো বার্তা বা অভিযোগ এডিট করুন, এক ক্লিকে মূল ফিডে পাবলিশ (লাইভ) করুন, ডিএক্টিভ বা ডিলিট করুন</p>
             </div>
-            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <input type="text" id="inboxSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 বিষয় বা প্রেরক খুঁজুন..." oninput="renderInboxTable()">
-              <button class="btn btn-secondary btn-sm" onclick="filterInbox('all')">সকল</button>
-              <button class="btn btn-secondary btn-sm" onclick="filterInbox('direct')">এডমিন অভিযোগ</button>
-              <button class="btn btn-secondary btn-sm" onclick="filterInbox('contact')">যোগাযোগ ফর্ম</button>
+            <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+              <input type="text" id="inboxSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 প্রেরক, বিষয় বা আইডি খুঁজুন..." oninput="renderInbox()">
+              <button class="btn btn-secondary btn-sm" onclick="setInboxFilter('all')">সকল</button>
+              <button class="btn btn-secondary btn-sm" onclick="setInboxFilter('direct_admin')">এডমিন অভিযোগ</button>
+              <button class="btn btn-secondary btn-sm" onclick="setInboxFilter('contact')">যোগাযোগ বার্তা</button>
+              <button class="btn btn-secondary btn-sm" onclick="setInboxFilter('published')">পাবলিশড</button>
+              <button class="btn btn-secondary btn-sm" onclick="setInboxFilter('deactive')">ডিএক্টিভ</button>
             </div>
           </div>
 
@@ -93,12 +134,12 @@
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>আইডি</th>
+                  <th>আইডি ও ধরন</th>
                   <th>প্রেরক ও যোগাযোগ</th>
-                  <th>বিষয় ও বার্তা বিবরণ</th>
-                  <th>ফাইল সংযুক্তি</th>
-                  <th>স্ট্যাটাস</th>
-                  <th>অ্যাকশন (এডিট / পাবলিশ / ডিএক্টিভ / ডিলিট)</th>
+                  <th>শিরোনাম, ক্যাটাগরি ও বিবরণ</th>
+                  <th>সংযুক্ত মিডিয়া</th>
+                  <th>স্ট্যাটাস ও তারিখ</th>
+                  <th>অ্যাকশন (পাবলিশ / এডিট / ডিএক্টিভ / ডিলিট)</th>
                 </tr>
               </thead>
               <tbody id="inboxTableBody"></tbody>
@@ -109,175 +150,189 @@
     </main>
   </div>
 
-  <!-- Edit Message Modal -->
-  <div class="modal-backdrop" id="editMsgModal">
-    <div class="modal-container" style="max-width:550px; padding:1.75rem;">
-      <h3 style="color:#fff; margin-bottom:1rem;">✏️ অভিযোগ / বার্তা এডিট করুন</h3>
-      <form onsubmit="event.preventDefault(); saveEditedMessage();">
+  <!-- Inbox Message / Complaint Edit Modal (Requirement #16) -->
+  <div class="modal-backdrop" id="inboxEditModal">
+    <div class="modal-container" style="max-width:640px; padding:1.85rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:1rem;">
+        <h3 style="color:#fff; font-size:1.25rem;" id="inboxModalTitle">✏️ অভিযোগ / মেসেজ এডিট করুন</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('inboxEditModal').classList.remove('active')">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); saveInboxEdit();">
         <input type="hidden" id="editMsgId">
-        <div class="form-group"><label class="form-label">বিষয় *</label><input type="text" id="editMsgSubject" class="form-control" required></div>
-        <div class="form-group"><label class="form-label">বার্তা বিবরণ *</label><textarea id="editMsgBody" class="form-control" style="min-height:110px;" required></textarea></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">প্রেরকের নাম *</label>
+            <input type="text" id="mNameInp" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ফোন নম্বর</label>
+            <input type="text" id="mPhoneInp" class="form-control">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">ইমেইল</label>
+            <input type="text" id="mEmailInp" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ক্যাটাগরি</label>
+            <input type="text" id="mCatInp" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">স্থান / জেলা</label>
+            <input type="text" id="mLocInp" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">বিষয় / শিরোনাম *</label>
+          <input type="text" id="mSubjInp" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">বিস্তারিত বিবরণ / মেসেজ *</label>
+          <textarea id="mBodyInp" class="form-control" style="min-height:110px;" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">স্ট্যাটাস</label>
+          <select id="mStatusInp" class="form-control">
+            <option value="unread">অপঠিত / পেন্ডিং (Unread / Pending)</option>
+            <option value="read">পঠিত ও যাচাইকৃত (Verified / Read)</option>
+            <option value="published">🌐 পাবলিশড (Published on Live Feed)</option>
+            <option value="deactive">🚫 ডিএক্টিভ (Deactivated)</option>
+          </select>
+        </div>
         <div style="display:flex; gap:0.75rem;">
-          <button type="button" class="btn btn-outline" style="flex:1;" onclick="document.getElementById('editMsgModal').classList.remove('active')">বাতিল</button>
-          <button type="submit" class="btn btn-primary" style="flex:1;">💾 আপডেট সংরক্ষণ করুন</button>
+          <button type="button" class="btn btn-outline" style="flex:1;" onclick="document.getElementById('inboxEditModal').classList.remove('active')">বাতিল</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">💾 পরিবর্তন সংরক্ষণ করুন</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="../assets/js/mailer.js"></script>
   <script src="../assets/js/data.js"></script>
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
   <script>
     let currentInboxFilter = "all";
 
-    function filterInbox(type) {
-      currentInboxFilter = type;
-      renderInboxTable();
+    function setInboxFilter(f, cardEl) {
+      currentInboxFilter = f;
+      document.querySelectorAll(".admin-content .stats-grid .stat-card").forEach(c => {
+        c.style.outline = "none";
+      });
+      if (cardEl) cardEl.style.outline = "2px solid #38bdf8";
+      renderInbox();
     }
 
-    function renderInboxTable() {
-      const q = (document.getElementById("inboxSearchInp")?.value || "").toLowerCase();
-      let msgs = StorageManager.getMessages();
+    function renderInbox() {
+      const allMsgs = StorageManager.getMessages();
+      document.getElementById("inbStatTotal").innerText = allMsgs.length.toLocaleString("bn-BD");
+      document.getElementById("inbStatDirect").innerText = allMsgs.filter(m => m.type === "direct_admin").length.toLocaleString("bn-BD");
+      document.getElementById("inbStatContact").innerText = allMsgs.filter(m => m.type !== "direct_admin").length.toLocaleString("bn-BD");
+      document.getElementById("inbStatPublished").innerText = allMsgs.filter(m => m.status === "published").length.toLocaleString("bn-BD");
+      document.getElementById("inbStatDeactive").innerText = allMsgs.filter(m => m.active === false || m.status === "deactive").length.toLocaleString("bn-BD");
 
-      // Update Digital Counters
-      document.getElementById("inboxTotalCount").innerText = msgs.length.toLocaleString("bn-BD");
-      document.getElementById("inboxDirectCount").innerText = msgs.filter(m => m.type === "direct_admin").length.toLocaleString("bn-BD");
-      document.getElementById("inboxPublishedCount").innerText = msgs.filter(m => m.status === "published").length.toLocaleString("bn-BD");
-      document.getElementById("inboxUnreadCount").innerText = msgs.filter(m => m.status === "unread").length.toLocaleString("bn-BD");
-
-      if (currentInboxFilter === "direct") msgs = msgs.filter(m => m.type === "direct_admin");
-      else if (currentInboxFilter === "contact") msgs = msgs.filter(m => m.type === "contact");
+      let msgs = [...allMsgs];
+      if (currentInboxFilter === "direct_admin") msgs = msgs.filter(m => m.type === "direct_admin");
+      else if (currentInboxFilter === "contact") msgs = msgs.filter(m => m.type !== "direct_admin");
       else if (currentInboxFilter === "published") msgs = msgs.filter(m => m.status === "published");
-      else if (currentInboxFilter === "unread") msgs = msgs.filter(m => m.status === "unread");
+      else if (currentInboxFilter === "deactive") msgs = msgs.filter(m => m.active === false || m.status === "deactive");
 
+      const q = (document.getElementById("inboxSearchInp")?.value || "").toLowerCase();
       if (q) {
-        msgs = msgs.filter(m => m.subject.toLowerCase().includes(q) || m.name.toLowerCase().includes(q) || m.message.toLowerCase().includes(q));
+        msgs = msgs.filter(m =>
+          (m.id && m.id.toLowerCase().includes(q)) ||
+          (m.name && m.name.toLowerCase().includes(q)) ||
+          (m.subject && m.subject.toLowerCase().includes(q)) ||
+          (m.message && m.message.toLowerCase().includes(q))
+        );
       }
 
       const tbody = document.getElementById("inboxTableBody");
       if (msgs.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো মেসেজ পাওয়া যায়নি।</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো মেসেজ বা অভিযোগ পাওয়া যায়নি।</td></tr>';
         return;
       }
 
-      tbody.innerHTML = msgs.map(m => {
-        let badgeCls = "badge-verified";
-        let statusLabel = "পঠিত";
-        if (m.status === "unread") { badgeCls = "badge-fake"; statusLabel = "নতুন"; }
-        else if (m.status === "published") { badgeCls = "badge-official"; statusLabel = "পাবলিশড"; }
-        else if (m.status === "deactivated") { badgeCls = "badge-unverified"; statusLabel = "ডিএক্টিভ"; }
+      tbody.innerHTML = msgs.map(function(m) {
+        const isAct = m.active !== false && m.status !== "deactive";
+        const isPub = m.status === "published";
+        const typeBadge = m.type === "direct_admin"
+          ? '<span class="badge badge-official">🛡️ এডমিন অভিযোগ</span>'
+          : '<span class="badge badge-identified">📩 যোগাযোগ ফর্ম</span>';
 
-        return `
-          <tr>
-            <td><strong>${m.id}</strong></td>
-            <td><div style="font-weight:700; color:#fff;">${m.name}</div><div style="font-size:0.75rem; color:#38bdf8;">${m.phone} | ${m.email}</div></td>
-            <td>
-              <div style="font-weight:700; color:#fca5a5;">${m.subject}</div>
-              <div style="font-size:0.85rem; color:#cbd5e1; margin-top:3px;">${m.message}</div>
-            </td>
-            <td><span class="badge badge-identified">📎 ${m.mediaAttached || 'নেই'}</span></td>
-            <td><span class="badge ${badgeCls}">${statusLabel}</span></td>
-            <td>
-              <div class="table-actions">
-                <button class="btn-action btn-action-view" onclick="openEditMessageModal('${m.id}')">✏️ এডিট</button>
-                ${m.status !== 'published' ? `<button class="btn-action btn-action-verify" onclick="publishMessageToFeed('${m.id}')">📢 পাবলিশ</button>` : ''}
-                ${m.status !== 'deactivated' ? `<button class="btn-action" style="background:#64748b; color:#fff;" onclick="toggleDeactivateMessage('${m.id}')">⏸️ ডিএক্টিভ</button>` : `<button class="btn-action" style="background:#10b981; color:#fff;" onclick="toggleDeactivateMessage('${m.id}')">▶️ এক্টিভ</button>`}
-                <button class="btn-action btn-action-delete" onclick="deleteMessageAdmin('${m.id}')">🗑️ ডিলিট</button>
-              </div>
-            </td>
-          </tr>
-        `;
+        let stBadge = '<span class="badge badge-investigating">⏳ পেন্ডিং / অপঠিত</span>';
+        if (isPub) stBadge = '<span class="badge badge-verified">🌐 পাবলিশড (' + (m.publishedReportId || 'Live') + ')</span>';
+        else if (!isAct) stBadge = '<span class="badge badge-fake">🚫 ডিএক্টিভ</span>';
+        else if (m.status === "read") stBadge = '<span class="badge badge-partially">✓ পঠিত</span>';
+
+        return '<tr>' +
+          '<td><strong>' + m.id + '</strong><br><div style="margin-top:4px;">' + typeBadge + '</div></td>' +
+          '<td><div style="font-weight:700; color:#fff;">' + m.name + '</div><div style="font-size:0.78rem; color:#38bdf8;">📞 ' + (m.phone || 'গোপনীয়') + '<br>✉️ ' + (m.email || 'N/A') + '</div></td>' +
+          '<td>' +
+            '<div style="font-weight:700; color:#fca5a5;">' + m.subject + '</div>' +
+            '<div style="font-size:0.76rem; color:#38bdf8;">🏷️ ' + (m.category || 'সাধারণ') + ' • 📍 ' + (m.location || 'ঢাকা') + '</div>' +
+            '<div style="font-size:0.85rem; color:#cbd5e1; margin-top:4px;">' + m.message + '</div>' +
+          '</td>' +
+          '<td><span class="badge badge-identified">📎 ' + (m.mediaAttached || 'Text') + '</span></td>' +
+          '<td><div>' + stBadge + '</div><div style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">📅 ' + m.date + '</div></td>' +
+          '<td>' +
+            '<div class="table-actions">' +
+              '<button class="btn-action btn-action-verify" style="background:rgba(16,185,129,0.25); color:#fff; border-color:#10b981;" onclick="publishInboxItem(\'' + m.id + '\')">🌐 পাবলিশ করুন</button>' +
+              '<button class="btn-action btn-action-view" onclick="openInboxEditModal(\'' + m.id + '\')">✏️ এডিট</button>' +
+              '<button class="btn-action btn-action-forensic" onclick="StorageManager.toggleMessageStatus(\'' + m.id + '\'); renderInbox();">' + (isAct ? '🚫 ডিএক্টিভ' : '✅ এক্টিভ') + '</button>' +
+              '<button class="btn-action btn-action-delete" onclick="StorageManager.deleteMessage(\'' + m.id + '\'); renderInbox();">🗑️ ডিলিট</button>' +
+            '</div>' +
+          '</td>' +
+        '</tr>';
       }).join("");
     }
 
-    function openEditMessageModal(id) {
+    function publishInboxItem(id) {
+      const rep = StorageManager.publishMessageToFeed(id);
+      renderInbox();
+      if (rep && window.showSecurityNotice) {
+        window.showSecurityNotice("✓ বার্তাটি সফলভাবে লাইভ ফিডে (" + rep.id + ") পাবলিশ করা হয়েছে!");
+      }
+    }
+
+    function openInboxEditModal(id) {
       const m = StorageManager.getMessages().find(item => item.id === id);
       if (!m) return;
       document.getElementById("editMsgId").value = m.id;
-      document.getElementById("editMsgSubject").value = m.subject;
-      document.getElementById("editMsgBody").value = m.message;
-      document.getElementById("editMsgModal").classList.add("active");
+      document.getElementById("inboxModalTitle").innerText = "✏️ মেসেজ / অভিযোগ এডিট (" + m.id + ")";
+      document.getElementById("mNameInp").value = m.name || "";
+      document.getElementById("mPhoneInp").value = m.phone || "";
+      document.getElementById("mEmailInp").value = m.email || "";
+      document.getElementById("mCatInp").value = m.category || "সাধারণ অভিযোগ";
+      document.getElementById("mLocInp").value = m.location || "ঢাকা";
+      document.getElementById("mSubjInp").value = m.subject || "";
+      document.getElementById("mBodyInp").value = m.message || "";
+      document.getElementById("mStatusInp").value = (m.active === false) ? "deactive" : (m.status || "unread");
+      document.getElementById("inboxEditModal").classList.add("active");
     }
 
-    function saveEditedMessage() {
+    function saveInboxEdit() {
       const id = document.getElementById("editMsgId").value;
-      const msgs = StorageManager.getMessages();
-      const idx = msgs.findIndex(m => m.id === id);
-      if (idx !== -1) {
-        msgs[idx].subject = document.getElementById("editMsgSubject").value.trim();
-        msgs[idx].message = document.getElementById("editMsgBody").value.trim();
-        localStorage.setItem("crime_zoo_messages", JSON.stringify(msgs));
-        StorageManager.addAuditLog("মেসেজ এডিট", id, "Super Admin", "ইনবক্স মেসেজ সফলভাবে এডিট করা হয়েছে।");
+      const st = document.getElementById("mStatusInp").value;
+      StorageManager.updateMessage(id, {
+        name: document.getElementById("mNameInp").value.trim(),
+        phone: document.getElementById("mPhoneInp").value.trim(),
+        email: document.getElementById("mEmailInp").value.trim(),
+        category: document.getElementById("mCatInp").value.trim(),
+        location: document.getElementById("mLocInp").value.trim(),
+        subject: document.getElementById("mSubjInp").value.trim(),
+        message: document.getElementById("mBodyInp").value.trim(),
+        status: st,
+        active: st !== "deactive"
+      });
+      if (st === "published") {
+        StorageManager.publishMessageToFeed(id);
       }
-      document.getElementById("editMsgModal").classList.remove("active");
-      renderInboxTable();
+      document.getElementById("inboxEditModal").classList.remove("active");
+      renderInbox();
     }
 
-    function publishMessageToFeed(id) {
-      const msgs = StorageManager.getMessages();
-      const m = msgs.find(item => item.id === id);
-      if (!m) return;
-
-      const newPost = {
-        id: "CZ-2026-" + Math.floor(1000 + Math.random() * 9000),
-        pin: "7788",
-        title: m.subject.replace(/^(🚨\s*\[[^\]]+\]\s*)/, ""),
-        category: "এডমিন অভিযোগ",
-        location: "ঢাকা",
-        reporterType: "anonymous",
-        reporterName: "এডমিন ইনবক্স সূত্রে প্রাপ্ত",
-        reporterPhone: "সংরক্ষিত",
-        date: new Date().toLocaleDateString("bn-BD"),
-        time: new Date().toLocaleTimeString("bn-BD"),
-        timestamp: Date.now(),
-        status: "verified",
-        truthScore: 92,
-        statusNote: "এডমিন ডেস্কে জমা হওয়া অভিযোগ থেকে জনস্বার্থে ভেরিফাইড করে প্রকাশিত।",
-        views: 1,
-        likes: 0,
-        mediaType: "photo",
-        mediaUrl: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=80",
-        description: m.message,
-        evidence: "ইনবক্স অভিযোগ রেকর্ড",
-        comments: []
-      };
-
-      StorageManager.addReport(newPost);
-      m.status = "published";
-      localStorage.setItem("crime_zoo_messages", JSON.stringify(msgs));
-
-      if (window.MailerService) {
-        MailerService.sendNotification("MESSAGE_PUBLISHED_TO_FEED", `ইনবক্স বার্তা ফিডে পাবলিশ হয়েছে: ${newPost.id}`, {
-          "মেসেজ আইডি": m.id,
-          "নতুন পোস্ট আইডি": newPost.id,
-          "শিরোনাম": newPost.title,
-          "স্ট্যাটাস": "পাবলিক ফিডে লাইভ"
-        });
-      }
-
-      alert("অভিযোগটি সফলভাবে মূল ফিডে লাইভ পাবলিশ করা হয়েছে!");
-      renderInboxTable();
-    }
-
-    function toggleDeactivateMessage(id) {
-      const msgs = StorageManager.getMessages();
-      const m = msgs.find(item => item.id === id);
-      if (!m) return;
-      m.status = m.status === "deactivated" ? "read" : "deactivated";
-      localStorage.setItem("crime_zoo_messages", JSON.stringify(msgs));
-      renderInboxTable();
-    }
-
-    function deleteMessageAdmin(id) {
-      if (confirm("এই বার্তাটি চিরতরে মুছে ফেলতে চান?")) {
-        StorageManager.deleteMessage(id);
-        renderInboxTable();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", renderInboxTable);
+    document.addEventListener("DOMContentLoaded", renderInbox);
   </script>
 </body>
 </html>

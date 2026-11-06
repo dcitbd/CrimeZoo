@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>যোগাযোগ ও বার্তা প্রেরণ | Crime Zoo</title>
+  <title>বিস্তারিত যোগাযোগ ফর্ম | Crime Zoo</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#dc2626">
   <link rel="icon" href="./assets/icons/logo.png">
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="./assets/css/security.css">
 </head>
 <body>
-
+  <!-- Breaking Crime Alert Ticker -->
   <div class="alert-ticker-bar">
     <div class="container alert-ticker-container">
       <span class="ticker-label">🚨 Crime Zoo লাইভ</span>
@@ -21,6 +21,7 @@
     </div>
   </div>
 
+  <!-- Main Site Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="./index.html" class="brand-logo">
@@ -32,21 +33,21 @@
       </a>
 
       <nav class="main-nav">
-        <a href="./index.html" class="nav-link ">মূল পাতা</a>
-        <a href="./all-reports.html" class="nav-link ">সকল রিপোর্ট (৫০+)</a>
-        <a href="./submit-report.html" class="nav-link ">পোস্ট / রিপোর্ট</a>
-        <a href="./direct-admin-complaint.html" class="nav-link ">এডমিন অভিযোগ</a>
-        <a href="./track-report.html" class="nav-link ">সত্যতা ট্র্যাকার</a>
-        <a href="./emergency-helpline.html" class="nav-link ">জরুরি নম্বর (৩২+)</a>
+        <a href="./index.html" class="nav-link">মূল পাতা</a>
+        <a href="./all-reports.html" class="nav-link">সকল রিপোর্ট (৫০+)</a>
+        <a href="./submit-report.html" class="nav-link">পোস্ট / রিপোর্ট</a>
+        <a href="./track-report.html" class="nav-link">সত্যতা ট্র্যাকার</a>
+        <a href="./emergency-helpline.html" class="nav-link">জরুরি নম্বর</a>
+        <a href="./direct-admin-complaint.html" class="nav-link">এডমিন অভিযোগ</a>
         <a href="./contact.html" class="nav-link active">যোগাযোগ</a>
       </nav>
 
       <div class="header-actions">
-        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="triggerPwaInstall()" style="display: none;">
-          📲 Install App
+        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="openDirectAppInstallerModal()" style="display: inline-flex;">
+          📲 সরাসরি অ্যাপ ইনস্টল
         </button>
         <a href="./reporter-login.html" class="btn btn-outline btn-sm">
-          🎙️ রিপোর্টার ডেস্ক
+          🎙️ রিপোর্টার প্যানেল
         </a>
         <a href="./submit-report.html" class="btn btn-primary btn-sm">
           ✍️ অপরাধ রিপোর্ট
@@ -56,6 +57,7 @@
     </div>
   </header>
 
+  <!-- Mobile Slide-Out Drawer Menu -->
   <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
   <aside class="mobile-drawer" id="mobileDrawer">
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:0.5rem;">
@@ -65,64 +67,114 @@
       </div>
       <button class="modal-close-btn" id="mobileDrawerClose" style="width:32px; height:32px;">✕</button>
     </div>
-    <a href="./index.html" class="nav-link ">🏠 মূল পাতা</a>
-    <a href="./all-reports.html" class="nav-link ">📑 সকল রিপোর্ট (১ পেজে ৫০+)</a>
-    <a href="./submit-report.html" class="nav-link ">✍️ অপরাধ রিপোর্ট করুন</a>
-    <a href="./direct-admin-complaint.html" class="nav-link ">🛡️ সরাসরি এডমিনের কাছে অভিযোগ</a>
-    <a href="./track-report.html" class="nav-link ">🔍 সত্যতা ট্র্যাকার (রিপোর্টার)</a>
-    <a href="./emergency-helpline.html" class="nav-link ">🚨 ৩২+ সরকারি জরুরি নম্বর</a>
-    <a href="./contact.html" class="nav-link active">📩 যোগাযোগ ও বার্তা</a>
-    <a href="./reporter-login.html" class="nav-link ">🎙️ রিপোর্টার লগইন</a>
-    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্ট্রেশন</a>
-    <a href="./admin/login.html" class="nav-link">🔐 এডমিন গেটওয়ে</a>
-    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color);">
-      <button class="btn btn-install btn-sm" style="width:100%;" onclick="triggerPwaInstall()">📲 অ্যাপ ইনস্টল করুন</button>
+    <a href="./index.html" class="nav-link">🏠 মূল পাতা (ফিড)</a>
+    <a href="./all-reports.html" class="nav-link">📚 সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a>
+    <a href="./submit-report.html" class="nav-link">✍️ অপরাধ রিপোর্ট / পোস্ট করুন</a>
+    <a href="./direct-admin-complaint.html" class="nav-link">🛡️ এডমিন অভিযোগ ফর্ম</a>
+    <a href="./track-report.html" class="nav-link">🔍 সত্যতা ট্র্যাকিং (শুধু রিপোর্টার)</a>
+    <a href="./emergency-helpline.html" class="nav-link">🚨 সকল সরকারি জরুরি নম্বর</a>
+    <a href="./contact.html" class="nav-link active">📩 যোগাযোগ ফর্ম</a>
+    <a href="./reporter-login.html" class="nav-link">🔐 রিপোর্টার লগইন</a>
+    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্টার</a>
+    <a href="./admin/login.html" class="nav-link">🛡️ এডমিন কন্ট্রোল প্যানেল</a>
+    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color); display:flex; flex-direction:column; gap:0.45rem;">
+      <button class="btn btn-install btn-sm" style="width:100%;" onclick="openDirectAppInstallerModal()">📲 সরাসরি অ্যাপ ইনস্টল করুন</button>
+      <button class="btn btn-secondary btn-sm" style="width:100%;" onclick="downloadDesktopMobileShortcut()">🔖 ক্রিয়েট শর্টকাট</button>
     </div>
   </aside>
 
   <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
     <div class="form-card">
       <div class="form-header">
-        <span class="badge badge-identified" style="margin-bottom: 0.5rem;">📩 যোগাযোগ ও অনুসন্ধান ডেস্ক</span>
-        <h1 class="form-title">Crime Zoo টিমের সাথে যোগাযোগ</h1>
+        <span class="badge badge-identified" style="margin-bottom: 0.5rem;">📩 সরাসরি যোগাযোগ ও তথ্য প্রেরণ ডেস্ক</span>
+        <h1 class="form-title">Crime Zoo টিমের সাথে যোগাযোগ করুন</h1>
         <p style="color: var(--text-secondary); font-size: 0.92rem;">
-          যেকোনো সাধারণ জিজ্ঞাসা বা তথ্যের জন্য বার্তা পাঠাতে পারেন। ডকুমেন্ট আপলোড করা সম্পূর্ণ ঐচ্ছিক।
+          যেকোনো অনুসন্ধানী তথ্য, মিডিয়া পার্টনারশিপ, আইনি সহায়তা বা সাধারণ বার্তা আমাদের কাছে পাঠান। <strong>এই ফর্মে ডকুমেন্টস আপলোড করা বাধ্যতামূলক নয়।</strong>
         </p>
       </div>
 
-      <form onsubmit="event.preventDefault(); submitExpandedContact();">
+      <div id="contactSuccessBanner" style="display:none; background:rgba(16,185,129,0.16); border:1px solid #10b981; color:#34d399; padding:1rem; border-radius:12px; margin-bottom:1.25rem; text-align:center; font-weight:700;">
+        ✓ আপনার বার্তা সফলভাবে Crime Zoo কন্টাক্ট ও ইনবক্সে জমা হয়েছে এবং এডমিন মেইলে নোটিফিকেশন পাঠানো হয়েছে!
+      </div>
+
+      <form id="expandedContactForm" onsubmit="event.preventDefault(); submitExpandedContact();">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group"><label class="form-label">আপনার নাম (ঐচ্ছিক)</label><input type="text" id="cntName" class="form-control" placeholder="নাম লিখুন"></div>
-          <div class="form-group"><label class="form-label">মোবাইল / হোয়াটসঅ্যাপ</label><input type="text" id="cntPhone" class="form-control" placeholder="০১৭XXXXXXXX"></div>
+          <div class="form-group">
+            <label class="form-label">আপনার নাম (অথবা ছদ্মনাম) *</label>
+            <input type="text" id="cntName" class="form-control" placeholder="আপনার নাম লিখুন..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">মোবাইল / হোয়াটসঅ্যাপ নম্বর *</label>
+            <input type="text" id="cntPhone" class="form-control" placeholder="০১৭XXXXXXXX" required>
+          </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div class="form-group"><label class="form-label">ইমেইল অ্যাড্রেস</label><input type="email" id="cntEmail" class="form-control" placeholder="mail@example.com"></div>
           <div class="form-group">
-            <label class="form-label">যোগাযোগের বিষয় *</label>
-            <input type="text" id="cntSubject" class="form-control" placeholder="বার্তার বিষয়..." required>
+            <label class="form-label">ইমেইল অ্যাড্রেস (ঐচ্ছিক)</label>
+            <input type="email" id="cntEmail" class="form-control" placeholder="example@mail.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">যোগাযোগের বিভাগ / ক্যাটাগরি *</label>
+            <select id="cntDept" class="form-control" required>
+              <option value="সাধারণ জিজ্ঞাসা">সাধারণ জিজ্ঞাসা ও মতামত</option>
+              <option value="অনুসন্ধান ও প্রমাণ প্রেরণ">অনুসন্ধান ও তথ্য প্রেরণ</option>
+              <option value="আইনি ও মানবাধিকার সহায়তা">আইনি ও মানবাধিকার সহায়তা</option>
+              <option value="রিপোর্টার এক্রেডিটেশন">রিপোর্টার এক্রেডিটেশন</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label">আপনার জেলা ও থানা *</label>
+            <input type="text" id="cntLocation" class="form-control" placeholder="যেমন: কুমিল্লা সদর" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">বার্তার বিষয় / শিরোনাম *</label>
+            <input type="text" id="cntSubject" class="form-control" placeholder="সংক্ষেপে বিষয় লিখুন..." required>
+          </div>
+        </div>
+
+        <!-- Optional Document Upload Section (Requirement #10: NOT mandatory) -->
+        <div class="form-group">
+          <label class="form-label">
+            <span>ডকুমেন্টস / ফাইল সংযুক্তি (সম্পূর্ণ ঐচ্ছিক — বাধ্যতামূলক নয়)</span>
+            <span class="badge badge-verified" style="font-size:0.72rem;">ডকুমেন্ট ছাড়াও সাবমিট করা যাবে</span>
+          </label>
+          <div class="multi-upload-grid">
+            <div class="media-slot-card">
+              <div style="font-size:0.85rem; font-weight:700; color:#38bdf8; margin-bottom:0.35rem;">📷 ছবি সংযুক্তি (ঐচ্ছিক)</div>
+              <input type="file" id="cntPhoto" class="form-control" accept="image/*" multiple style="font-size:0.8rem;">
+            </div>
+            <div class="media-slot-card">
+              <div style="font-size:0.85rem; font-weight:700; color:#34d399; margin-bottom:0.35rem;">📄 ফাইল / PDF ডকুমেন্ট (ঐচ্ছিক)</div>
+              <input type="file" id="cntDoc" class="form-control" accept=".pdf,.doc,.docx,.txt" style="font-size:0.8rem;">
+            </div>
+            <div class="media-slot-card">
+              <div style="font-size:0.85rem; font-weight:700; color:#c084fc; margin-bottom:0.35rem;">🎙️ অডিও রেকর্ড (ঐচ্ছিক)</div>
+              <input type="file" id="cntAudio" class="form-control" accept="audio/*" style="font-size:0.8rem;">
+            </div>
+            <div class="media-slot-card">
+              <div style="font-size:0.85rem; font-weight:700; color:#f59e0b; margin-bottom:0.35rem;">🎥 ভিডিও ক্লিপ (ঐচ্ছিক)</div>
+              <input type="file" id="cntVideo" class="form-control" accept="video/*" style="font-size:0.8rem;">
+            </div>
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label">বিস্তারিত বার্তা *</label>
-          <textarea id="cntMessage" class="form-control" style="min-height: 120px;" placeholder="আপনার বার্তা লিখুন..." required></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">
-            <span>ফাইল বা ডকুমেন্ট সংযুক্তি (ঐচ্ছিক — বাধ্যতামূলক নয়)</span>
-          </label>
-          <input type="file" id="cntOptionalFile" class="form-control" multiple accept="image/*,video/*,audio/*,.pdf">
+          <textarea id="cntMessage" class="form-control" style="min-height: 130px;" placeholder="আপনার বার্তা বিস্তারিত লিখুন..." required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1rem;">
-          ✉️ বার্তা প্রেরণ করুন
+          📩 বার্তাটি পাঠান
         </button>
       </form>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -143,37 +195,41 @@
         </div>
 
         <div>
-          <h4 class="footer-col-title">জরুরি সরকারি সেবা (৩২+)</h4>
+          <h4 class="footer-col-title">জরুরি সরকারি সেবা</h4>
           <ul class="footer-links">
             <li><a href="tel:999">জাতীয় জরুরি সেবা (৯৯৯)</a></li>
             <li><a href="tel:106">দুর্নীতি দমন কমিশন (১০৬)</a></li>
             <li><a href="tel:109">নারী ও শিশু হেল্পলাইন (১০৯)</a></li>
-            <li><a href="tel:1098">চাইল্ড হেল্পলাইন (১০৯৮)</a></li>
-            <li><a href="./emergency-helpline.html">সকল সরকারি হটলাইন দেখুন →</a></li>
+            <li><a href="tel:333">জাতীয় তথ্য ও সেবা বাতায়ন (৩৩৩)</a></li>
+            <li><a href="./emergency-helpline.html">সকল ৪৮+ সরকারি জরুরি নম্বর →</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-col-title">নেভিগেশন ও রিপোর্ট</h4>
+          <h4 class="footer-col-title">নেভিগেশন ও প্যানেল</h4>
           <ul class="footer-links">
-            <li><a href="./all-reports.html">সকল রিপোর্ট (৫০+ পোস্ট ভিউ)</a></li>
-            <li><a href="./submit-report.html">অপরাধ রিপোর্ট ও প্রমাণ দাখিল</a></li>
+            <li><a href="./all-reports.html">সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a></li>
+            <li><a href="./submit-report.html">বেনামি বা পরিচয়সহ পোস্ট</a></li>
             <li><a href="./direct-admin-complaint.html">সরাসরি এডমিন অভিযোগ ফর্ম</a></li>
-            <li><a href="./track-report.html">সত্যতা যাচাই ট্র্যাকার</a></li>
-            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a></li>
+            <li><a href="./track-report.html">রিপোর্টার সত্যতা ট্র্যাকিং</a></li>
+            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a> | <a href="./reporter-register.html">রেজিস্টার</a></li>
+            <li><a href="./admin/login.html">এডমিন কন্ট্রোল প্যানেল</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-col-title">অ্যাপ ইনস্টল ও এক্সেস</h4>
+          <h4 class="footer-col-title">সরাসরি অ্যাপ ইনস্টল ও শর্টকাট</h4>
           <p style="font-size: 0.84rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0.85rem;">
-            সরাসরি ব্রাউজার থেকে ইনস্টল বাটনে চাপ দিয়ে মোবাইলে অ্যাপ আইকন যুক্ত করুন।
+            ওয়েবসাইট থেকে সরাসরি অ্যাপ ইনস্টল করুন অথবা ডেস্কটপ/মোবাইল শর্টকাট তৈরি করুন।
           </p>
-          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="triggerPwaInstall()">
-            📲 সরাসরি অ্যাপ ইনস্টল করুন
+          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="openDirectAppInstallerModal()">
+            📲 সরাসরি ওয়েবসাইট থেকে অ্যাপ ইনস্টল
           </button>
-          <a href="./reporter-register.html" class="btn btn-secondary btn-sm" style="width: 100%;">
-            📝 রিপোর্টার রেজিস্ট্রেশন
+          <button class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="downloadDesktopMobileShortcut()">
+            🔖 ক্রিয়েট শর্টকাট (Create Shortcut)
+          </button>
+          <a href="./direct-admin-complaint.html" class="btn btn-outline btn-sm" style="width: 100%;">
+            🛡️ গোপন টিপ-অফ পাঠান
           </a>
         </div>
       </div>
@@ -183,12 +239,14 @@
         <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
           <a href="./privacy-policy.html">হুইসেলব্লোয়ার সুরক্ষা নীতি</a>
           <a href="./terms.html">ব্যবহারের শর্তাবলী</a>
-          <a href="./admin/login.html">এডমিন গেটওয়ে</a>
+          <a href="./reporter-login.html">রিপোর্টার ডেস্ক</a>
+          <a href="./admin/login.html">এডমিন লগইন</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- Mobile Bottom App Navigation -->
   <nav class="bottom-app-nav">
     <a href="./index.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
@@ -200,58 +258,50 @@
     </a>
     <a href="./submit-report.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
-      <span>পোস্ট</span>
+      <span>পোস্ট করুন</span>
     </a>
     <a href="./emergency-helpline.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-      <span>জরুরি ৩২+</span>
+      <span>জরুরি নম্বর</span>
     </a>
-    <a href="./reporter-dashboard.html" class="bottom-nav-item">
+    <a href="./reporter-login.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-      <span>ড্যাশবোর্ড</span>
+      <span>রিপোর্টার</span>
     </a>
   </nav>
 
-  <script src="./assets/js/mailer.js"></script>
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/security.js"></script>
   <script src="./assets/js/pwa.js"></script>
   <script>
     function submitExpandedContact() {
-      var fInp = document.getElementById("cntOptionalFile");
-      var fCount = fInp && fInp.files ? fInp.files.length : 0;
-      var sub = document.getElementById("cntSubject").value.trim();
-      var msg = document.getElementById("cntMessage").value.trim();
-      var name = document.getElementById("cntName").value.trim() || "সাধারণ ভিজিটর";
-      var phone = document.getElementById("cntPhone").value.trim() || "সংরক্ষিত";
-      var email = document.getElementById("cntEmail").value.trim() || "N/A";
+      const files = [];
+      if (document.getElementById("cntPhoto").files.length) files.push(document.getElementById("cntPhoto").files.length + " Photo(s)");
+      if (document.getElementById("cntDoc").files.length) files.push("PDF/File");
+      if (document.getElementById("cntAudio").files.length) files.push("Audio");
+      if (document.getElementById("cntVideo").files.length) files.push("Video");
 
       StorageManager.addMessage({
-        id: "MSG-" + Math.floor(100 + Math.random() * 900),
+        id: "MSG-" + Math.floor(1000 + Math.random() * 9000),
         type: "contact",
-        name: name,
-        phone: phone,
-        email: email,
-        subject: sub,
-        message: msg,
-        mediaAttached: fCount ? fCount + "টি ফাইল সংযুক্ত" : "কোনো ফাইল নেই",
+        reporterType: "identified",
+        name: document.getElementById("cntName").value.trim() || "বেনামি প্রেরক",
+        phone: document.getElementById("cntPhone").value.trim() || "গোপনীয়",
+        email: document.getElementById("cntEmail").value.trim() || "N/A",
+        category: document.getElementById("cntDept").value,
+        location: document.getElementById("cntLocation").value.trim() || "ঢাকা",
+        subject: `[${document.getElementById("cntDept").value}] ` + document.getElementById("cntSubject").value.trim(),
+        message: document.getElementById("cntMessage").value.trim(),
+        mediaAttached: files.length ? files.join(" + ") : "ডকুমেন্ট ছাড়া টেক্সট বার্তা",
         date: new Date().toLocaleDateString("bn-BD"),
-        status: "unread"
+        status: "unread",
+        active: true
       });
 
-      if (window.MailerService) {
-        MailerService.sendNotification("NEW_CONTACT_MESSAGE", "নতুন যোগাযোগ বার্তা: " + sub, {
-          "প্রেরকের নাম": name,
-          "ফোন": phone,
-          "ইমেইল": email,
-          "বিষয়": sub,
-          "বার্তা": msg,
-          "সংযুক্ত ফাইল": fCount ? fCount + "টি ফাইল" : "নেই"
-        });
-      }
-
-      alert("আপনার বার্তাটি সফলভাবে প্রেরিত হয়েছে এবং স্বয়ংক্রিয় নোটিফিকেশন মেইল পাঠানো হয়েছে।");
-      window.location.href = "./index.html";
+      const banner = document.getElementById("contactSuccessBanner");
+      if (banner) banner.style.display = "block";
+      document.getElementById("expandedContactForm").reset();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
 </body>

@@ -1,11 +1,11 @@
 /**
- * CRIME ZOO - MAIN PORTAL APPLICATION CONTROLLER
+ * CRIME ZOO - MAIN PORTAL & ALL REPORTS (50+ PER PAGE) CONTROLLER
  * Features:
- * - Animated Digital Counters
- * - Dynamic Pagination (< ১, ২, ৩, ... ১০ >)
- * - Single-Page Quick View Modal with Multi-Media Tabs (Photo Zoom, Video, Audio, PDF Preview)
- * - Zero Download / Zero Print Protected Media Rendering
- * - Mobile Drawer Navigation Controller
+ * - Shows ONLY Admin-Approved & Active reports dynamically (Requirement #19)
+ * - Auto Slide View for uploaded images (5-10 photos carousel with play/pause, thumbnails & zoom) (Requirement #5)
+ * - 50+ Posts on 1 Page in All Reports page (Requirement #7)
+ * - Interactive Digital Counter Filters
+ * - Truth Tracking restricted to logged-in Reporters (Requirement #6)
  */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,19 +16,40 @@ document.addEventListener("DOMContentLoaded", function () {
   initSearch();
   initModalListeners();
   initMobileDrawer();
+
+  // Dynamic real-time listener when Admin approves/edits/adds reports
+  window.addEventListener("storage", function () {
+    initLiveCounters();
+    initTicker();
+    renderFeed();
+  });
+  window.addEventListener("cz_data_updated", function () {
+    initLiveCounters();
+    initTicker();
+    renderFeed();
+  });
 });
 
 let currentActiveFilter = "all";
+let currentCounterFilter = "all";
 let currentSearchQuery = "";
 let currentPage = 1;
-const ITEMS_PER_PAGE = 6;
+
+function getItemsPerPage() {
+  const pageAttr = document.body.getAttribute("data-page-size");
+  if (pageAttr) return parseInt(pageAttr, 10) || 60;
+  const path = window.location.pathname;
+  if (path.includes("all-reports.html") || path.includes("fact-check.html")) {
+    return 60; // 50+ posts on 1 page!
+  }
+  return 12;
+}
 
 const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
 function toBnNumber(n) {
   return String(n).replace(/[0-9]/g, d => BN_DIGITS[d]);
 }
 
-// Mobile Slide-out Drawer
 function initMobileDrawer() {
   const btn = document.getElementById("mobileMenuBtn");
   const drawer = document.getElementById("mobileDrawer");
@@ -49,9 +70,9 @@ function initMobileDrawer() {
   if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
 }
 
-// 1. Digital Animated Counters
+// 1. Digital Animated Counters + Interactive Counter Filtering
 function initLiveCounters() {
-  const reports = StorageManager.getReports();
+  const reports = StorageManager.getPublicApprovedReports();
   const totalReports = reports.length;
   const verifiedCount = reports.filter(r => r.status === "verified").length;
   const anonCount = reports.filter(r => r.reporterType === "anonymous").length;
@@ -61,13 +82,41 @@ function initLiveCounters() {
   animateCounter("statVerified", verifiedCount);
   animateCounter("statAnonymous", anonCount);
   animateCounter("statFake", fakeCount);
+
+  const bindCounterClick = (elemId, filterVal) => {
+    const numEl = document.getElementById(elemId);
+    const card = numEl ? numEl.closest(".stat-card") : null;
+    if (card && !card.dataset.boundFilter) {
+      card.dataset.boundFilter = "true";
+      card.style.cursor = "pointer";
+      card.title = "ক্লিক করে এই ক্যাটাগরির রিপোর্ট ফিল্টার করুন";
+      card.addEventListener("click", () => {
+        currentCounterFilter = (currentCounterFilter === filterVal && filterVal !== "all") ? "all" : filterVal;
+        document.querySelectorAll(".hero-counter-section .stat-card").forEach(c => {
+          c.style.outline = "none";
+          c.style.boxShadow = "";
+        });
+        if (currentCounterFilter !== "all") {
+          card.style.outline = "2px solid #38bdf8";
+          card.style.boxShadow = "0 0 22px rgba(56, 189, 248, 0.35)";
+        }
+        currentPage = 1;
+        renderFeed();
+      });
+    }
+  };
+
+  bindCounterClick("statTotal", "all");
+  bindCounterClick("statVerified", "verified");
+  bindCounterClick("statAnonymous", "anonymous");
+  bindCounterClick("statFake", "fake");
 }
 
 function animateCounter(elemId, target) {
   const el = document.getElementById(elemId);
   if (!el) return;
   let current = 0;
-  const step = Math.max(1, Math.ceil(target / 20));
+  const step = Math.max(1, Math.ceil(target / 18));
   const timer = setInterval(() => {
     current += step;
     if (current >= target) {
@@ -75,35 +124,45 @@ function animateCounter(elemId, target) {
       clearInterval(timer);
     }
     el.innerText = toBnNumber(current);
-  }, 30);
+  }, 25);
 }
 
 // 2. Alert Ticker
 function initTicker() {
   const tickerEl = document.getElementById("tickerText");
   if (!tickerEl) return;
-  const reports = StorageManager.getReports();
+  const reports = StorageManager.getPublicApprovedReports();
   if (reports.length > 0) {
-    tickerEl.innerHTML = reports
+    tickerEl.innerHTML = reports.slice(0, 15)
       .map(r => `<span class="ticker-link" onclick="openQuickView('${r.id}')">🚨 [${r.location}] ${r.title} (${r.id})</span>`)
       .join(" &nbsp;&nbsp;•&nbsp;&nbsp; ");
   }
 }
 
-// 3. Render Feed with Pagination (< ১, ২, ৩ ... ১০ >)
+// 3. Render Feed with Pagination
 function getFilteredReports() {
-  let filtered = StorageManager.getReports();
+  let filtered = StorageManager.getPublicApprovedReports();
+
+  if (currentCounterFilter === "verified") {
+    filtered = filtered.filter(r => r.status === "verified");
+  } else if (currentCounterFilter === "anonymous") {
+    filtered = filtered.filter(r => r.reporterType === "anonymous");
+  } else if (currentCounterFilter === "fake") {
+    filtered = filtered.filter(r => r.status === "fake");
+  }
+
   if (currentActiveFilter !== "all") {
     filtered = filtered.filter(r => r.category === currentActiveFilter);
   }
+
   if (currentSearchQuery.trim() !== "") {
     const q = currentSearchQuery.toLowerCase();
     filtered = filtered.filter(r =>
-      r.title.toLowerCase().includes(q) ||
-      r.location.toLowerCase().includes(q) ||
-      r.category.toLowerCase().includes(q) ||
-      r.description.toLowerCase().includes(q) ||
-      r.id.toLowerCase().includes(q)
+      (r.title && r.title.toLowerCase().includes(q)) ||
+      (r.location && r.location.toLowerCase().includes(q)) ||
+      (r.category && r.category.toLowerCase().includes(q)) ||
+      (r.description && r.description.toLowerCase().includes(q)) ||
+      (r.id && r.id.toLowerCase().includes(q))
     );
   }
   return filtered;
@@ -113,15 +172,21 @@ function renderFeed() {
   const feedGrid = document.getElementById("feedGrid");
   if (!feedGrid) return;
 
+  const itemsPerPage = getItemsPerPage();
   const filtered = getFilteredReports();
   const totalItems = filtered.length;
-  const totalPages = Math.max(1, Math.ceil(totalItems / ITEMS_PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
 
   if (currentPage > totalPages) currentPage = totalPages;
   if (currentPage < 1) currentPage = 1;
 
-  const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-  const pageItems = filtered.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const startIdx = (currentPage - 1) * itemsPerPage;
+  const pageItems = filtered.slice(startIdx, startIdx + itemsPerPage);
+
+  const countBanner = document.getElementById("allReportsCountLabel");
+  if (countBanner) {
+    countBanner.innerText = `মোট প্রকাশিত লাইভ রিপোর্ট: ${toBnNumber(totalItems)} টি (এক পেজে ${toBnNumber(pageItems.length)} টি প্রদর্শিত হচ্ছে)`;
+  }
 
   if (pageItems.length === 0) {
     feedGrid.innerHTML = `
@@ -148,7 +213,6 @@ function renderPaginationBar(totalItems, totalPages) {
     return;
   }
 
-  // Always show interactive numbered pagination (< ১, ২, ৩ ... ১০ > style)
   const displayPages = Math.max(totalPages, 1);
   let html = `<button class="page-btn" ${currentPage === 1 ? "disabled" : ""} onclick="goToPage(${currentPage - 1})">&lt; পূর্ববর্তী</button>`;
 
@@ -156,7 +220,6 @@ function renderPaginationBar(totalItems, totalPages) {
     html += `<button class="page-btn ${p === currentPage ? "active" : ""}" onclick="goToPage(${p})">${toBnNumber(p)}</button>`;
   }
 
-  // If totalPages is small, also show visual indicator of multi-page scalability
   html += `<button class="page-btn" ${currentPage === displayPages ? "disabled" : ""} onclick="goToPage(${currentPage + 1})">পরবর্তী &gt;</button>`;
   pagEl.innerHTML = html;
 }
@@ -184,19 +247,22 @@ function createPostCardHTML(r) {
   if (r.reporterType === "anonymous") reporterBadge = `<span class="badge badge-anonymous">🕵️ বেনামি</span>`;
   if (r.reporterType === "official") reporterBadge = `<span class="badge badge-official">🛡️ Crime Zoo ডেস্ক</span>`;
 
-  // Multi-media indicator pills
+  const photos = (r.mediaUrls && r.mediaUrls.length) ? r.mediaUrls : (r.mediaUrl ? [r.mediaUrl] : []);
   const pills = [];
-  if (r.mediaUrl) pills.push(`<span class="media-type-tag">📷 ছবি (Zoom)</span>`);
+  if (photos.length > 0) {
+    pills.push(`<span class="media-type-tag">🎞️ ${toBnNumber(photos.length)}টি ছবি (Auto Slide)</span>`);
+  }
   if (r.videoUrl) pills.push(`<span class="media-type-tag">🎥 ভিডিও</span>`);
   if (r.audioUrl) pills.push(`<span class="media-type-tag">🎙️ অডিও</span>`);
   if (r.pdfUrl) pills.push(`<span class="media-type-tag">📄 PDF দলিল</span>`);
 
   const isLiked = localStorage.getItem(`cz_liked_${r.id}`) === "true";
+  const thumbUrl = photos[0] || "./assets/icons/banner.jpg";
 
   return `
     <article class="post-card reveal-anim" onclick="openQuickView('${r.id}')">
       <div class="post-thumb-wrapper">
-        <img src="${r.mediaUrl || './assets/icons/banner.jpg'}" alt="${r.title}" class="post-thumb" loading="lazy">
+        <img src="${thumbUrl}" alt="${r.title}" class="post-thumb" loading="lazy">
         <div class="protected-media-shield"></div>
         <div class="thumb-badges">
           <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">${statusBadge} ${reporterBadge}</div>
@@ -223,7 +289,7 @@ function createPostCardHTML(r) {
               👁️ <span>${toBnNumber(r.views || 0)}</span>
             </span>
           </div>
-          <span class="quick-view-prompt">প্রিভিউ ও জুম →</span>
+          <span class="quick-view-prompt">অটো স্লাইড ও জুম →</span>
         </div>
       </div>
     </article>
@@ -255,11 +321,44 @@ function initSearch() {
 }
 
 // ==========================================================================
-// 5. SINGLE-PAGE POPUP MODAL WITH IMAGE ZOOM, VIDEO/AUDIO RUNNER & PDF PREVIEW
+// 5. SINGLE-PAGE POPUP MODAL WITH AUTO SLIDE VIEW (Requirement #5),
+//    IMAGE ZOOM, VIDEO/AUDIO RUNNER & PDF PREVIEW
 // ==========================================================================
 let currentViewingReport = null;
 let currentZoomScale = 1;
 let audioWaveInterval = null;
+let autoSlideInterval = null;
+let currentSlideIndex = 0;
+let isAutoSlidePlaying = true;
+
+function stopAutoSlideTimer() {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = null;
+  }
+}
+
+function startAutoSlideTimer() {
+  stopAutoSlideTimer();
+  if (!isAutoSlidePlaying || !currentViewingReport) return;
+  const photos = getReportPhotos(currentViewingReport);
+  if (photos.length <= 1) return;
+
+  autoSlideInterval = setInterval(() => {
+    if (!isAutoSlidePlaying) return;
+    currentSlideIndex = (currentSlideIndex + 1) % photos.length;
+    updateSlideViewDOM();
+  }, 2600);
+}
+
+function getReportPhotos(r) {
+  if (!r) return [];
+  if (r.mediaUrls && Array.isArray(r.mediaUrls) && r.mediaUrls.length > 0) {
+    return r.mediaUrls;
+  }
+  if (r.mediaUrl) return [r.mediaUrl];
+  return [];
+}
 
 function openQuickView(reportId) {
   const reports = StorageManager.getReports();
@@ -268,6 +367,8 @@ function openQuickView(reportId) {
 
   currentViewingReport = r;
   currentZoomScale = 1;
+  currentSlideIndex = 0;
+  isAutoSlidePlaying = true;
   r.views = StorageManager.incrementView(reportId);
 
   const modalBackdrop = document.getElementById("postQuickModal");
@@ -297,29 +398,43 @@ function openQuickView(reportId) {
   barInner.style.width = score + "%";
   document.getElementById("truthScoreNote").innerText = r.statusNote || "ফরেনসিক যাচাই চলমান।";
 
-  // Build Multi-Media Switcher Tabs (Photo Zoom, Video Player, Audio Player, PDF Preview)
+  const photos = getReportPhotos(r);
   const tabsBar = document.getElementById("modalEvidenceTabs");
   if (tabsBar) {
     const tabButtons = [];
-    if (r.mediaUrl) tabButtons.push(`<button class="evidence-tab-btn active" onclick="switchEvidenceTab('photo', this)">📷 ছবি (Zoom ভিউ)</button>`);
+    if (photos.length > 0) {
+      tabButtons.push(`<button class="evidence-tab-btn active" onclick="switchEvidenceTab('photo', this)">🎞️ ছবি অটো স্লাইড (${toBnNumber(photos.length)}টি)</button>`);
+    }
     if (r.videoUrl) tabButtons.push(`<button class="evidence-tab-btn" onclick="switchEvidenceTab('video', this)">🎥 ভিডিও ফুটেজ</button>`);
     if (r.audioUrl) tabButtons.push(`<button class="evidence-tab-btn" onclick="switchEvidenceTab('audio', this)">🎙️ অডিও রেকর্ড</button>`);
     if (r.pdfUrl) tabButtons.push(`<button class="evidence-tab-btn" onclick="switchEvidenceTab('pdf', this)">📄 পিডিএফ দলিল (প্রিভিউ)</button>`);
     tabsBar.innerHTML = tabButtons.join("");
   }
 
-  // Render default first available tab
-  if (r.mediaUrl) renderEvidenceStage("photo");
+  if (photos.length > 0) renderEvidenceStage("photo");
   else if (r.videoUrl) renderEvidenceStage("video");
   else if (r.audioUrl) renderEvidenceStage("audio");
   else if (r.pdfUrl) renderEvidenceStage("pdf");
 
-  // Like button
   const isLiked = localStorage.getItem(`cz_liked_${r.id}`) === "true";
   const likeBtn = document.getElementById("modalLikeBtn");
   if (likeBtn) {
     likeBtn.className = `modal-action-btn ${isLiked ? "active-like" : ""}`;
     document.getElementById("modalLikeCount").innerText = toBnNumber(r.likes || 0);
+  }
+
+  // Requirement #6: Only logged-in reporters see secret code / direct truth tracking link
+  const trackLinkBtn = document.querySelector(".modal-actions-bar a[href*='track-report.html']");
+  const loggedReporter = sessionStorage.getItem("cz_logged_reporter");
+  if (trackLinkBtn) {
+    if (loggedReporter) {
+      trackLinkBtn.href = `./track-report.html?id=${r.id}&pin=${r.pin}`;
+      trackLinkBtn.innerHTML = `🔍 সত্যতা ট্র্যাক করুন (গোপন কোড: ${r.pin})`;
+      trackLinkBtn.style.display = "inline-flex";
+    } else {
+      trackLinkBtn.href = `./reporter-login.html`;
+      trackLinkBtn.innerHTML = `🔒 রিপোর্টার ট্র্যাকিং (লগইন আবশ্যক)`;
+    }
   }
 
   renderModalComments(r.comments || []);
@@ -339,45 +454,53 @@ function renderEvidenceStage(type) {
   const r = currentViewingReport;
   currentZoomScale = 1;
   if (audioWaveInterval) clearInterval(audioWaveInterval);
+  stopAutoSlideTimer();
 
-  
   if (type === "photo") {
-    const photos = (r.photosList && r.photosList.length > 0) ? r.photosList : [r.mediaUrl];
-    let slideImagesHtml = "";
-    photos.forEach((pUrl, idx) => {
-      slideImagesHtml += `<img src="${pUrl}" class="carousel-slide-img" style="max-height:440px; width:auto; display:${idx === 0 ? 'block' : 'none'};" data-idx="${idx}">`;
-    });
+    const photos = getReportPhotos(r);
+    const activePhoto = photos[currentSlideIndex] || "./assets/icons/banner.jpg";
+
+    const thumbsHtml = photos.length > 1
+      ? `<div style="display:flex; gap:0.45rem; padding:0.6rem 0.85rem; background:rgba(6,9,17,0.95); width:100%; overflow-x:auto; justify-content:center; border-top:1px solid rgba(255,255,255,0.08);">
+          ${photos.map((url, idx) => `
+            <div onclick="jumpToSlide(${idx})" class="slide-thumb-item" data-slide-idx="${idx}" style="width:54px; height:42px; border-radius:6px; overflow:hidden; cursor:pointer; border:2px solid ${idx === currentSlideIndex ? '#dc2626' : 'rgba(255,255,255,0.18)'}; opacity:${idx === currentSlideIndex ? '1' : '0.55'}; flex-shrink:0; transition:all 0.2s;">
+              <img src="${url}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+          `).join("")}
+        </div>`
+      : "";
 
     stage.innerHTML = `
       <div class="zoom-image-viewport" id="zoomViewport" style="position:relative;">
-        <div id="carouselSlidesWrapper" style="width:100%; display:flex; align-items:center; justify-content:center;">
-          ${slideImagesHtml}
-        </div>
+        <img src="${activePhoto}" id="zoomTargetImg" alt="${r.title}" style="transition: opacity 0.35s ease, transform 0.25s ease;">
         <div class="protected-media-shield"></div>
         ${photos.length > 1 ? `
-          <div style="position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:6px; z-index:15;">
-            ${photos.map((_, i) => `<span class="slide-indicator-dot ${i === 0 ? 'active' : ''}" style="width:10px; height:10px; border-radius:50%; background:${i === 0 ? '#dc2626' : 'rgba(255,255,255,0.4)'}; cursor:pointer;" onclick="jumpToSlide(${i})"></span>`).join('')}
+          <button type="button" onclick="prevSlidePhoto()" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); z-index:15; background:rgba(6,9,17,0.8); border:1px solid rgba(255,255,255,0.25); color:#fff; width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:1.1rem;">❮</button>
+          <button type="button" onclick="nextSlidePhoto()" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); z-index:15; background:rgba(6,9,17,0.8); border:1px solid rgba(255,255,255,0.25); color:#fff; width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:1.1rem;">❯</button>
+          <div id="slideCounterBadge" style="position:absolute; top:12px; right:12px; z-index:15; background:rgba(220,38,38,0.88); color:#fff; padding:0.25rem 0.7rem; border-radius:99px; font-size:0.78rem; font-weight:700;">
+            🎞️ স্লাইড ${toBnNumber(currentSlideIndex + 1)} / ${toBnNumber(photos.length)} (Auto Slide)
           </div>
-          <button style="position:absolute; left:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:#fff; border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; z-index:15;" onclick="prevSlide()">❮</button>
-          <button style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:#fff; border:none; width:36px; height:36px; border-radius:50%; cursor:pointer; z-index:15;" onclick="nextSlide()">❯</button>
-        ` : ''}
+        ` : ""}
       </div>
-      <div class="zoom-controls-toolbar">
-        <button class="btn btn-secondary btn-sm" onclick="adjustImageZoom(0.25)">🔍 জুম ইন (+)</button>
-        <button class="btn btn-secondary btn-sm" onclick="adjustImageZoom(-0.25)">🔍 জুম আউট (-)</button>
-        <button class="btn btn-outline btn-sm" onclick="resetImageZoom()">↺ ১০০% রিসেট</button>
-        ${photos.length > 1 ? `<span id="slideCounterBadge" style="font-size:0.8rem; color:#38bdf8; font-weight:700; margin-left:0.5rem;">অটো স্লাইড: ১/${photos.length}</span>` : ''}
+      ${thumbsHtml}
+      <div class="zoom-controls-toolbar" style="flex-wrap:wrap;">
+        ${photos.length > 1 ? `
+          <button type="button" class="btn btn-primary btn-sm" id="autoSlideToggleBtn" onclick="toggleAutoSlidePlay()">
+            ⏸ অটো স্লাইড চালু
+          </button>
+        ` : ""}
+        <button type="button" class="btn btn-secondary btn-sm" onclick="adjustImageZoom(0.25)">🔍 জুম ইন (+)</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="adjustImageZoom(-0.25)">🔍 জুম আউট (-)</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="resetImageZoom()">↺ ১০০% রিসেট</button>
         <span style="font-size: 0.78rem; color: #94a3b8; margin-left: 0.5rem;">🔒 ডাউনলোড ও প্রিন্ট লককৃত</span>
       </div>
     `;
 
-    // Initialize Auto-Slide if multiple photos
     if (photos.length > 1) {
-      initAutoSlideCarousel(photos.length);
+      startAutoSlideTimer();
     }
-  }
-} else if (type === "video") {
-    const isDirectVideo = r.videoUrl && (r.videoUrl.endsWith(".mp4") || r.videoUrl.startsWith("data:video") || r.videoUrl.includes("commondatastorage"));
+  } else if (type === "video") {
+    const isDirectVideo = r.videoUrl && (r.videoUrl.endsWith(".mp4") || r.videoUrl.startsWith("data:video") || r.videoUrl.includes("commondatastorage") || r.videoUrl.startsWith("blob:"));
     stage.innerHTML = `
       <div class="custom-media-player">
         <div style="position: relative; border-radius: 10px; overflow: hidden; background: #000;">
@@ -455,6 +578,62 @@ function renderEvidenceStage(type) {
   }
 }
 
+function updateSlideViewDOM() {
+  if (!currentViewingReport) return;
+  const photos = getReportPhotos(currentViewingReport);
+  if (photos.length === 0) return;
+
+  const img = document.getElementById("zoomTargetImg");
+  const badge = document.getElementById("slideCounterBadge");
+  if (img) {
+    img.style.opacity = "0.35";
+    setTimeout(() => {
+      img.src = photos[currentSlideIndex];
+      img.style.opacity = "1";
+    }, 120);
+  }
+  if (badge) {
+    badge.innerText = `🎞️ স্লাইড ${toBnNumber(currentSlideIndex + 1)} / ${toBnNumber(photos.length)} (${isAutoSlidePlaying ? "Auto Slide" : "Paused"})`;
+  }
+  document.querySelectorAll(".slide-thumb-item").forEach(el => {
+    const idx = parseInt(el.getAttribute("data-slide-idx"), 10);
+    el.style.borderColor = idx === currentSlideIndex ? "#dc2626" : "rgba(255,255,255,0.18)";
+    el.style.opacity = idx === currentSlideIndex ? "1" : "0.55";
+  });
+}
+
+window.nextSlidePhoto = function () {
+  if (!currentViewingReport) return;
+  const photos = getReportPhotos(currentViewingReport);
+  if (photos.length <= 1) return;
+  currentSlideIndex = (currentSlideIndex + 1) % photos.length;
+  updateSlideViewDOM();
+};
+
+window.prevSlidePhoto = function () {
+  if (!currentViewingReport) return;
+  const photos = getReportPhotos(currentViewingReport);
+  if (photos.length <= 1) return;
+  currentSlideIndex = (currentSlideIndex - 1 + photos.length) % photos.length;
+  updateSlideViewDOM();
+};
+
+window.jumpToSlide = function (idx) {
+  currentSlideIndex = idx;
+  updateSlideViewDOM();
+};
+
+window.toggleAutoSlidePlay = function () {
+  isAutoSlidePlaying = !isAutoSlidePlaying;
+  const btn = document.getElementById("autoSlideToggleBtn");
+  if (btn) {
+    btn.innerText = isAutoSlidePlaying ? "⏸ অটো স্লাইড চালু" : "▶ অটো স্লাইড চালান";
+  }
+  if (isAutoSlidePlaying) startAutoSlideTimer();
+  else stopAutoSlideTimer();
+  updateSlideViewDOM();
+};
+
 window.adjustImageZoom = function (delta) {
   currentZoomScale = Math.min(3.5, Math.max(0.5, currentZoomScale + delta));
   const img = document.getElementById("zoomTargetImg");
@@ -493,7 +672,6 @@ window.toggleProtectedVideo = function (btn) {
       btn.innerText = "▶ ভিডিও চালান";
     }
   } else {
-    // Simulated stream progress
     if (btn.innerText.includes("চালান")) {
       btn.innerText = "⏸ স্ট্রিমিং চলছে...";
       if (fill) fill.style.width = "65%";
@@ -528,7 +706,6 @@ window.toggleProtectedAudio = function (btn) {
     return;
   }
 
-  // Synthesized WebAudio Forensic Voice Tone & Progress simulation
   if (btn.innerText.includes("শুনুন")) {
     btn.innerText = "⏸ পজ অডিও";
     let pct = 15;
@@ -556,6 +733,7 @@ function closeQuickView() {
     document.body.style.overflow = "auto";
   }
   if (audioWaveInterval) clearInterval(audioWaveInterval);
+  stopAutoSlideTimer();
   currentViewingReport = null;
   renderFeed();
 }
@@ -571,7 +749,6 @@ function initModalListeners() {
   });
 }
 
-// Like & Comment Handlers
 function handleCardLike(reportId, el) {
   const res = StorageManager.toggleLike(reportId);
   const countSpan = el.querySelector("span");
@@ -617,7 +794,7 @@ function submitModalComment() {
   const text = textEl ? textEl.value.trim() : "";
 
   if (!text) {
-    alert("অনুগ্রহ করে মন্তব্য লিখুন।");
+    if (window.showSecurityNotice) window.showSecurityNotice("অনুগ্রহ করে মন্তব্য লিখুন।");
     return;
   }
 

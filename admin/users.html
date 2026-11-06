@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>৫. ইউজার ও রিপোর্টার লিস্ট | Crime Zoo এডমিন</title>
+  <title>৫. ইউজার, রিপোর্টার ও এডমিন ব্যবস্থাপনা | Crime Zoo এডমিন</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>html { visibility: hidden; }</style>
+  <script>
+    (function() {
+      var s1 = sessionStorage.getItem("cz_admin_step1") === "true";
+      var s2 = sessionStorage.getItem("cz_admin_timelock") === "true";
+      var tk = sessionStorage.getItem("cz_admin_auth_token");
+      if (!s1 || !s2 || !tk) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="admin-layout">
@@ -17,76 +30,102 @@
           <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
           <div>
             <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
-            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">সিকিউর কমান্ড ও ফরেনসিক সেল</div>
           </div>
         </div>
       </div>
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
-        <li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
-        <li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
-        <li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
-        <li><a href="contacts.html" class="sidebar-link"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
-        <li><a href="users.html" class="sidebar-link active"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
-        <li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
-        <li><a href="media-forensics.html" class="sidebar-link"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
-        <li><a href="inbox.html" class="sidebar-link"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
-        <li><a href="audit-logs.html" class="sidebar-link"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
+        <li><a href="index.html" class="sidebar-link "><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link "><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link "><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link "><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+<li><a href="contacts.html" class="sidebar-link "><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
+<li><a href="users.html" class="sidebar-link active"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link "><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+<li><a href="media-forensics.html" class="sidebar-link "><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
+<li><a href="inbox.html" class="sidebar-link "><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+<li><a href="audit-logs.html" class="sidebar-link "><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
       </ul>
       <div class="sidebar-footer">
-        <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">🌐 মূল সাইট ভিউ দেখুন</a>
-        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="adminLogout()">🚪 সিকিউর লগআউট</button>
+        <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="EmailNotifier.openEmailPreviewModal()">
+          📧 প্রেরিত মেইল নোটিফিকেশন
+        </button>
+        <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
+          🌐 মূল সাইট ভিউ দেখুন
+        </a>
+        <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="adminLogout()">
+          🚪 সিকিউর লগআউট
+        </button>
       </div>
     </aside>
-
     <main class="admin-main">
       <div class="admin-topbar">
         <div style="display:flex; align-items:center; gap:0.75rem;">
           <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
-          <h1 class="admin-page-title">৫. ইউজার ও রিপোর্টার ব্যবস্থাপনা (Add / Edit / Delete / Status)</h1>
+          <h1 class="admin-page-title">৫. ইউজার, রিপোর্টার ও এডমিন ব্যবস্থাপনা (পাসওয়ার্ডসহ)</h1>
         </div>
         <div class="admin-user-profile">
-          <button class="btn btn-primary btn-sm" onclick="openUserModal()">➕ নতুন ইউজার/রিপোর্টার যোগ করুন</button>
+          <button class="btn btn-install btn-sm" onclick="EmailNotifier.openEmailPreviewModal()">📧 মেইল লগ</button>
+          <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
           <div style="text-align: right;">
             <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
-            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● ভেরিফাইড সেশন</div>
           </div>
           <div class="admin-avatar">CZ</div>
         </div>
       </div>
-
       <div class="admin-content">
-        <!-- Digital Counters Filter Cards for Users -->
-        <div class="stats-grid" style="margin-bottom: 1.35rem;">
-          <div class="stat-card stat-red" style="cursor:pointer;" onclick="filterUserRole('all')">
+        <!-- Digital Counter Filters for Users (Requirement #14) -->
+        <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 1.35rem;">
+          <div class="stat-card stat-red" style="cursor:pointer;" onclick="setUserFilter('all', this)">
             <div class="stat-icon">👥</div>
-            <div class="stat-info"><span class="stat-number" id="usrTotalStat">০</span><span class="stat-label">মোট নিবন্ধিত ইউজার</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="usrStatTotal">০</span>
+              <span class="stat-label">মোট ইউজার (সকল)</span>
+            </div>
           </div>
-          <div class="stat-card stat-green" style="cursor:pointer;" onclick="filterUserRole('active')">
+          <div class="stat-card stat-green" style="cursor:pointer;" onclick="setUserFilter('active', this)">
             <div class="stat-icon">✓</div>
-            <div class="stat-info"><span class="stat-number" id="usrActiveStat">০</span><span class="stat-label">সক্রিয় ইউজার</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="usrStatActive">০</span>
+              <span class="stat-label">সক্রিয় (Active)</span>
+            </div>
           </div>
-          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="filterUserRole('reporter')">
+          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="setUserFilter('deactive', this)">
+            <div class="stat-icon">🚫</div>
+            <div class="stat-info">
+              <span class="stat-number" id="usrStatDeactive">০</span>
+              <span class="stat-label">ডিএক্টিভ (Inactive)</span>
+            </div>
+          </div>
+          <div class="stat-card stat-purple" style="cursor:pointer;" onclick="setUserFilter('reporter', this)">
             <div class="stat-icon">🎙️</div>
-            <div class="stat-info"><span class="stat-number" id="usrReporterStat">০</span><span class="stat-label">ভেরিফাইড রিপোর্টার</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="usrStatReporters">০</span>
+              <span class="stat-label">ভেরিফাইড রিপোর্টার</span>
+            </div>
           </div>
-          <div class="stat-card stat-gold" style="cursor:pointer;" onclick="filterUserRole('admin')">
+          <div class="stat-card stat-red" style="cursor:pointer;" onclick="setUserFilter('admin', this)">
             <div class="stat-icon">🛡️</div>
-            <div class="stat-info"><span class="stat-number" id="usrAdminStat">০</span><span class="stat-label">এডমিন লেভেল</span></div>
+            <div class="stat-info">
+              <span class="stat-number" id="usrStatAdmins">০</span>
+              <span class="stat-label">এডমিন অ্যাক্সেস</span>
+            </div>
           </div>
         </div>
 
         <div class="data-card">
           <div class="table-header-bar">
             <div>
-              <h3 style="font-size: 1.15rem; color: #fff;">ইউজার ও রিপোর্টার ডিরেক্টরি (<span id="userCountBadge" style="color:#38bdf8;">০</span>)</h3>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">পাসওয়ার্ডসহ ইউজার পরিচালনা, এক্টিভ/ডিএক্টিভ ও এডিট করুন</p>
+              <h3 style="font-size: 1.15rem; color: #fff;">নিবন্ধিত রিপোর্টার ও এডমিন ইউজার তালিকা (পাসওয়ার্ডসহ)</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">নতুন ইউজার যুক্ত করুন (রিপোর্টার বা এডমিন হিসেবে লগইন করতে পারবে), এডিট, এক্টিভ/ডিএক্টিভ ও ডিলিট করুন</p>
             </div>
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-              <input type="text" id="usrSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 নাম, ইমেইল বা ব্যাজ খুঁজুন..." oninput="renderUsersTable()">
-              <button class="btn btn-secondary btn-sm" onclick="filterUserRole('all')">সকল</button>
-              <button class="btn btn-secondary btn-sm" onclick="filterUserRole('active')">সক্রিয়</button>
-              <button class="btn btn-secondary btn-sm" onclick="filterUserRole('inactive')">ডিএক্টিভ</button>
+              <input type="text" id="userSearchInp" class="form-control" style="width:220px; padding:0.4rem 0.75rem; font-size:0.85rem;" placeholder="🔍 নাম, ইমেইল বা ফোন খুঁজুন..." oninput="renderUsersAdmin()">
+              <button class="btn btn-secondary btn-sm" onclick="setUserFilter('all')">সকল</button>
+              <button class="btn btn-secondary btn-sm" onclick="setUserFilter('active')">সক্রিয়</button>
+              <button class="btn btn-secondary btn-sm" onclick="setUserFilter('deactive')">ডিএক্টিভ</button>
+              <button class="btn btn-primary btn-sm" onclick="openUserCrudModal()">➕ নতুন ইউজার যুক্ত করুন</button>
             </div>
           </div>
 
@@ -94,12 +133,13 @@
             <table class="admin-table">
               <thead>
                 <tr>
-                  <th>আইডি</th>
-                  <th>নাম ও ব্যাজ আইডি</th>
-                  <th>ইমেইল ও ফোন</th>
-                  <th>লগইন পাসওয়ার্ড</th>
-                  <th>ভূমিকা ও স্ট্যাটাস</th>
-                  <th>অ্যাকশন (এডিট / এক্টিভ / ডিলিট)</th>
+                  <th>ইউজার আইডি ও ব্যাজ</th>
+                  <th>নাম, সংস্থা ও এনআইডি</th>
+                  <th>ইমেইল ও মোবাইল</th>
+                  <th>পাসওয়ার্ড (Password)</th>
+                  <th>জেলা</th>
+                  <th>রোল ও স্ট্যাটাস</th>
+                  <th>অ্যাকশন (এডিট / এক্টিভ-ডিএক্টিভ / ডিলিট)</th>
                 </tr>
               </thead>
               <tbody id="usersTableBody"></tbody>
@@ -110,194 +150,204 @@
     </main>
   </div>
 
-  <!-- Add / Edit User Modal (matches reporter registration form with password & role) -->
-  <div class="modal-backdrop" id="userCrudModal">
-    <div class="modal-container" style="max-width:540px; padding:1.75rem;">
-      <h3 style="color:#fff; margin-bottom:1rem;" id="userModalHeading">➕ নতুন ইউজার / রিপোর্টার যুক্ত করুন</h3>
-      <form onsubmit="event.preventDefault(); saveUserCrud();">
+  <!-- Add / Edit User Modal matching Reporter Register Form + Role & Status (Requirement #14) -->
+  <div class="modal-backdrop" id="addUserModal">
+    <div class="modal-container" style="max-width:640px; padding:1.85rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:1rem;">
+        <h3 style="color:#fff; font-size:1.25rem;" id="userModalTitle">➕ নতুন ইউজার / রিপোর্টার / এডমিন যুক্ত করুন</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('addUserModal').classList.remove('active')">✕</button>
+      </div>
+      <form onsubmit="event.preventDefault(); saveUserAdminCrud();">
         <input type="hidden" id="editUserId">
-        <div class="form-group"><label class="form-label">পূর্ণ নাম *</label><input type="text" id="uNameInp" class="form-control" required placeholder="নাম লিখুন"></div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-          <div class="form-group"><label class="form-label">ইমেইল *</label><input type="email" id="uEmailInp" class="form-control" required placeholder="user@mail.com"></div>
-          <div class="form-group"><label class="form-label">মোবাইল নম্বর *</label><input type="text" id="uPhoneInp" class="form-control" required placeholder="০১৭XXXXXXXX"></div>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
-          <div class="form-group"><label class="form-label">জেলা / এলাকা *</label><input type="text" id="uDistInp" class="form-control" required placeholder="যেমন: ঢাকা"></div>
-          <div class="form-group"><label class="form-label">লগইন পাসওয়ার্ড *</label><input type="text" id="uPassInp" class="form-control" required placeholder="পাসওয়ার্ড দিন"></div>
+          <div class="form-group">
+            <label class="form-label">পূর্ণ নাম *</label>
+            <input type="text" id="uName" class="form-control" placeholder="পূর্ণ নাম লিখুন" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">মোবাইল নম্বর *</label>
+            <input type="text" id="uPhone" class="form-control" placeholder="০১৭XXXXXXXX" required>
+          </div>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
           <div class="form-group">
-            <label class="form-label">ভূমিকা / রোল *</label>
-            <select id="uRoleInp" class="form-control">
-              <option value="ভেরিফাইড রিপোর্টার">ভেরিফাইড রিপোর্টার</option>
-              <option value="ইনভেস্টিগেটিভ রিপোর্টার">ইনভেস্টিগেটিভ রিপোর্টার</option>
-              <option value="মডারেটর / এডমিন">মডারেটর / এডমিন</option>
-              <option value="সিটিজেন জার্নালিস্ট">সিটিজেন জার্নালিস্ট</option>
+            <label class="form-label">ইমেইল অ্যাড্রেস *</label>
+            <input type="email" id="uEmail" class="form-control" placeholder="user@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">জাতীয় পরিচয়পত্র (NID) / প্রেস আইডি *</label>
+            <input type="text" id="uNid" class="form-control" placeholder="NID বা প্রেস আইডি নম্বর" required>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">মিডিয়া হাউস / পদবী *</label>
+            <input type="text" id="uOrg" class="form-control" placeholder="যেমন: ক্রাইম রিপোর্টার" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">কর্মরত জেলা *</label>
+            <input type="text" id="uDist" class="form-control" placeholder="যেমন: ঢাকা" required>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label">লগইন পাসওয়ার্ড *</label>
+            <input type="text" id="uPass" class="form-control" placeholder="পাসওয়ার্ড সেট করুন" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">অ্যাক্সেস রোল (Role) *</label>
+            <select id="uRole" class="form-control">
+              <option value="reporter">🎙️ রিপোর্টার (Reporter Login)</option>
+              <option value="admin">🛡️ এডমিন ও রিপোর্টার (Admin Login)</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">অ্যাকাউন্ট স্ট্যাটাস *</label>
-            <select id="uStatusInp" class="form-control">
-              <option value="active">সক্রিয় (Active)</option>
-              <option value="inactive">ডিএক্টিভ (Inactive)</option>
+            <select id="uActive" class="form-control">
+              <option value="true">✓ এক্টিভ (Active)</option>
+              <option value="false">🚫 ডিএক্টিভ (Deactive)</option>
             </select>
           </div>
         </div>
         <div style="display:flex; gap:0.75rem; margin-top:0.5rem;">
-          <button type="button" class="btn btn-outline" style="flex:1;" onclick="document.getElementById('userCrudModal').classList.remove('active')">বাতিল</button>
-          <button type="submit" class="btn btn-primary" style="flex:1;">💾 সেভ করুন</button>
+          <button type="button" class="btn btn-outline" style="flex:1;" onclick="document.getElementById('addUserModal').classList.remove('active')">বাতিল</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">💾 ইউজার সংরক্ষণ করুন</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script src="../assets/js/mailer.js"></script>
   <script src="../assets/js/data.js"></script>
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
   <script>
     let currentUserFilter = "all";
-    function filterUserRole(role) {
-      currentUserFilter = role;
-      renderUsersTable();
+
+    function setUserFilter(f, cardEl) {
+      currentUserFilter = f;
+      document.querySelectorAll(".admin-content .stats-grid .stat-card").forEach(c => {
+        c.style.outline = "none";
+      });
+      if (cardEl) cardEl.style.outline = "2px solid #38bdf8";
+      renderUsersAdmin();
     }
 
-    function renderUsersTable() {
-      const q = (document.getElementById("usrSearchInp")?.value || "").toLowerCase();
-      let list = StorageManager.getReporters();
+    function renderUsersAdmin() {
+      const allUsers = StorageManager.getReporters();
+      document.getElementById("usrStatTotal").innerText = allUsers.length.toLocaleString("bn-BD");
+      document.getElementById("usrStatActive").innerText = allUsers.filter(u => u.active !== false).length.toLocaleString("bn-BD");
+      document.getElementById("usrStatDeactive").innerText = allUsers.filter(u => u.active === false).length.toLocaleString("bn-BD");
+      document.getElementById("usrStatReporters").innerText = allUsers.filter(u => u.role !== "admin").length.toLocaleString("bn-BD");
+      document.getElementById("usrStatAdmins").innerText = allUsers.filter(u => u.role === "admin").length.toLocaleString("bn-BD");
 
-      // Digital Counters
-      document.getElementById("usrTotalStat").innerText = list.length.toLocaleString("bn-BD");
-      document.getElementById("usrActiveStat").innerText = list.filter(u => u.status !== "ডিএক্টিভ" && u.status !== "inactive").length.toLocaleString("bn-BD");
-      document.getElementById("usrReporterStat").innerText = list.filter(u => u.status.includes("রিপোর্টার")).length.toLocaleString("bn-BD");
-      document.getElementById("usrAdminStat").innerText = list.filter(u => u.status.includes("এডমিন")).length.toLocaleString("bn-BD");
+      let list = [...allUsers];
+      if (currentUserFilter === "active") list = list.filter(u => u.active !== false);
+      else if (currentUserFilter === "deactive") list = list.filter(u => u.active === false);
+      else if (currentUserFilter === "reporter") list = list.filter(u => u.role !== "admin");
+      else if (currentUserFilter === "admin") list = list.filter(u => u.role === "admin");
 
-      if (currentUserFilter === "active") list = list.filter(u => u.status !== "ডিএক্টিভ" && u.status !== "inactive");
-      else if (currentUserFilter === "inactive") list = list.filter(u => u.status === "ডিএক্টিভ" || u.status === "inactive");
-      else if (currentUserFilter === "reporter") list = list.filter(u => u.status.includes("রিপোর্টার"));
-      else if (currentUserFilter === "admin") list = list.filter(u => u.status.includes("এডমিন"));
-
+      const q = (document.getElementById("userSearchInp")?.value || "").toLowerCase();
       if (q) {
-        list = list.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q) || u.phone.includes(q) || (u.badgeNo && u.badgeNo.toLowerCase().includes(q)));
+        list = list.filter(u =>
+          (u.name && u.name.toLowerCase().includes(q)) ||
+          (u.email && u.email.toLowerCase().includes(q)) ||
+          (u.phone && u.phone.toLowerCase().includes(q)) ||
+          (u.district && u.district.toLowerCase().includes(q)) ||
+          (u.id && u.id.toLowerCase().includes(q))
+        );
       }
 
-      document.getElementById("userCountBadge").innerText = list.length.toLocaleString("bn-BD");
       const tbody = document.getElementById("usersTableBody");
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো ইউজার মেলেনি।</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--text-muted);">কোনো ইউজার পাওয়া যায়নি।</td></tr>';
         return;
       }
 
-      tbody.innerHTML = list.map(u => {
-        const isActive = u.status !== "ডিএক্টিভ" && u.status !== "inactive";
-        return `
-          <tr>
-            <td><strong>${u.id}</strong></td>
-            <td>
-              <div style="font-weight:700; color:#fff;">${u.name}</div>
-              <div style="font-size:0.75rem; color:#38bdf8;">ব্যাজ: ${u.badgeNo || 'N/A'} • 📍 ${u.district}</div>
-            </td>
-            <td>${u.email}<br><span style="font-size:0.75rem; color:#94a3b8;">${u.phone}</span></td>
-            <td><code style="background:#0f172a; padding:2px 6px; border-radius:4px; color:#fbbf24; font-size:0.82rem;">${u.pass || '••••••'}</code></td>
-            <td><span class="badge ${isActive ? 'badge-verified' : 'badge-fake'}">${isActive ? (u.status || 'সক্রিয়') : 'ডিএক্টিভ'}</span></td>
-            <td>
-              <div class="table-actions">
-                <button class="btn-action btn-action-verify" onclick="editUserModal('${u.id}')">✏️ এডিট</button>
-                <button class="btn-action" style="background:${isActive ? '#f59e0b' : '#10b981'}; color:#fff;" onclick="toggleUserStatus('${u.id}')">${isActive ? '⏸️ ডিএক্টিভ' : '▶️ এক্টিভ'}</button>
-                <button class="btn-action btn-action-delete" onclick="deleteUserItem('${u.id}')">🗑️ ডিলিট</button>
-              </div>
-            </td>
-          </tr>
-        `;
+      tbody.innerHTML = list.map(function(u) {
+        const isAct = u.active !== false;
+        const roleBadge = u.role === "admin"
+          ? '<span class="badge badge-official">🛡️ এডমিন + রিপোর্টার</span>'
+          : '<span class="badge badge-identified">🎙️ রিপোর্টার</span>';
+        const stateBadge = isAct
+          ? '<span class="badge badge-verified">✓ এক্টিভ</span>'
+          : '<span class="badge badge-fake">🚫 ডিএক্টিভ</span>';
+
+        return '<tr>' +
+          '<td><strong>' + u.id + '</strong><br><span style="font-size:0.75rem; color:#38bdf8;">' + (u.badgeNo || '') + '</span></td>' +
+          '<td><div style="font-weight:700; color:#fff;">' + u.name + '</div><div style="font-size:0.78rem; color:#94a3b8;">' + (u.org || 'প্রেস') + ' • NID: ' + (u.nid || 'N/A') + '</div></td>' +
+          '<td><div style="color:#38bdf8;">' + u.email + '</div><div style="font-size:0.78rem; color:#cbd5e1;">📞 ' + u.phone + '</div></td>' +
+          '<td><code style="background:rgba(16,185,129,0.14); border:1px solid rgba(16,185,129,0.4); color:#34d399; padding:3px 8px; border-radius:6px; font-weight:700;">🔑 ' + (u.pass || '123456') + '</code></td>' +
+          '<td>📍 ' + u.district + '</td>' +
+          '<td><div style="display:flex; flex-direction:column; gap:4px; align-items:flex-start;">' + roleBadge + stateBadge + '</div></td>' +
+          '<td>' +
+            '<div class="table-actions">' +
+              '<button class="btn-action btn-action-verify" onclick="editUserItem(\'' + u.id + '\')">✏️ এডিট</button>' +
+              '<button class="btn-action btn-action-view" onclick="StorageManager.toggleReporterStatus(\'' + u.id + '\'); renderUsersAdmin();">' + (isAct ? '🚫 ডিএক্টিভ' : '✅ এক্টিভ') + '</button>' +
+              '<button class="btn-action btn-action-delete" onclick="StorageManager.deleteReporter(\'' + u.id + '\'); renderUsersAdmin();">🗑️ ডিলিট</button>' +
+            '</div>' +
+          '</td>' +
+        '</tr>';
       }).join("");
     }
 
-    function openUserModal() {
+    function openUserCrudModal() {
       document.getElementById("editUserId").value = "";
-      document.getElementById("userModalHeading").innerText = "➕ নতুন ইউজার / রিপোর্টার যুক্ত করুন";
-      document.getElementById("uNameInp").value = "";
-      document.getElementById("uEmailInp").value = "";
-      document.getElementById("uPhoneInp").value = "";
-      document.getElementById("uDistInp").value = "";
-      document.getElementById("uPassInp").value = "";
-      document.getElementById("userCrudModal").classList.add("active");
+      document.getElementById("userModalTitle").innerText = "➕ নতুন ইউজার / রিপোর্টার / এডমিন যুক্ত করুন";
+      document.getElementById("uName").value = "";
+      document.getElementById("uPhone").value = "";
+      document.getElementById("uEmail").value = "";
+      document.getElementById("uNid").value = "";
+      document.getElementById("uOrg").value = "";
+      document.getElementById("uDist").value = "";
+      document.getElementById("uPass").value = "";
+      document.getElementById("uRole").value = "reporter";
+      document.getElementById("uActive").value = "true";
+      document.getElementById("addUserModal").classList.add("active");
     }
 
-    function editUserModal(id) {
+    function editUserItem(id) {
       const u = StorageManager.getReporters().find(item => item.id === id);
       if (!u) return;
       document.getElementById("editUserId").value = u.id;
-      document.getElementById("userModalHeading").innerText = "✏️ ইউজার এডিট করুন (" + u.name + ")";
-      document.getElementById("uNameInp").value = u.name;
-      document.getElementById("uEmailInp").value = u.email;
-      document.getElementById("uPhoneInp").value = u.phone;
-      document.getElementById("uDistInp").value = u.district;
-      document.getElementById("uPassInp").value = u.pass || "";
-      document.getElementById("uRoleInp").value = u.status || "ভেরিফাইড রিপোর্টার";
-      document.getElementById("userCrudModal").classList.add("active");
+      document.getElementById("userModalTitle").innerText = "✏️ ইউজার প্রোফাইল ও পাসওয়ার্ড এডিট (" + u.id + ")";
+      document.getElementById("uName").value = u.name || "";
+      document.getElementById("uPhone").value = u.phone || "";
+      document.getElementById("uEmail").value = u.email || "";
+      document.getElementById("uNid").value = u.nid || "";
+      document.getElementById("uOrg").value = u.org || "";
+      document.getElementById("uDist").value = u.district || "";
+      document.getElementById("uPass").value = u.pass || "";
+      document.getElementById("uRole").value = u.role || "reporter";
+      document.getElementById("uActive").value = (u.active === false) ? "false" : "true";
+      document.getElementById("addUserModal").classList.add("active");
     }
 
-    function saveUserCrud() {
+    function saveUserAdminCrud() {
       const editId = document.getElementById("editUserId").value;
-      const list = StorageManager.getReporters();
+      const roleVal = document.getElementById("uRole").value;
+      const isAct = document.getElementById("uActive").value === "true";
       const payload = {
-        name: document.getElementById("uNameInp").value.trim(),
-        email: document.getElementById("uEmailInp").value.trim(),
-        phone: document.getElementById("uPhoneInp").value.trim(),
-        district: document.getElementById("uDistInp").value.trim(),
-        pass: document.getElementById("uPassInp").value.trim(),
-        status: document.getElementById("uStatusInp").value === "inactive" ? "ডিএক্টিভ" : document.getElementById("uRoleInp").value
+        name: document.getElementById("uName").value.trim(),
+        phone: document.getElementById("uPhone").value.trim(),
+        email: document.getElementById("uEmail").value.trim(),
+        nid: document.getElementById("uNid").value.trim(),
+        org: document.getElementById("uOrg").value.trim(),
+        district: document.getElementById("uDist").value.trim(),
+        pass: document.getElementById("uPass").value.trim(),
+        role: roleVal,
+        active: isAct,
+        status: isAct ? (roleVal === "admin" ? "এডমিন ও মডারেটর" : "ভেরিফাইড রিপোর্টার") : "ডিএক্টিভ (স্থগিত)"
       };
-
       if (editId) {
-        const idx = list.findIndex(u => u.id === editId);
-        if (idx !== -1) {
-          list[idx] = { ...list[idx], ...payload };
-          localStorage.setItem("crime_zoo_reporters", JSON.stringify(list));
-          StorageManager.addAuditLog("ইউজার এডিট", editId, "Super Admin", `${payload.name} এর তথ্য আপডেট করা হয়েছে।`);
-        }
+        StorageManager.updateReporter(editId, payload);
       } else {
-        const newU = {
-          id: "USR-" + Math.floor(100 + Math.random() * 899),
-          badgeNo: "CZ-REP-2026-" + Math.floor(10 + Math.random() * 89),
-          ...payload
-        };
-        list.unshift(newU);
-        localStorage.setItem("crime_zoo_reporters", JSON.stringify(list));
-        StorageManager.addAuditLog("নতুন ইউজার যোগ", newU.id, "Super Admin", `${payload.name} পাসওয়ার্ডসহ ডাটাবেজে যুক্ত হয়েছে।`);
-
-        if (window.MailerService) {
-          MailerService.sendNotification("NEW_USER_CREATED_BY_ADMIN", `এডমিন কর্তৃক নতুন ইউজার যুক্ত: ${payload.name}`, {
-            "নাম": payload.name,
-            "ইমেইল": payload.email,
-            "ফোন": payload.phone,
-            "পাসওয়ার্ড": payload.pass,
-            "রোল": payload.status
-          });
-        }
+        StorageManager.registerReporter(payload);
       }
-
-      document.getElementById("userCrudModal").classList.remove("active");
-      renderUsersTable();
+      document.getElementById("addUserModal").classList.remove("active");
+      renderUsersAdmin();
     }
 
-    function toggleUserStatus(id) {
-      const list = StorageManager.getReporters();
-      const u = list.find(item => item.id === id);
-      if (!u) return;
-      u.status = (u.status === "ডিএক্টিভ" || u.status === "inactive") ? "ভেরিফাইড রিপোর্টার" : "ডিএক্টিভ";
-      localStorage.setItem("crime_zoo_reporters", JSON.stringify(list));
-      renderUsersTable();
-    }
-
-    function deleteUserItem(id) {
-      if (confirm("এই ইউজারটিকে চিরতরে মুছে ফেলতে চান?")) {
-        StorageManager.deleteReporter(id);
-        renderUsersTable();
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", renderUsersTable);
+    document.addEventListener("DOMContentLoaded", renderUsersAdmin);
   </script>
 </body>
 </html>

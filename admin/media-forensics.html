@@ -3,39 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>৭. মিডিয়া ও এআই ফরেনসিক ল্যাব | Crime Zoo এডমিন</title>
+  <title>৭. অ্যাডভান্সড মিডিয়া ও এআই ফরেনসিক ল্যাব | Crime Zoo এডমিন</title>
   <link rel="icon" href="../assets/icons/logo.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/security.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <style>html { visibility: hidden; }</style>
+  <script>
+    (function() {
+      var s1 = sessionStorage.getItem("cz_admin_step1") === "true";
+      var s2 = sessionStorage.getItem("cz_admin_timelock") === "true";
+      var tk = sessionStorage.getItem("cz_admin_auth_token");
+      if (!s1 || !s2 || !tk) {
+        window.location.replace("login.html");
+      } else {
+        document.documentElement.style.visibility = "visible";
+      }
+    })();
+  </script>
 </head>
 <body>
   <div class="admin-layout">
-    
     <aside class="admin-sidebar">
       <div class="sidebar-header">
         <div style="display:flex; align-items:center; gap:0.65rem;">
           <img src="../assets/icons/logo.png" style="width:38px; height:38px; object-fit:contain; border-radius:8px; border:1px solid rgba(220,38,38,0.4);">
           <div>
             <div style="font-weight: 800; color: #fff; font-size: 1.05rem;">Crime Zoo এডমিন</div>
-            <div style="font-size: 0.7rem; color: #38bdf8;">টাইম-লক সিকিউর কন্ট্রোল সেল</div>
+            <div style="font-size: 0.7rem; color: #38bdf8;">সিকিউর কমান্ড ও ফরেনসিক সেল</div>
           </div>
         </div>
       </div>
       <ul class="sidebar-menu">
-        <li><a href="index.html" class="sidebar-link"><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
-<li><a href="anonymous-reports.html" class="sidebar-link"><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
-<li><a href="identified-reports.html" class="sidebar-link"><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
-<li><a href="official-posts.html" class="sidebar-link"><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
-<li><a href="contacts.html" class="sidebar-link"><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
-<li><a href="users.html" class="sidebar-link"><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
-<li><a href="fake-reports.html" class="sidebar-link"><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
+        <li><a href="index.html" class="sidebar-link "><span>📊 মূল ড্যাশবোর্ড ও কাউন্টার</span></a></li>
+<li><a href="anonymous-reports.html" class="sidebar-link "><span>🕵️ ১. সকল বেনামি অভিযোগ লিস্ট</span></a></li>
+<li><a href="identified-reports.html" class="sidebar-link "><span>👤 ২. পরিচয় দিয়ে পোস্ট লিস্ট</span></a></li>
+<li><a href="official-posts.html" class="sidebar-link "><span>✍️ ৩. সরাসরি এডমিন পোস্ট লিস্ট</span></a></li>
+<li><a href="contacts.html" class="sidebar-link "><span>📇 ৪. কন্টাক্ট লিস্ট (Add/Edit/Del)</span></a></li>
+<li><a href="users.html" class="sidebar-link "><span>👥 ৫. ইউজার ও রিপোর্টার লিস্ট</span></a></li>
+<li><a href="fake-reports.html" class="sidebar-link "><span>⚠️ ৬. ভুয়া পোস্ট লিস্ট</span></a></li>
 <li><a href="media-forensics.html" class="sidebar-link active"><span>🔬 ৭. মিডিয়া ও এআই ফরেনসিক ল্যাব</span></a></li>
-<li><a href="inbox.html" class="sidebar-link"><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
-<li><a href="audit-logs.html" class="sidebar-link"><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
-
+<li><a href="inbox.html" class="sidebar-link "><span>📥 সরাসরি অভিযোগ ও ইনবক্স</span></a></li>
+<li><a href="audit-logs.html" class="sidebar-link "><span>📜 সিকিউরিটি অডিট লগ</span></a></li>
       </ul>
       <div class="sidebar-footer">
+        <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="EmailNotifier.openEmailPreviewModal()">
+          📧 প্রেরিত মেইল নোটিফিকেশন
+        </button>
         <a href="../index.html" class="btn btn-outline btn-sm" style="width: 100%; margin-bottom: 0.5rem;" target="_blank">
           🌐 মূল সাইট ভিউ দেখুন
         </a>
@@ -44,59 +58,94 @@
         </button>
       </div>
     </aside>
-    
-
     <main class="admin-main">
-      
       <div class="admin-topbar">
         <div style="display:flex; align-items:center; gap:0.75rem;">
           <button class="admin-mobile-toggle" id="adminMobileToggle">☰ মেন্যু</button>
-          <h1 class="admin-page-title">৭. ছবি, ভিডিও, অডিও ও ডিপফেক ফরেনসিক যাচাইকরণ ল্যাব</h1>
+          <h1 class="admin-page-title">৭. অ্যাডভান্সড ৬-স্তরের মিডিয়া ও এআই ডিপফেক ফরেনসিক ল্যাব</h1>
         </div>
         <div class="admin-user-profile">
+          <button class="btn btn-install btn-sm" onclick="EmailNotifier.openEmailPreviewModal()">📧 মেইল লগ</button>
           <button class="btn btn-primary btn-sm" onclick="openAdminAddPostModal()">➕ নতুন পোস্ট এড করুন</button>
           <div style="text-align: right;">
             <div style="font-weight: 700; color: #fff; font-size: 0.88rem;">সুপার এডমিন</div>
-            <div style="font-size: 0.72rem; color: #34d399;">● টাইম-লক ভেরিফাইড</div>
+            <div style="font-size: 0.72rem; color: #34d399;">● ভেরিফাইড সেশন</div>
           </div>
           <div class="admin-avatar">CZ</div>
         </div>
       </div>
-    
-
       <div class="admin-content">
+        <!-- Digital Forensic Lab Counters -->
+        <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 1.35rem;">
+          <div class="stat-card stat-red">
+            <div class="stat-icon">🔬</div>
+            <div class="stat-info">
+              <span class="stat-number" id="flStatTotal">০</span>
+              <span class="stat-label">মোট কেস এভিডেন্স বান্ডেল</span>
+            </div>
+          </div>
+          <div class="stat-card stat-green">
+            <div class="stat-icon">✓</div>
+            <div class="stat-info">
+              <span class="stat-number" id="flStatAuthentic">০</span>
+              <span class="stat-label">অরিজিনাল ক্যামেরা মিডিয়া</span>
+            </div>
+          </div>
+          <div class="stat-card stat-gold">
+            <div class="stat-icon">🤖</div>
+            <div class="stat-info">
+              <span class="stat-number" id="flStatAiFake">০</span>
+              <span class="stat-label">শনাক্তকৃত এআই / ডিপফেক</span>
+            </div>
+          </div>
+          <div class="stat-card stat-purple">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+              <span class="stat-number">৬ স্তর</span>
+              <span class="stat-label">ELA + বিট-প্লেন + স্পেকট্রাম + হ্যাশ</span>
+            </div>
+          </div>
+        </div>
+
         <div class="forensics-grid">
           <div class="forensics-panel">
-            <span class="badge badge-official" style="margin-bottom:0.5rem;">নির্ভুল মিডিয়া ফরেনসিক স্ক্যানার</span>
-            <h3 style="color: #fff; font-size: 1.25rem; margin-bottom: 0.4rem;">ছবি, ভিডিও বা অডিও ফাইল পরীক্ষা করুন</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.15rem;">
-              আপলোডকৃত মিডিয়া ফাইলটি এআই (Midjourney, DALL-E, Sora, Deepfake, Voice Clone) দিয়ে তৈরি নাকি অরিজিনাল ক্যামেরা/মাইক্রোফোন রেকর্ড তা নির্ভুলভাবে যাচাই করুন।
+            <span class="badge badge-official" style="margin-bottom:0.5rem;">নির্ভুল মিডিয়া ও ডিপফেক ফরেনসিক স্ক্যানার v3.5</span>
+            <h3 style="color: #fff; font-size: 1.22rem; margin-bottom: 0.4rem;">১. ডাটাবেজের যেকোনো কেস অথবা নতুন মিডিয়া ফাইল নির্বাচন করুন</h3>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin-bottom: 1rem;">
+              আপলোডকৃত ছবি, ভিডিও, অডিও বা পিডিএফ ফাইলটি AI (Midjourney, Sora, ElevenLabs Voice Clone, Deepfake) দিয়ে তৈরি নাকি অরিজিনাল তা ৬-স্তরের ক্যানভাস হিটম্যাপ ও হ্যাশ দিয়ে পরীক্ষা করুন।
             </p>
 
-            <div class="media-slot-card" style="text-align:center; padding:1.5rem; cursor:pointer;" onclick="document.getElementById('forensicFileInput').click()">
-              <div style="font-size:2.4rem; margin-bottom:0.4rem;">🔬</div>
-              <div style="font-weight: 700; color: #fff;">পরীক্ষার জন্য মিডিয়া ফাইল নির্বাচন করুন</div>
-              <div style="font-size: 0.8rem; color: #38bdf8; margin-top: 4px;">সমর্থিত ফরম্যাট: JPG, PNG, WEBP, MP4, MP3, WAV, PDF</div>
+            <div class="form-group">
+              <label class="form-label">ডাটাবেজের বিদ্যমান রিপোর্ট থেকে সরাসরি স্ক্যান করুন:</label>
+              <select id="forensicCaseSelector" class="form-control" onchange="selectReportForForensicLab(this.value)">
+                <option value="">-- কেস আইডি নির্বাচন করুন --</option>
+              </select>
+            </div>
+
+            <div class="media-slot-card" style="text-align:center; padding:1.35rem; cursor:pointer;" onclick="document.getElementById('forensicFileInput').click()">
+              <div style="font-size:2.2rem; margin-bottom:0.35rem;">🔬</div>
+              <div style="font-weight: 700; color: #fff;">অথবা ডিভাইস থেকে মিডিয়া ফাইল আপলোড করুন</div>
+              <div style="font-size: 0.78rem; color: #38bdf8; margin-top: 4px;">সমর্থিত ফরম্যাট: JPG, PNG, WEBP, MP4, MP3, WAV, PDF</div>
               <input type="file" id="forensicFileInput" style="display: none;" onchange="handleForensicFileSelect(this)">
             </div>
 
             <div id="forensicPreviewWrapper" style="margin-top: 1rem; display: none;">
-              <img id="forensicImgPreview" src="" style="width: 100%; max-height: 210px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color);">
+              <img id="forensicImgPreview" src="" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color);">
             </div>
 
-            <button class="btn btn-primary" style="width: 100%; margin-top: 1.2rem; padding: 0.88rem;" onclick="runMediaForensicsAnalysis()">
-              ⚡ ডিপ ফরেনসিক ও মেটাডাটা যাচাই শুরু করুন
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.1rem; padding: 0.88rem;" onclick="runMediaForensicsAnalysis()">
+              ⚡ ৬-স্তরের ডিপ ফরেনসিক ও ELA হিটম্যাপ স্ক্যান রান করুন
             </button>
           </div>
 
           <div class="forensics-panel">
-            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 0.4rem;">৪-স্তরের ফরেনসিক ল্যাব রিপোর্ট</h3>
-            <p style="color: var(--text-muted); font-size: 0.84rem; margin-bottom: 1.15rem;">
-              ১. ELA পিক্সেল গ্রিড • ২. EXIF সেন্সর সিগনেচার • ৩. অডিও স্পেকট্রাম • ৪. SHA-256 হ্যাশ
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 0.35rem;">২. লাইভ ক্যানভাস ELA হিটম্যাপ, স্পেকট্রাম ও ফরেনসিক রায়</h3>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 1rem;">
+              ১. ELA পিক্সেল গ্রিড • ২. বিট-প্লেন স্পেকট্রাম • ৩. AI/GAN রাডার • ৪. EXIF সেন্সর • ৫. অডিও সিঙ্ক • ৬. SHA-256 হ্যাশ
             </p>
 
-            <div id="forensicsResultBox" style="background: rgba(8, 12, 22, 0.75); border: 1px dashed var(--border-color); border-radius: 12px; padding: 1.5rem; min-height: 270px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-muted);">
-              ফাইল নির্বাচন করে বা সরাসরি স্ক্যান বাটনে ক্লিক করে ফরেনসিক রিপোর্ট দেখুন।
+            <div id="forensicsResultBox" style="background: rgba(8, 12, 22, 0.75); border: 1px dashed var(--border-color); border-radius: 12px; padding: 1.35rem; min-height: 310px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-muted);">
+              বাম পাশ থেকে একটি কেস নির্বাচন করুন অথবা ফাইল আপলোড করে স্ক্যান বাটনে ক্লিক করুন।
             </div>
           </div>
         </div>
@@ -107,5 +156,21 @@
   <script src="../assets/js/data.js"></script>
   <script src="../assets/js/security.js"></script>
   <script src="../assets/js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const reports = StorageManager.getReports();
+      document.getElementById("flStatTotal").innerText = reports.length.toLocaleString("bn-BD");
+      document.getElementById("flStatAuthentic").innerText = reports.filter(r => r.status === "verified").length.toLocaleString("bn-BD");
+      document.getElementById("flStatAiFake").innerText = reports.filter(r => r.status === "fake").length.toLocaleString("bn-BD");
+
+      const sel = document.getElementById("forensicCaseSelector");
+      if (sel) {
+        sel.innerHTML = '<option value="">-- কেস আইডি নির্বাচন করে তাৎক্ষণিক ফরেনসিক পরীক্ষা করুন --</option>' +
+          reports.map(r => `<option value="${r.id}">${r.id} — ${r.title.slice(0, 50)}...</option>`).join("");
+      }
+      // Run default sample analysis so the lab looks alive immediately
+      runMediaForensicsAnalysis();
+    });
+  </script>
 </body>
 </html>

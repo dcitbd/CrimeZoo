@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>৩২+ সরকারি সেক্টরের জরুরি হেল্পলাইন ডিরেক্টরি | Crime Zoo</title>
+  <title>সকল সরকারি জরুরি নম্বর ও হেল্পলাইন ডিরেক্টরি (৪৮+) | Crime Zoo</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#dc2626">
   <link rel="icon" href="./assets/icons/logo.png">
@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="./assets/css/security.css">
 </head>
 <body>
-
   <!-- Breaking Crime Alert Ticker -->
   <div class="alert-ticker-bar">
     <div class="container alert-ticker-container">
@@ -34,18 +33,18 @@
       </a>
 
       <nav class="main-nav">
-        <a href="./index.html" class="nav-link ">মূল পাতা</a>
-        <a href="./submit-report.html" class="nav-link ">পোস্ট / রিপোর্ট</a>
-        <a href="./track-report.html" class="nav-link ">সত্যতা ট্র্যাকার</a>
-        <a href="./fact-check.html" class="nav-link ">ফ্যাক্ট-চেক</a>
-        <a href="./emergency-helpline.html" class="nav-link active">জরুরি নম্বর (৩২+)</a>
-        <a href="./direct-admin-complaint.html" class="nav-link ">এডমিন অভিযোগ</a>
-        <a href="./contact.html" class="nav-link ">যোগাযোগ</a>
+        <a href="./index.html" class="nav-link">মূল পাতা</a>
+        <a href="./all-reports.html" class="nav-link">সকল রিপোর্ট (৫০+)</a>
+        <a href="./submit-report.html" class="nav-link">পোস্ট / রিপোর্ট</a>
+        <a href="./track-report.html" class="nav-link">সত্যতা ট্র্যাকার</a>
+        <a href="./emergency-helpline.html" class="nav-link active">জরুরি নম্বর</a>
+        <a href="./direct-admin-complaint.html" class="nav-link">এডমিন অভিযোগ</a>
+        <a href="./contact.html" class="nav-link">যোগাযোগ</a>
       </nav>
 
       <div class="header-actions">
-        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="triggerPwaInstall()" style="display: none;">
-          📲 Install App
+        <button id="navInstallBtn" class="btn btn-install btn-sm" onclick="openDirectAppInstallerModal()" style="display: inline-flex;">
+          📲 সরাসরি অ্যাপ ইনস্টল
         </button>
         <a href="./reporter-login.html" class="btn btn-outline btn-sm">
           🎙️ রিপোর্টার প্যানেল
@@ -68,38 +67,49 @@
       </div>
       <button class="modal-close-btn" id="mobileDrawerClose" style="width:32px; height:32px;">✕</button>
     </div>
-    <a href="./index.html" class="nav-link ">🏠 মূল পাতা (ফিড)</a>
-    <a href="./submit-report.html" class="nav-link ">✍️ অপরাধ রিপোর্ট / পোস্ট করুন</a>
-    <a href="./direct-admin-complaint.html" class="nav-link ">🛡️ সরাসরি এডমিনের কাছে অভিযোগ</a>
-    <a href="./track-report.html" class="nav-link ">🔍 ট্র্যাক ও সত্যতা যাচাই করুন</a>
-    <a href="./fact-check.html" class="nav-link ">⚖️ ফ্যাক্ট-চেক ও ট্রুথ আর্কাইভ</a>
-    <a href="./emergency-helpline.html" class="nav-link active">🚨 ৩২+ সরকারি জরুরি নম্বর</a>
-    <a href="./contact.html" class="nav-link ">📩 বিস্তারিত যোগাযোগ ও ফাইল প্রেরণ</a>
-    <a href="./reporter-login.html" class="nav-link ">🎙️ রিপোর্টার লগইন / রেজিস্টার</a>
-    <a href="./admin/login.html" class="nav-link">🔐 এডমিন কন্ট্রোল প্যানেল</a>
-    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color);">
-      <button class="btn btn-install btn-sm" style="width:100%;" onclick="triggerPwaInstall()">📲 মোবাইলে অ্যাপ ইনস্টল করুন</button>
+    <a href="./index.html" class="nav-link">🏠 মূল পাতা (ফিড)</a>
+    <a href="./all-reports.html" class="nav-link">📚 সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a>
+    <a href="./submit-report.html" class="nav-link">✍️ অপরাধ রিপোর্ট / পোস্ট করুন</a>
+    <a href="./direct-admin-complaint.html" class="nav-link">🛡️ এডমিন অভিযোগ ফর্ম</a>
+    <a href="./track-report.html" class="nav-link">🔍 সত্যতা ট্র্যাকিং (শুধু রিপোর্টার)</a>
+    <a href="./emergency-helpline.html" class="nav-link active">🚨 সকল সরকারি জরুরি নম্বর</a>
+    <a href="./contact.html" class="nav-link">📩 যোগাযোগ ফর্ম</a>
+    <a href="./reporter-login.html" class="nav-link">🔐 রিপোর্টার লগইন</a>
+    <a href="./reporter-register.html" class="nav-link">📝 রিপোর্টার রেজিস্টার</a>
+    <a href="./admin/login.html" class="nav-link">🛡️ এডমিন কন্ট্রোল প্যানেল</a>
+    <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-color); display:flex; flex-direction:column; gap:0.45rem;">
+      <button class="btn btn-install btn-sm" style="width:100%;" onclick="openDirectAppInstallerModal()">📲 সরাসরি অ্যাপ ইনস্টল করুন</button>
+      <button class="btn btn-secondary btn-sm" style="width:100%;" onclick="downloadDesktopMobileShortcut()">🔖 ক্রিয়েট শর্টকাট</button>
     </div>
   </aside>
 
   <main class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <span class="badge badge-official" style="margin-bottom: 0.5rem;">🚨 ৩২+ সরকারি জরুরি সেবা ডিরেক্টরি</span>
-      <h1 style="font-size: 2rem; color: #fff; font-weight: 800;">জাতীয় জরুরি নম্বর ও আইন প্রয়োগকারী সংস্থা</h1>
-      <p style="color: var(--text-secondary); max-width: 680px; margin: 0.45rem auto 1.25rem auto;">
-        যেকোনো অপরাধ, সাইবার জালিয়াতি, দুর্নীতি বা জীবনরক্ষাকারী জরুরি প্রয়োজনে সরাসরি সংশ্লিষ্ট সরকারি সেক্টরের হটলাইনে কল করুন।
+    <div style="text-align: center; margin-bottom: 1.75rem;">
+      <span class="badge badge-official" style="margin-bottom: 0.5rem;">🚨 ৪৮+ সকল সরকারি জরুরি সেবা ডিরেক্টরি</span>
+      <h1 style="font-size: 2rem; color: #fff; font-weight: 800;">জাতীয় জরুরি নম্বর ও সকল সরকারি হেল্পলাইন</h1>
+      <p style="color: var(--text-secondary); max-width: 720px; margin: 0.45rem auto 1.25rem auto;">
+        বাংলাদেশের সকল প্রকার সরকারি জরুরি সেবা, পুলিশ, র‍্যাব, সিআইডি, পিবিআই, ফায়ার সার্ভিস, দুদক, সাইবার সেল, নারী ও শিশু সুরক্ষা, স্বাস্থ্য, বিটিআরসি, পাসপোর্ট, ভূমি ও ইউটিলিটি হটলাইনসমূহ।
       </p>
-      <div style="max-width: 480px; margin: 0 auto;">
-        <div class="search-box" style="max-width: 100%;">
+      <div class="controls-bar" style="max-width: 980px; margin: 0 auto;">
+        <div class="search-box" style="max-width: 380px;">
           <span>🔍</span>
-          <input type="text" id="helplineSearch" placeholder="সেক্টরের নাম বা নম্বর দিয়ে খুঁজুন (যেমন: দুদক, সাইবার, ৯৯৯)..." oninput="filterHelplines(this.value)">
+          <input type="text" id="helplineSearch" placeholder="সেক্টরের নাম বা নম্বর দিয়ে খুঁজুন (যেমন: ৯৯৯, দুদক, সাইবার, ফায়ার)..." oninput="filterHelplines()">
+        </div>
+        <div class="category-tabs" id="helplineCatTabs">
+          <button class="cat-btn active" onclick="setHelplineCat('all', this)">সকল সেবা (৪৮+)</button>
+          <button class="cat-btn" onclick="setHelplineCat('জাতীয় হটলাইন', this)">জাতীয় হটলাইন</button>
+          <button class="cat-btn" onclick="setHelplineCat('আইনশৃঙ্খলা ও পুলিশ', this)">আইনশৃঙ্খলা ও পুলিশ</button>
+          <button class="cat-btn" onclick="setHelplineCat('সাইবার ও গোয়েন্দা', this)">সাইবার ও গোয়েন্দা</button>
+          <button class="cat-btn" onclick="setHelplineCat('দুর্নীতি ও ভোক্তা', this)">দুর্নীতি ও ভোক্তা</button>
+          <button class="cat-btn" onclick="setHelplineCat('নারী ও শিশু সুরক্ষা', this)">নারী ও শিশু</button>
+          <button class="cat-btn" onclick="setHelplineCat('ফায়ার ও স্বাস্থ্য', this)">ফায়ার ও স্বাস্থ্য</button>
+          <button class="cat-btn" onclick="setHelplineCat('ইউটিলিটি ও সরকারি সেবা', this)">সরকারি ও ইউটিলিটি</button>
         </div>
       </div>
     </div>
 
     <div class="helpline-grid" id="helplineCardsGrid"></div>
   </main>
-
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -127,31 +137,35 @@
             <li><a href="tel:999">জাতীয় জরুরি সেবা (৯৯৯)</a></li>
             <li><a href="tel:106">দুর্নীতি দমন কমিশন (১০৬)</a></li>
             <li><a href="tel:109">নারী ও শিশু হেল্পলাইন (১০৯)</a></li>
-            <li><a href="./emergency-helpline.html">পুলিশ সাইবার ও সিআইডি সেল</a></li>
-            <li><a href="./emergency-helpline.html">সকল ৩২+ সরকারি হটলাইন →</a></li>
+            <li><a href="tel:333">জাতীয় তথ্য ও সেবা বাতায়ন (৩৩৩)</a></li>
+            <li><a href="./emergency-helpline.html">সকল ৪৮+ সরকারি জরুরি নম্বর →</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="footer-col-title">নেভিগেশন ও প্যানেল</h4>
           <ul class="footer-links">
+            <li><a href="./all-reports.html">সকল রিপোর্ট (১ পেজে ৫০+ পোস্ট)</a></li>
             <li><a href="./submit-report.html">বেনামি বা পরিচয়সহ পোস্ট</a></li>
             <li><a href="./direct-admin-complaint.html">সরাসরি এডমিন অভিযোগ ফর্ম</a></li>
-            <li><a href="./track-report.html">কেস ট্র্যাকিং ও সত্যতা যাচাই</a></li>
-            <li><a href="./reporter-login.html">রিপোর্টার লগইন / রেজিস্টার</a></li>
-            <li><a href="./admin/login.html">এডমিন টাইম-লক গেটওয়ে</a></li>
+            <li><a href="./track-report.html">রিপোর্টার সত্যতা ট্র্যাকিং</a></li>
+            <li><a href="./reporter-login.html">রিপোর্টার লগইন</a> | <a href="./reporter-register.html">রেজিস্টার</a></li>
+            <li><a href="./admin/login.html">এডমিন কন্ট্রোল প্যানেল</a></li>
           </ul>
         </div>
 
         <div>
-          <h4 class="footer-col-title">অ্যাপ ইনস্টল ও গোপনীয়তা</h4>
+          <h4 class="footer-col-title">সরাসরি অ্যাপ ইনস্টল ও শর্টকাট</h4>
           <p style="font-size: 0.84rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0.85rem;">
-            মোবাইল বা ট্যাব ব্রাউজার থেকে সরাসরি অ্যাপ আইকন হিসেবে ইনস্টল করে দ্রুত ব্রাউজ করুন।
+            ওয়েবসাইট থেকে সরাসরি অ্যাপ ইনস্টল করুন অথবা ডেস্কটপ/মোবাইল শর্টকাট তৈরি করুন।
           </p>
-          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="triggerPwaInstall()">
-            📲 Create Shortcut / Install App
+          <button class="btn btn-install btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="openDirectAppInstallerModal()">
+            📲 সরাসরি ওয়েবসাইট থেকে অ্যাপ ইনস্টল
           </button>
-          <a href="./direct-admin-complaint.html" class="btn btn-secondary btn-sm" style="width: 100%;">
+          <button class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 0.5rem;" onclick="downloadDesktopMobileShortcut()">
+            🔖 ক্রিয়েট শর্টকাট (Create Shortcut)
+          </button>
+          <a href="./direct-admin-complaint.html" class="btn btn-outline btn-sm" style="width: 100%;">
             🛡️ গোপন টিপ-অফ পাঠান
           </a>
         </div>
@@ -175,17 +189,17 @@
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
       <span>ফিড</span>
     </a>
+    <a href="./all-reports.html" class="bottom-nav-item">
+      <svg fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+      <span>সকল রিপোর্ট</span>
+    </a>
     <a href="./submit-report.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg>
       <span>পোস্ট করুন</span>
     </a>
-    <a href="./track-report.html" class="bottom-nav-item">
-      <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-      <span>যাচাই</span>
-    </a>
     <a href="./emergency-helpline.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-      <span>জরুরি ৩২+</span>
+      <span>জরুরি নম্বর</span>
     </a>
     <a href="./reporter-login.html" class="bottom-nav-item">
       <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
@@ -193,21 +207,29 @@
     </a>
   </nav>
 
-  <script src="./assets/js/mailer.js"></script>
   <script src="./assets/js/data.js"></script>
   <script src="./assets/js/security.js"></script>
   <script src="./assets/js/pwa.js"></script>
   <script>
+    let currentHelplineCat = "all";
+    function setHelplineCat(cat, btn) {
+      currentHelplineCat = cat;
+      document.querySelectorAll("#helplineCatTabs .cat-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      filterHelplines();
+    }
     function renderHelplines(query = "") {
       const grid = document.getElementById("helplineCardsGrid");
       if (!grid || !window.EMERGENCY_SECTORS) return;
       const q = query.toLowerCase().trim();
-      const items = window.EMERGENCY_SECTORS.filter(s =>
-        !q || s.name.toLowerCase().includes(q) || s.dept.toLowerCase().includes(q) || s.displayNum.includes(q) || s.number.includes(q)
-      );
+      const items = window.EMERGENCY_SECTORS.filter(s => {
+        const matchCat = currentHelplineCat === "all" || s.category === currentHelplineCat;
+        const matchQ = !q || s.name.toLowerCase().includes(q) || s.dept.toLowerCase().includes(q) || s.displayNum.includes(q) || s.number.includes(q) || (s.category && s.category.toLowerCase().includes(q));
+        return matchCat && matchQ;
+      });
 
       grid.innerHTML = items.map(s => `
-        <div class="helpline-card reveal-anim" onclick="this.classList.toggle('selected-card')" style="border-top: 3px solid ${s.color}; cursor: pointer;">
+        <div class="helpline-card reveal-anim" style="border-top: 3px solid ${s.color};">
           <div>
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
               <div class="helpline-logo-badge" style="background: ${s.color}22; color: ${s.color};">
@@ -215,21 +237,25 @@
               </div>
               <span class="badge" style="background:${s.color}22; color:${s.color}; border:1px solid ${s.color}55;">${s.badge}</span>
             </div>
-            <h3 style="font-size: 1.18rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem;">${s.name}</h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">${s.dept}</p>
+            <div style="font-size:0.74rem; color:#38bdf8; margin-bottom:2px;">${s.category || 'সরকারি জরুরি সেবা'}</div>
+            <h3 style="font-size: 1.12rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem;">${s.name}</h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1rem;">${s.dept}</p>
           </div>
           <div>
-            <div style="font-size: 1.6rem; font-weight: 800; color: ${s.color}; margin-bottom: 0.85rem; letter-spacing: 0.02em;">
+            <div style="font-size: 1.45rem; font-weight: 800; color: ${s.color}; margin-bottom: 0.85rem; letter-spacing: 0.02em;">
               📞 ${s.displayNum}
             </div>
-            <a href="tel:${s.number}" class="btn btn-primary btn-sm" style="width: 100%;" onclick="event.stopPropagation();">
+            <a href="tel:${s.number}" class="btn btn-primary btn-sm" style="width: 100%;">
               📲 সরাসরি কল করুন (${s.displayNum})
             </a>
           </div>
         </div>
       `).join("");
     }
-    function filterHelplines(val) { renderHelplines(val); }
+    function filterHelplines() {
+      const val = document.getElementById("helplineSearch")?.value || "";
+      renderHelplines(val);
+    }
     document.addEventListener("DOMContentLoaded", () => renderHelplines());
   </script>
 </body>
