@@ -503,10 +503,7 @@ const INITIAL_AUDIT_LOGS = [
   { id: "LOG-504", action: "অটো যাচাই ও লাইভ অনুমোদন", status: "SUCCESS", role: "ADMIN", target: "CZ-2026-8941", admin: "Super Admin", time: "০৬ নভেম্বর ২০২৬, ১৮:৪০:১২", detail: "ফরেনসিক স্কোর ৯৭% নিশ্চিত করে পোস্টটি ভেরিফাইড ও লাইভ করা হয়েছে।" }
 ];
 
-// ============================================================================
-// EXTRAORDINARY HTML EMAIL NOTIFICATION ENGINE (Requirements #2 & #18)
-// Sends rich HTML emails to jainal.dcitbd@gmail.com and saiful05333@gmail.com
-// ============================================================================
+
 // ============================================================================
 // REAL-TIME BROADCAST & HYBRID BACKEND ENDPOINTS (cPanel, GitHub, Cloudflare)
 // ============================================================================
@@ -638,7 +635,7 @@ class EmailNotifier {
       html
     };
 
-    // 1. Save in local storage email log
+    // 1. Save in local storage email archive
     try {
       const list = this.getSentEmails();
       list.unshift(emailRecord);
@@ -670,6 +667,7 @@ class EmailNotifier {
           body: JSON.stringify({
             _subject: subject,
             _template: 'table',
+            _captcha: 'false',
             Event: eventTitle,
             Summary: summaryText,
             ...detailsObj,
@@ -679,42 +677,31 @@ class EmailNotifier {
       } catch (e) {}
     });
 
-    // 4. Dispatch via Web3Forms (Public fallback endpoint)
-    try {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: 'b94e0134-2e98-4c8d-90cf-criminalzoo',
-          subject: subject,
-          from_name: 'Criminal Zoo Security System',
-          to_email: 'jainal.dcitbd@gmail.com',
-          message: `${eventTitle}\n${summaryText}\n\n` + JSON.stringify(detailsObj, null, 2)
-        })
-      }).catch(() => {});
-    } catch (e) {}
-
-    // 5. Show sleek live toast notification with button to preview the exact HTML email template
+    // 4. Show sleek live toast notification with button to preview the exact HTML email template
     this.showEmailToast(emailRecord);
     return emailRecord;
   }
 
   static sendTestEmail() {
-    return this.send(
+    const rec = this.send(
       'TEST_EMAIL',
-      'ইমেইল নোটিফিকেশন সিস্টেম টেস্ট ভেরিফিকেশন',
+      'ইমেইল নোটিফিকেশন টেস্ট ভেরিফিকেশন',
       'EMAIL VERIFIED',
       '#10b981',
       'Criminal Zoo নোটিফিকেশন ইঞ্জিন সফলভাবে সক্রিয় রয়েছে। jainal.dcitbd@gmail.com এবং saiful05333@gmail.com ঠিকানায় টেস্ট অ্যালার্ট প্রেরিত হয়েছে।',
       {
         'সিস্টেম': 'Criminal Zoo Notification Engine v4.0',
-        'সার্ভার টাইপ': 'cPanel / GitHub Pages / Cloudflare Hybrid',
+        'হোস্টিং': 'cPanel / GitHub Pages / Cloudflare Hybrid',
         'প্রাপক এডমিন ১': 'jainal.dcitbd@gmail.com',
         'প্রাপক এডমিন ২': 'saiful05333@gmail.com',
         'স্ট্যাটাস': 'Active & Operational (Dispatched)',
         'এনক্রিপশন': 'Zero-Trace 256-Bit SSL'
       }
     );
+    if (window.showSecurityNotice) {
+      window.showSecurityNotice('✓ টেস্ট ইমেইল jainal.dcitbd@gmail.com এবং saiful05333@gmail.com এ প্রেরণ করা হয়েছে!');
+    }
+    return rec;
   }
 
   static getSentEmails() {
@@ -793,7 +780,7 @@ class EmailNotifier {
       <div class="modal-container" style="max-width:760px; padding:1.5rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:1rem;">
           <div>
-            <span class="badge badge-verified">📧 অটোমেটেড ইমেইল নোটিফিকেশন প্রিভিউ</span>
+            <span class="badge badge-verified">📧 অটোমেটেড ইমেইল নোটিফিকেশন কন্ট্রোল</span>
             <h3 style="color:#fff; font-size:1.15rem; margin-top:4px;">${item.subject}</h3>
             <div style="font-size:0.78rem; color:#38bdf8;">প্রাপক: ${item.recipients.join(', ')} • সময়: ${item.time}</div>
           </div>
@@ -804,7 +791,15 @@ class EmailNotifier {
             <button class="modal-close-btn" onclick="document.getElementById('czEmailTemplatePreviewModal').classList.remove('active')">✕</button>
           </div>
         </div>
-        <div style="background:#04070e; border:1px solid var(--border-color); border-radius:12px; overflow:hidden; max-height:68vh; overflow-y:auto;">
+
+        <div style="background:rgba(245, 158, 11, 0.12); border:1px solid #f59e0b; border-radius:10px; padding:0.85rem 1rem; margin-bottom:1rem; font-size:0.82rem; color:#fde68a; line-height:1.6;">
+          <strong>💡 জিমেইলে নোটিফিকেশন সরাসরি ইনবক্সে পাওয়ার নিশ্চিত নিয়ম:</strong><br>
+          ১. FormSubmit সার্ভার প্রথমবারের মতো <code>jainal.dcitbd@gmail.com</code> এবং <code>saiful05333@gmail.com</code> ঠিকানায় একটি <strong>Action Required: Activate FormSubmit</strong> ইমেইল পাঠায়。<br>
+          ২. আপনার জিমেইল ইনবক্স অথবা স্প্যাম ফোল্ডারে গিয়ে ওই মেইলে থাকা <strong>"Activate Form"</strong> বাটনে শুধু একবার ক্লিক করে সক্রিয় করে নিন। এরপর সকল নোটিফিকেশন স্বয়ংক্রিয়ভাবে ইনবক্সে আসবে।<br>
+          ৩. সি-প্যানেলে ব্যবহারের ক্ষেত্রে <code>api/config.php</code> ফাইলে আপনার জিমেইল অ্যাপ পাসওয়ার্ড অথবা ওয়েবমেইল SMTP ব্যবহার করতে পারেন।
+        </div>
+
+        <div style="background:#04070e; border:1px solid var(--border-color); border-radius:12px; overflow:hidden; max-height:55vh; overflow-y:auto;">
           ${item.html}
         </div>
       </div>
@@ -818,12 +813,34 @@ class EmailNotifier {
 // Works seamlessly across cPanel (PHP Backend), GitHub Pages, and Cloudflare Pages
 // ============================================================================
 class StorageManager {
+  // --- DELETED IDS TOMBSTONE (Prevents deleted reports from resurrecting) ---
+  static getDeletedIds() {
+    try {
+      const raw = localStorage.getItem('criminal_zoo_deleted_ids');
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  static addDeletedId(id) {
+    try {
+      const list = this.getDeletedIds();
+      if (!list.includes(id)) {
+        list.push(id);
+        localStorage.setItem('criminal_zoo_deleted_ids', JSON.stringify(list.slice(-500)));
+      }
+    } catch (e) {}
+  }
+
   // --- REPORTS ---
   static getReports() {
     try {
       const data = localStorage.getItem('criminal_zoo_reports_v4');
       if (data) {
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        const deletedIds = new Set(this.getDeletedIds());
+        return parsed.filter(r => r && r.id && !deletedIds.has(r.id));
       }
       // Check migration from previous versions
       const oldRaw = localStorage.getItem('crime_zoo_reports_v3') || localStorage.getItem('crime_zoo_reports_v2');
@@ -853,7 +870,8 @@ class StorageManager {
 
   // Returns ONLY Approved & Active reports for Public Viewer Pages (Requirement #19)
   static getPublicApprovedReports() {
-    return this.getReports().filter(r => r.approvalStatus === 'approved' && r.active !== false);
+    const deletedIds = new Set(this.getDeletedIds());
+    return this.getReports().filter(r => r && !deletedIds.has(r.id) && r.approvalStatus === 'approved' && r.active !== false);
   }
 
   static saveReports(reports) {
@@ -879,6 +897,7 @@ class StorageManager {
     if (newReport.active === undefined) {
       newReport.active = true;
     }
+    newReport.updatedAt = Date.now();
 
     reports.unshift(newReport);
     this.saveReports(reports);
@@ -930,6 +949,7 @@ class StorageManager {
     const reports = this.getReports();
     const idx = reports.findIndex(r => r.id === reportId);
     if (idx !== -1) {
+      updatedFields.updatedAt = Date.now();
       reports[idx] = { ...reports[idx], ...updatedFields };
       if (reports[idx].mediaUrls && reports[idx].mediaUrls.length > 0 && !updatedFields.mediaUrl) {
         reports[idx].mediaUrl = reports[idx].mediaUrls[0];
@@ -980,16 +1000,15 @@ class StorageManager {
   }
 
   static approveReport(reportId) {
-    // 1. Update in local storage
     const updated = this.updateReport(reportId, {
       approvalStatus: 'approved',
       active: true,
       status: 'verified',
       truthScore: 95,
-      statusNote: 'এডমিন কর্তৃক অনুমোদিত ও ভেরিফাইড হয়ে লাইভ ফিডে প্রকাশিত হয়েছে।'
+      statusNote: 'এডমিন কর্তৃক অনুমোদিত ও ভেরিফাইড হয়ে লাইভ ফিডে প্রকাশিত হয়েছে।',
+      updatedAt: Date.now()
     });
 
-    // 2. Async sync with server
     try {
       fetch(getApiEndpoint('admin.php'), {
         method: 'POST',
@@ -1010,7 +1029,8 @@ class StorageManager {
 
     const updated = this.updateReport(reportId, {
       active: newActive,
-      approvalStatus: newApproval
+      approvalStatus: newApproval,
+      updatedAt: Date.now()
     });
 
     try {
@@ -1028,7 +1048,8 @@ class StorageManager {
     const updatePayload = {
       status,
       statusNote: note || '',
-      truthScore: truthScore !== undefined ? truthScore : 50
+      truthScore: truthScore !== undefined ? truthScore : 50,
+      updatedAt: Date.now()
     };
     if (status === 'verified' || status === 'partially_true' || status === 'investigating') {
       updatePayload.approvalStatus = 'approved';
@@ -1039,6 +1060,7 @@ class StorageManager {
 
   static deleteReport(reportId) {
     const target = this.getReports().find(r => r.id === reportId);
+    this.addDeletedId(reportId);
     let reports = this.getReports().filter(r => r.id !== reportId);
     this.saveReports(reports);
 
@@ -1152,7 +1174,8 @@ class StorageManager {
       source: item.source || 'official',
       status: item.status || 'active',
       note: item.note || '',
-      date: item.date || new Date().toLocaleDateString('bn-BD')
+      date: item.date || new Date().toLocaleDateString('bn-BD'),
+      updatedAt: Date.now()
     };
     list.unshift(newContact);
     this.saveContacts(list);
@@ -1193,6 +1216,7 @@ class StorageManager {
     const list = this.getContacts();
     const idx = list.findIndex(c => c.id === id);
     if (idx !== -1) {
+      updated.updatedAt = Date.now();
       list[idx] = { ...list[idx], ...updated };
       this.saveContacts(list);
 
@@ -1215,6 +1239,7 @@ class StorageManager {
     const c = list.find(item => item.id === id);
     if (c) {
       c.status = (c.status === 'deactive') ? 'active' : 'deactive';
+      c.updatedAt = Date.now();
       this.saveContacts(list);
       try {
         fetch(getApiEndpoint('contact.php'), {
@@ -1283,7 +1308,8 @@ class StorageManager {
       role: rep.role || 'reporter',
       status: rep.status || (rep.role === 'admin' ? 'কো-এডমিন' : 'ভেরিফাইড রিপোর্টার'),
       verifiedReports: 0,
-      active: true
+      active: true,
+      updatedAt: Date.now()
     };
     list.unshift(newUser);
     this.saveReporters(list);
@@ -1315,6 +1341,7 @@ class StorageManager {
     const list = this.getReporters();
     const idx = list.findIndex(r => r.id === id);
     if (idx !== -1) {
+      updated.updatedAt = Date.now();
       list[idx] = { ...list[idx], ...updated };
       this.saveReporters(list);
       this.addAuditLog('ইউজার প্রোফাইল আপডেট', id, 'Admin', `${list[idx].name} এর তথ্য আপডেট করা হয়েছে।`, 'SUCCESS', 'ADMIN');
@@ -1328,6 +1355,7 @@ class StorageManager {
     const r = list.find(item => item.id === id);
     if (r) {
       r.active = !r.active;
+      r.updatedAt = Date.now();
       this.saveReporters(list);
       return r.active;
     }
@@ -1388,7 +1416,8 @@ class StorageManager {
       date: msg.date || new Date().toLocaleDateString('bn-BD'),
       status: msg.status || 'unread',
       active: msg.active !== undefined ? msg.active : true,
-      publishedReportId: msg.publishedReportId || ''
+      publishedReportId: msg.publishedReportId || '',
+      updatedAt: Date.now()
     };
     messages.unshift(newMsg);
     this.saveMessages(messages);
@@ -1407,7 +1436,8 @@ class StorageManager {
         source: 'user_form',
         status: 'active',
         note: newMsg.message,
-        date: newMsg.date
+        date: newMsg.date,
+        updatedAt: Date.now()
       });
       this.saveContacts(contacts);
     }
@@ -1456,6 +1486,7 @@ class StorageManager {
     const messages = this.getMessages();
     const idx = messages.findIndex(m => m.id === id);
     if (idx !== -1) {
+      updatedFields.updatedAt = Date.now();
       messages[idx] = { ...messages[idx], ...updatedFields };
       this.saveMessages(messages);
       try {
@@ -1476,6 +1507,7 @@ class StorageManager {
     const m = messages.find(item => item.id === id);
     if (m) {
       m.active = (m.active === false) ? true : false;
+      m.updatedAt = Date.now();
       this.saveMessages(messages);
       try {
         fetch(getApiEndpoint('inbox.php'), {
@@ -1591,25 +1623,33 @@ class StorageManager {
     };
   }
 
-  // --- SERVER BACKGROUND SYNC ENGINE ---
+  // --- SERVER BACKGROUND SYNC ENGINE (Safe Non-Overwriting) ---
   static async syncWithServer() {
+    // If static hosting (file://, GitHub Pages, Cloudflare Pages where PHP does not execute), skip server sync
+    if (typeof window === 'undefined' || window.location.protocol === 'file:') return;
+
     try {
       const reportsUrl = getApiEndpoint('reports.php');
       const res = await fetch(reportsUrl);
-      if (res.ok) {
+      const contentType = res.headers ? (res.headers.get('content-type') || '') : '';
+      if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
         if (data && data.status === 'success' && Array.isArray(data.reports) && data.reports.length > 0) {
           const local = StorageManager.getReports();
           const localMap = new Map(local.map(r => [r.id, r]));
+          const deletedIds = new Set(StorageManager.getDeletedIds());
           let updated = false;
 
           data.reports.forEach(sr => {
+            if (!sr || !sr.id || deletedIds.has(sr.id)) return;
+
             if (!localMap.has(sr.id)) {
               local.unshift(sr);
               updated = true;
             } else {
               const lr = localMap.get(sr.id);
-              if (lr.approvalStatus !== sr.approvalStatus || lr.status !== sr.status || lr.title !== sr.title || lr.truthScore !== sr.truthScore || lr.active !== sr.active) {
+              // ONLY update if server timestamp is strictly newer than local edit timestamp
+              if (sr.updatedAt && lr.updatedAt && sr.updatedAt > lr.updatedAt) {
                 const idx = local.findIndex(x => x.id === sr.id);
                 if (idx !== -1) {
                   local[idx] = { ...local[idx], ...sr };
@@ -1630,7 +1670,8 @@ class StorageManager {
     try {
       const contactUrl = getApiEndpoint('contact.php');
       const res2 = await fetch(contactUrl);
-      if (res2.ok) {
+      const ct2 = res2.headers ? (res2.headers.get('content-type') || '') : '';
+      if (res2.ok && ct2.includes('application/json')) {
         const data2 = await res2.json();
         if (data2 && Array.isArray(data2.contacts) && data2.contacts.length > 0) {
           const localContacts = StorageManager.getContacts();
@@ -1667,6 +1708,62 @@ class StorageManager {
   }
 }
 
+
+// Universal Reporter Auth & UI Helper
+function getLoggedInReporter() {
+  try {
+    const raw = localStorage.getItem("cz_logged_reporter") || sessionStorage.getItem("cz_logged_reporter");
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function updateUniversalReporterUI() {
+  if (typeof document === 'undefined') return;
+  const rep = getLoggedInReporter();
+  if (!rep) return;
+
+  const isCurrentDashboard = window.location.pathname.includes("reporter-dashboard.html");
+
+  // 1. Top Header Action Buttons
+  document.querySelectorAll('.header-actions a[href*="reporter-login.html"]').forEach(btn => {
+    btn.href = "./reporter-dashboard.html";
+    btn.className = "btn btn-sm";
+    btn.style.cssText = "background:linear-gradient(135deg, #10b981, #059669); color:#fff; border:none; font-weight:700; display:inline-flex; align-items:center; gap:0.4rem; padding:0.45rem 0.95rem; border-radius:8px; box-shadow:0 0 15px rgba(16,185,129,0.3);";
+    btn.innerHTML = `<span style="font-size:1.05rem;">👤</span> <span>${rep.name}</span>`;
+  });
+
+  // 2. Nav links in header, drawer and sidebar
+  document.querySelectorAll('a.nav-link[href*="reporter-login.html"]').forEach(link => {
+    link.href = "./reporter-dashboard.html";
+    if (isCurrentDashboard) link.classList.add("active");
+    link.style.color = "#34d399";
+    link.style.fontWeight = "700";
+    link.innerHTML = `👤 ${rep.name} (ড্যাশবোর্ড)`;
+  });
+
+  // 3. Mobile Bottom Nav
+  document.querySelectorAll('a.bottom-nav-item[href*="reporter-login.html"]').forEach(link => {
+    link.href = "./reporter-dashboard.html";
+    const span = link.querySelector("span");
+    if (span) {
+      span.innerText = "প্রোফাইল";
+      span.style.color = "#34d399";
+      span.style.fontWeight = "700";
+    }
+  });
+
+  // 4. Footer links
+  document.querySelectorAll('.footer-bottom a[href*="reporter-login.html"]').forEach(link => {
+    link.href = "./reporter-dashboard.html";
+    link.innerText = `রিপোর্টার প্রোফাইল (${rep.name})`;
+  });
+}
+
+window.getLoggedInReporter = getLoggedInReporter;
+window.updateUniversalReporterUI = updateUniversalReporterUI;
+
 // Global Exports
 window.ADMIN_NOTIFICATION_EMAILS = ADMIN_NOTIFICATION_EMAILS;
 window.EVIDENCE_GALLERY_POOL = EVIDENCE_GALLERY_POOL;
@@ -1680,6 +1777,7 @@ window.getApiEndpoint = getApiEndpoint;
 // Auto-trigger background server sync on page load if browser environment
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
+    updateUniversalReporterUI();
     StorageManager.syncWithServer();
   });
 }

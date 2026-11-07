@@ -396,9 +396,13 @@ function renderAdminTable(filterType = "all") {
 
 window.handleAdminApproveLive = function (reportId) {
   StorageManager.approveReport(reportId);
+  // If viewing pending_approval, switch to all so approved row is immediately visible with live badge!
+  if (currentAdminFilter === "pending_approval") {
+    currentAdminFilter = "all";
+  }
   initAdminDashboard();
   if (window.showSecurityNotice) {
-    window.showSecurityNotice(`✓ রিপোর্ট ${reportId} এপ্রুভ করা হয়েছে এবং মূল সাইটে লাইভ হয়ে গেছে!`);
+    window.showSecurityNotice(`✓ রিপোর্ট ${reportId} সফলভাবে এপ্রুভ ও লাইভ করা হয়েছে! মূল সাইট ফিডে প্রদর্শিত হচ্ছে।`);
   }
 };
 
@@ -1027,10 +1031,12 @@ function closeAdminModal() {
 }
 
 function handleAdminDelete(reportId) {
-  StorageManager.deleteReport(reportId);
-  initAdminDashboard();
-  if (window.showSecurityNotice) {
-    window.showSecurityNotice(`🗑️ রিপোর্ট ${reportId} স্থায়ীভাবে মুছে ফেলা হয়েছে।`);
+  if (confirm(`আপনি কি নিশ্চিত যে রিপোর্ট ${reportId} স্থায়ীভাবে মুছে ফেলতে চান?`)) {
+    StorageManager.deleteReport(reportId);
+    initAdminDashboard();
+    if (window.showSecurityNotice) {
+      window.showSecurityNotice(`🗑️ রিপোর্ট ${reportId} সফলভাবে ডিলিট করা হয়েছে!`);
+    }
   }
 }
 
