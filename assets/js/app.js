@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - MAIN PORTAL & ALL REPORTS (50+ PER PAGE) CONTROLLER
+ * CRIMINAL ZOO - MAIN PORTAL & ALL REPORTS (50+ PER PAGE) CONTROLLER
  * Features:
  * - Shows ONLY Admin-Approved & Active reports dynamically (Requirement #19)
  * - Auto Slide View for uploaded images (5-10 photos carousel with play/pause, thumbnails & zoom) (Requirement #5)
@@ -18,6 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
   initMobileDrawer();
 
   // Dynamic real-time listener when Admin approves/edits/adds reports
+  if (typeof BroadcastChannel !== "undefined") {
+    const appChannel = new BroadcastChannel("criminal_zoo_channel");
+    appChannel.onmessage = function (ev) {
+      if (ev.data && ev.data.type === "reports") {
+        initLiveCounters();
+        initTicker();
+        renderFeed();
+      }
+    };
+  }
   window.addEventListener("storage", function () {
     initLiveCounters();
     initTicker();
@@ -245,7 +255,7 @@ function createPostCardHTML(r) {
   const statusBadge = getStatusBadgeHTML(r.status);
   let reporterBadge = `<span class="badge badge-identified">👤 ${r.reporterName}</span>`;
   if (r.reporterType === "anonymous") reporterBadge = `<span class="badge badge-anonymous">🕵️ বেনামি</span>`;
-  if (r.reporterType === "official") reporterBadge = `<span class="badge badge-official">🛡️ Crime Zoo ডেস্ক</span>`;
+  if (r.reporterType === "official") reporterBadge = `<span class="badge badge-official">🛡️ Criminal Zoo ডেস্ক</span>`;
 
   const photos = (r.mediaUrls && r.mediaUrls.length) ? r.mediaUrls : (r.mediaUrl ? [r.mediaUrl] : []);
   const pills = [];
@@ -552,7 +562,7 @@ function renderEvidenceStage(type) {
             <span style="font-size: 1.4rem;">📄</span>
             <div>
               <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${r.pdfUrl || "evidence-document.pdf"}</div>
-              <div style="font-size: 0.75rem; color: #38bdf8;">Crime Zoo Protected PDF Reader (শুধু পাঠযোগ্য • ডাউনলোড ও প্রিন্ট নিষিদ্ধ)</div>
+              <div style="font-size: 0.75rem; color: #38bdf8;">Criminal Zoo Protected PDF Reader (শুধু পাঠযোগ্য • ডাউনলোড ও প্রিন্ট নিষিদ্ধ)</div>
             </div>
           </div>
           <div style="display: flex; gap: 0.4rem;">

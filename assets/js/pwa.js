@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - DIRECT WEBSITE APP INSTALLER & PWA SHORTCUT CONTROLLER
+ * CRIMINAL ZOO - DIRECT WEBSITE APP INSTALLER & PWA SHORTCUT CONTROLLER
  * Features:
  * 1. Native Browser PWA Install (beforeinstallprompt)
  * 2. Interactive Direct Website-to-App Installer Modal (Android / Windows / iOS / Mac)
@@ -41,7 +41,7 @@ function ensureDirectAppModal() {
           <img src="${logoPath}" style="width:48px; height:48px; object-fit:contain; border-radius:12px; border:1px solid rgba(16,185,129,0.5);">
           <div>
             <span class="badge badge-verified">📲 ডিরেক্ট ওয়েব-অ্যাপ ইনস্টলার</span>
-            <h3 style="color:#fff; font-size:1.25rem; margin-top:3px;">Crime Zoo App সরাসরি ইনস্টল করুন</h3>
+            <h3 style="color:#fff; font-size:1.25rem; margin-top:3px;">Criminal Zoo App সরাসরি ইনস্টল করুন</h3>
           </div>
         </div>
         <button class="modal-close-btn" onclick="document.getElementById('czDirectAppInstallModal').classList.remove('active')">✕</button>
@@ -81,7 +81,7 @@ function ensureDirectAppModal() {
         <div style="font-weight:700; color:#38bdf8; margin-bottom:0.3rem;">📌 সব ডিভাইসে সরাসরি ইনস্টল গাইড:</div>
         <div>• <strong>Android / Chrome / Edge:</strong> উপরের <em>"এখনই অ্যাপ ইনস্টল করুন"</em> বাটনে ক্লিক করলে সরাসরি অ্যাপটি ইনস্টল হয়ে যাবে।</div>
         <div>• <strong>iPhone / iOS Safari:</strong> নিচে Share <strong>(⬆️)</strong> বাটনে ট্যাপ করে <strong>"Add to Home Screen"</strong> নির্বাচন করুন।</div>
-        <div>• <strong>Windows / Desktop:</strong> অ্যাড্রেস বারের ডান পাশে <strong>Install Crime Zoo (⊕)</strong> আইকনে ক্লিক করুন অথবা ডিরেক্ট অ্যাপ লঞ্চার নামিয়ে নিন।</div>
+        <div>• <strong>Windows / Desktop:</strong> অ্যাড্রেস বারের ডান পাশে <strong>Install Criminal Zoo (⊕)</strong> আইকনে ক্লিক করুন অথবা ডিরেক্ট অ্যাপ লঞ্চার নামিয়ে নিন।</div>
       </div>
     </div>
   `;
@@ -131,10 +131,10 @@ function executeDirectWebAppInstall() {
     bar.style.width = pct + "%";
     pctText.innerText = pct + "%";
     if (pct === 40) stepText.innerText = "অফলাইন সার্ভিস ওয়ার্কার ও আইকন যুক্ত হচ্ছে...";
-    if (pct === 80) stepText.innerText = "Crime Zoo স্ট্যান্ডঅ্যালোন ওয়েব-অ্যাপ ভেরিফাইড...";
+    if (pct === 80) stepText.innerText = "Criminal Zoo স্ট্যান্ডঅ্যালোন ওয়েব-অ্যাপ ভেরিফাইড...";
     if (pct === 100) {
       clearInterval(timer);
-      stepText.innerText = "✓ Crime Zoo Web-App লঞ্চার প্রস্তুত ও ডাউনলোড সম্পন্ন!";
+      stepText.innerText = "✓ Criminal Zoo Web-App লঞ্চার প্রস্তুত ও ডাউনলোড সম্পন্ন!";
       generateDirectStandaloneAppFile();
     }
   }, 220);
@@ -149,7 +149,7 @@ function generateDirectStandaloneAppFile() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Crime Zoo App</title>
+  <title>Criminal Zoo App</title>
   <style>
     body, html { margin:0; padding:0; width:100%; height:100%; background:#060911; color:#fff; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
     .card { background:#0b111e; border:1px solid #dc2626; border-radius:18px; padding:2rem; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,0.8); }
@@ -163,7 +163,7 @@ function generateDirectStandaloneAppFile() {
 </head>
 <body>
   <div class="card">
-    <h2>🛡️ Crime Zoo App</h2>
+    <h2>🛡️ Criminal Zoo App</h2>
     <p>সুরক্ষিত অপরাধ অনুসন্ধান ও সত্যতা যাচাই অ্যাপে প্রবেশ করা হচ্ছে...</p>
     <a class="btn" href="${targetUrl}">🚀 অ্যাপ ওপেন করুন</a>
   </div>
@@ -173,7 +173,7 @@ function generateDirectStandaloneAppFile() {
   const blob = new Blob([appHtml], { type: "text/html;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "Crime-Zoo-App-Launcher.html";
+  a.download = "Criminal-Zoo-App-Launcher.html";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -185,12 +185,12 @@ function downloadDesktopMobileShortcut() {
   const blob = new Blob([shortcutContent], { type: "application/internet-shortcut" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "Crime-Zoo-Shortcut.url";
+  a.download = "Criminal-Zoo-Shortcut.url";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   if (window.showSecurityNotice) {
-    window.showSecurityNotice("✓ Crime Zoo শর্টকাট ফাইল আপনার ডিভাইসে ডাউনলোড হয়েছে!");
+    window.showSecurityNotice("✓ Criminal Zoo শর্টকাট ফাইল আপনার ডিভাইসে ডাউনলোড হয়েছে!");
   }
 }
 

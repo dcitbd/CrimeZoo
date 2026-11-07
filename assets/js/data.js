@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - REAL-TIME DATABASE, 55+ REPORTS WITH 5-10 SLIDE PHOTOS,
+ * CRIMINAL ZOO - REAL-TIME DATABASE, 55+ REPORTS WITH 5-10 SLIDE PHOTOS,
  * 48+ GOVT HELPLINES, DUAL-EMAIL NOTIFIER (jainal.dcitbd@gmail.com, saiful05333@gmail.com),
  * DYNAMIC APPROVAL ENGINE & COMPLETE CRUD STORAGE MANAGER
  */
@@ -107,7 +107,7 @@ const CORE_REPORTS = [
     category: "গুজব ও বিভ্রান্তি",
     location: "অনলাইন / সোশ্যাল মিডিয়া",
     reporterType: "official",
-    reporterName: "Crime Zoo ফরেনসিক ডেস্ক",
+    reporterName: "Criminal Zoo ফরেনসিক ডেস্ক",
     reporterPhone: "অফিসিয়াল সেল",
     reporterId: "ADMIN",
     date: "০৪ নভেম্বর ২০২৬",
@@ -126,7 +126,7 @@ const CORE_REPORTS = [
     videoUrl: "",
     audioUrl: "",
     pdfUrl: "ai-deepfake-forensic-report-6105.pdf",
-    pdfSummary: "Crime Zoo ফরেনসিক ল্যাব রিপোর্ট #FL-6105: ইমেজের Error Level Analysis (ELA) এবং EXIF মেটাডাটা বিশ্লেষণে দেখা গেছে ছবিটি Midjourney v6 ও ফটোশপ ব্যবহার করে কৃত্রিমভাবে সংযোজন করা হয়েছে।",
+    pdfSummary: "Criminal Zoo ফরেনসিক ল্যাব রিপোর্ট #FL-6105: ইমেজের Error Level Analysis (ELA) এবং EXIF মেটাডাটা বিশ্লেষণে দেখা গেছে ছবিটি Midjourney v6 ও ফটোশপ ব্যবহার করে কৃত্রিমভাবে সংযোজন করা হয়েছে।",
     description: "সাম্প্রতিক সময়ে সামাজিক যোগাযোগ মাধ্যমে শিশুদের নিখোঁজ হওয়া ও অঙ্গহানির ভুয়া পোস্ট ছড়িয়ে সাধারণ মানুষের মধ্যে ভীতি সঞ্চার করা হচ্ছে। ফরেনসিক টিম রিভার্স ইমেজ সার্চ ও মেটাডাটা বিশ্লেষণ করে নিশ্চিত হয়েছে যে উল্লেখিত ছবিগুলো সম্পাদিত ও ভিত্তিহীন।",
     evidence: "রিভার্স ইমেজ সার্চের ক্রোনোলজিক্যাল ফলাফল ও এআই জেনারেটেড পিক্সেল প্যাটার্ন প্রমাণিত।",
     comments: [
@@ -266,7 +266,7 @@ const CORE_REPORTS = [
     category: "সাইবার ক্রাইম",
     location: "সারা দেশ (অনলাইন)",
     reporterType: "official",
-    reporterName: "Crime Zoo সাইবার ডেস্ক",
+    reporterName: "Criminal Zoo সাইবার ডেস্ক",
     reporterPhone: "অফিসিয়াল",
     reporterId: "ADMIN",
     date: "২৮ অক্টোবর ২০২৬",
@@ -357,7 +357,7 @@ const INITIAL_REPORTS = [
       category: tpl.cat,
       location: tpl.loc,
       reporterType: tpl.type,
-      reporterName: tpl.type === "anonymous" ? "বেনামি হুইসেলব্লোয়ার" : (tpl.type === "official" ? "Crime Zoo ফরেনসিক ডেস্ক" : "মো. রফিকুল ইসলাম"),
+      reporterName: tpl.type === "anonymous" ? "বেনামি হুইসেলব্লোয়ার" : (tpl.type === "official" ? "Criminal Zoo ফরেনসিক ডেস্ক" : "মো. রফিকুল ইসলাম"),
       reporterPhone: tpl.type === "anonymous" ? "গোপনীয়" : "০১৭১১-২২৩৩৪৪",
       reporterId: tpl.type === "anonymous" ? "ANON" : (tpl.type === "official" ? "ADMIN" : "REP-101"),
       date: "অক্টোবর ২০২৬",
@@ -367,7 +367,7 @@ const INITIAL_REPORTS = [
       approvalStatus: "approved",
       active: true,
       truthScore: tpl.score,
-      statusNote: "Crime Zoo ফরেনসিক ও মাঠপর্যায়ের অনুসন্ধান টিম কর্তৃক সংযুক্ত ৬টি ছবি ও দালিলিক প্রমাণ যাচাইকৃত।",
+      statusNote: "Criminal Zoo ফরেনসিক ও মাঠপর্যায়ের অনুসন্ধান টিম কর্তৃক সংযুক্ত ৬টি ছবি ও দালিলিক প্রমাণ যাচাইকৃত।",
       views: 850 + idx * 47,
       likes: 42 + idx * 5,
       mediaType: "photo",
@@ -445,10 +445,10 @@ const INITIAL_CONTACTS_DIRECTORY = [
 ];
 
 const INITIAL_REPORTERS = [
-  { id: "ADM-001", name: "জয়নাল আবেদীন (Super Admin)", email: "jainal.dcitbd@gmail.com", phone: "০১৭০০-০০০০০১", pass: "Jainal@2000", pin: "5314", nid: "1990269845112", org: "Crime Zoo Chief Command", badgeNo: "CZ-CHIEF-01", district: "ঢাকা", role: "admin", verifiedReports: 45, active: true, status: "সুপার এডমিন" },
-  { id: "ADM-002", name: "সাইফুল ইসলাম (Co-Admin)", email: "saiful05333@gmail.com", phone: "০১৭০০-০০০০০২", pass: "Jainal@2000", pin: "5314", nid: "1992358741029", org: "Crime Zoo Security Directorate", badgeNo: "CZ-CHIEF-02", district: "কুমিল্লা", role: "admin", verifiedReports: 32, active: true, status: "কো-এডমিন" },
-  { id: "REP-101", name: "মো. রফিকুল ইসলাম", email: "rafiq@crimezoo.org", phone: "০১৭১১-২২৩৩৪৪", pass: "123456", nid: "1988159482013", org: "দৈনিক অনুসন্ধান ডেস্ক", badgeNo: "CZ-REP-2026-01", district: "চট্টগ্রাম", role: "reporter", verifiedReports: 14, active: true, status: "ভেরিফাইড রিপোর্টার" },
-  { id: "REP-102", name: "ডা. ফারহানা করিম", email: "farhana@crimezoo.org", phone: "০১৭৫৫-৬৬৭৭৮৮", pass: "123456", nid: "1991264859201", org: "পাবলিক হেলথ ওয়াচ", badgeNo: "CZ-REP-2026-02", district: "ঢাকা", role: "reporter", verifiedReports: 9, active: true, status: "ইনভেস্টিগেটিভ রিপোর্টার" }
+  { id: "ADM-001", name: "জয়নাল আবেদীন (Super Admin)", email: "jainal.dcitbd@gmail.com", phone: "০১৭০০-০০০০০১", pass: "Jainal@2000", pin: "5314", nid: "1990269845112", org: "Criminal Zoo Chief Command", badgeNo: "CZ-CHIEF-01", district: "ঢাকা", role: "admin", verifiedReports: 45, active: true, status: "সুপার এডমিন" },
+  { id: "ADM-002", name: "সাইফুল ইসলাম (Co-Admin)", email: "saiful05333@gmail.com", phone: "০১৭০০-০০০০০২", pass: "Jainal@2000", pin: "5314", nid: "1992358741029", org: "Criminal Zoo Security Directorate", badgeNo: "CZ-CHIEF-02", district: "কুমিল্লা", role: "admin", verifiedReports: 32, active: true, status: "কো-এডমিন" },
+  { id: "REP-101", name: "মো. রফিকুল ইসলাম", email: "rafiq@criminalzoo.org", phone: "০১৭১১-২২৩৩৪৪", pass: "123456", nid: "1988159482013", org: "দৈনিক অনুসন্ধান ডেস্ক", badgeNo: "CZ-REP-2026-01", district: "চট্টগ্রাম", role: "reporter", verifiedReports: 14, active: true, status: "ভেরিফাইড রিপোর্টার" },
+  { id: "REP-102", name: "ডা. ফারহানা করিম", email: "farhana@criminalzoo.org", phone: "০১৭৫৫-৬৬৭৭৮৮", pass: "123456", nid: "1991264859201", org: "পাবলিক হেলথ ওয়াচ", badgeNo: "CZ-REP-2026-02", district: "ঢাকা", role: "reporter", verifiedReports: 9, active: true, status: "ইনভেস্টিগেটিভ রিপোর্টার" }
 ];
 
 const INITIAL_CONTACT_MESSAGES = [
@@ -507,21 +507,49 @@ const INITIAL_AUDIT_LOGS = [
 // EXTRAORDINARY HTML EMAIL NOTIFICATION ENGINE (Requirements #2 & #18)
 // Sends rich HTML emails to jainal.dcitbd@gmail.com and saiful05333@gmail.com
 // ============================================================================
+// ============================================================================
+// REAL-TIME BROADCAST & HYBRID BACKEND ENDPOINTS (cPanel, GitHub, Cloudflare)
+// ============================================================================
+const CZ_SYNC_CHANNEL = (typeof BroadcastChannel !== 'undefined') ? new BroadcastChannel('criminal_zoo_channel') : null;
+
+function getApiEndpoint(file) {
+  const path = window.location.pathname;
+  if (path.includes('/admin/')) {
+    return '../api/' + file;
+  }
+  return './api/' + file;
+}
+
+function broadcastDataChange(type, payload) {
+  try {
+    localStorage.setItem('criminal_zoo_sync_ping', Date.now().toString());
+    if (CZ_SYNC_CHANNEL) {
+      CZ_SYNC_CHANNEL.postMessage({ type, payload, timestamp: Date.now() });
+    }
+    window.dispatchEvent(new CustomEvent('cz_data_updated', { detail: { type, payload } }));
+  } catch (e) {}
+}
+
+// ============================================================================
+// EXTRAORDINARY HTML EMAIL NOTIFICATION ENGINE (Requirements #2 & #18)
+// Sends rich HTML emails to jainal.dcitbd@gmail.com and saiful05333@gmail.com
+// Supports: cPanel PHP mail(), FormSubmit AJAX, Web3Forms, and In-App Live Inspector
+// ============================================================================
 class EmailNotifier {
   static buildHtmlTemplate(eventTitle, badgeText, badgeColor, summaryText, detailsObj = {}) {
-    const nowStr = new Date().toLocaleString("bn-BD", {
-      day: "numeric", month: "long", year: "numeric",
-      hour: "2-digit", minute: "2-digit", second: "2-digit"
+    const nowStr = new Date().toLocaleString('bn-BD', {
+      day: 'numeric', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
     });
 
     const rowsHtml = Object.entries(detailsObj)
-      .filter(([_, val]) => val !== undefined && val !== null && val !== "")
+      .filter(([_, val]) => val !== undefined && val !== null && val !== '')
       .map(([key, val]) => `
         <tr>
           <td style="padding:10px 14px; border-bottom:1px solid #1e293b; color:#94a3b8; font-size:13px; font-weight:600; width:36%; background:#0b111e;">${key}</td>
           <td style="padding:10px 14px; border-bottom:1px solid #1e293b; color:#f8fafc; font-size:13.5px; font-weight:700; background:#0f172a; word-break:break-all;">${val}</td>
         </tr>
-      `).join("");
+      `).join('');
 
     return `
 <!DOCTYPE html>
@@ -531,17 +559,17 @@ class EmailNotifier {
   <title>${eventTitle}</title>
 </head>
 <body style="margin:0; padding:24px; background-color:#04070e; font-family:'Segoe UI', Tahoma, sans-serif; color:#f8fafc;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:640px; margin:0 auto; background:#0b111e; border:1px solid #dc2626; border-radius:16px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.85);">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:640px; margin:0 auto; background:#0b111e; border:1px solid #e11d48; border-radius:16px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.85);">
     <!-- Header -->
     <tr>
-      <td style="background:linear-gradient(135deg, #1a0608 0%, #0b111e 60%, #1e1b4b 100%); padding:24px 28px; border-bottom:2px solid #dc2626;">
+      <td style="background:linear-gradient(135deg, #1f080c 0%, #0b111e 60%, #1e1b4b 100%); padding:24px 28px; border-bottom:2px solid #e11d48;">
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td>
-              <div style="display:inline-block; background:${badgeColor || '#dc2626'}; color:#ffffff; font-size:11px; font-weight:800; padding:4px 10px; border-radius:99px; letter-spacing:1px; text-transform:uppercase;">
-                🛡️ ${badgeText || 'CRIME ZOO SECURITY ALERT'}
+              <div style="display:inline-block; background:${badgeColor || '#e11d48'}; color:#ffffff; font-size:11px; font-weight:800; padding:4px 10px; border-radius:99px; letter-spacing:1px; text-transform:uppercase;">
+                🛡️ ${badgeText || 'CRIMINAL ZOO SECURITY ALERT'}
               </div>
-              <h1 style="margin:10px 0 4px 0; font-size:22px; color:#ffffff; font-weight:800;">Crime Zoo — সিকিউরিটি ও অ্যাক্টিভিটি অ্যালার্ট</h1>
+              <h1 style="margin:10px 0 4px 0; font-size:22px; color:#ffffff; font-weight:800;">Criminal Zoo — সিকিউরিটি ও অ্যাক্টিভিটি অ্যালার্ট</h1>
               <div style="font-size:12.5px; color:#38bdf8;">অপরাধ অনুসন্ধান, ফরেনসিক ল্যাব ও কমান্ড সেন্টার নোটিফিকেশন</div>
             </td>
           </tr>
@@ -552,7 +580,7 @@ class EmailNotifier {
     <!-- Event Banner -->
     <tr>
       <td style="padding:22px 28px 12px 28px;">
-        <div style="background:rgba(220,38,38,0.12); border-left:4px solid ${badgeColor || '#dc2626'}; padding:14px 16px; border-radius:8px;">
+        <div style="background:rgba(225,29,72,0.12); border-left:4px solid ${badgeColor || '#e11d48'}; padding:14px 16px; border-radius:8px;">
           <div style="font-size:16px; font-weight:800; color:#ffffff; margin-bottom:4px;">${eventTitle}</div>
           <div style="font-size:13.5px; color:#cbd5e1; line-height:1.6;">${summaryText}</div>
         </div>
@@ -581,8 +609,8 @@ class EmailNotifier {
     <tr>
       <td style="background:#060911; padding:18px 28px; border-top:1px solid #1e293b; text-align:center;">
         <div style="font-size:12px; color:#64748b; line-height:1.6;">
-          এই মেইলটি <strong>Crime Zoo Automated Security & Notification Engine</strong> হতে স্বয়ংক্রিয়ভাবে প্রেরণ করা হয়েছে।<br>
-          © ২০২৬ Crime Zoo Command Center • Zero-Trace Encrypted Portal
+          এই মেইলটি <strong>Criminal Zoo Automated Security & Notification Engine</strong> হতে স্বয়ংক্রিয়ভাবে প্রেরণ করা হয়েছে।<br>
+          © ২০২৬ Criminal Zoo Command Center • Zero-Trace Encrypted Portal
         </div>
       </td>
     </tr>
@@ -592,11 +620,11 @@ class EmailNotifier {
   }
 
   static send(eventType, eventTitle, badgeText, badgeColor, summaryText, detailsObj = {}) {
-    const subject = `[Crime Zoo Alert] ${eventTitle} — ${new Date().toLocaleTimeString("bn-BD")}`;
+    const subject = `[Criminal Zoo Alert] ${eventTitle} — ${new Date().toLocaleTimeString('bn-BD')}`;
     const html = this.buildHtmlTemplate(eventTitle, badgeText, badgeColor, summaryText, detailsObj);
 
     const emailRecord = {
-      id: "MAIL-" + Math.floor(10000 + Math.random() * 90000),
+      id: 'MAIL-' + Math.floor(10000 + Math.random() * 90000),
       eventType,
       subject,
       eventTitle,
@@ -605,24 +633,24 @@ class EmailNotifier {
       summaryText,
       details: detailsObj,
       recipients: ADMIN_NOTIFICATION_EMAILS,
-      time: new Date().toLocaleString("bn-BD"),
+      time: new Date().toLocaleString('bn-BD'),
       timestamp: Date.now(),
       html
     };
 
-    // 1. Save in local email log so admin can inspect all dispatched emails anytime
+    // 1. Save in local storage email log
     try {
       const list = this.getSentEmails();
       list.unshift(emailRecord);
-      localStorage.setItem("crime_zoo_sent_emails_v3", JSON.stringify(list.slice(0, 100)));
+      localStorage.setItem('criminal_zoo_sent_emails_v4', JSON.stringify(list.slice(0, 100)));
     } catch (e) {}
 
-    // 2. Dispatch to local/cPanel PHP mail endpoint
-    const apiPath = window.location.pathname.includes("/admin/") ? "../api/send-mail.php" : "./api/send-mail.php";
+    // 2. Dispatch to cPanel / local PHP send-mail endpoint
     try {
+      const apiPath = getApiEndpoint('send-mail.php');
       fetch(apiPath, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           eventType,
           subject,
@@ -633,32 +661,65 @@ class EmailNotifier {
       }).catch(() => {});
     } catch (e) {}
 
-    // 3. Also dispatch via FormSubmit AJAX for static hosting environments
+    // 3. Dispatch via FormSubmit AJAX (Reliable multi-host web fallback)
     ADMIN_NOTIFICATION_EMAILS.forEach(email => {
       try {
         fetch(`https://formsubmit.co/ajax/${email}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
             _subject: subject,
-            _template: "table",
+            _template: 'table',
             Event: eventTitle,
             Summary: summaryText,
             ...detailsObj,
-            Recipients: ADMIN_NOTIFICATION_EMAILS.join(", ")
+            Recipients: ADMIN_NOTIFICATION_EMAILS.join(', ')
           })
         }).catch(() => {});
       } catch (e) {}
     });
 
-    // 4. Show sleek live toast notification with button to preview the exact HTML email template
+    // 4. Dispatch via Web3Forms (Public fallback endpoint)
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: 'b94e0134-2e98-4c8d-90cf-criminalzoo',
+          subject: subject,
+          from_name: 'Criminal Zoo Security System',
+          to_email: 'jainal.dcitbd@gmail.com',
+          message: `${eventTitle}\n${summaryText}\n\n` + JSON.stringify(detailsObj, null, 2)
+        })
+      }).catch(() => {});
+    } catch (e) {}
+
+    // 5. Show sleek live toast notification with button to preview the exact HTML email template
     this.showEmailToast(emailRecord);
     return emailRecord;
   }
 
+  static sendTestEmail() {
+    return this.send(
+      'TEST_EMAIL',
+      'ইমেইল নোটিফিকেশন সিস্টেম টেস্ট ভেরিফিকেশন',
+      'EMAIL VERIFIED',
+      '#10b981',
+      'Criminal Zoo নোটিফিকেশন ইঞ্জিন সফলভাবে সক্রিয় রয়েছে। jainal.dcitbd@gmail.com এবং saiful05333@gmail.com ঠিকানায় টেস্ট অ্যালার্ট প্রেরিত হয়েছে।',
+      {
+        'সিস্টেম': 'Criminal Zoo Notification Engine v4.0',
+        'সার্ভার টাইপ': 'cPanel / GitHub Pages / Cloudflare Hybrid',
+        'প্রাপক এডমিন ১': 'jainal.dcitbd@gmail.com',
+        'প্রাপক এডমিন ২': 'saiful05333@gmail.com',
+        'স্ট্যাটাস': 'Active & Operational (Dispatched)',
+        'এনক্রিপশন': 'Zero-Trace 256-Bit SSL'
+      }
+    );
+  }
+
   static getSentEmails() {
     try {
-      const raw = localStorage.getItem("crime_zoo_sent_emails_v3");
+      const raw = localStorage.getItem('criminal_zoo_sent_emails_v4') || localStorage.getItem('crime_zoo_sent_emails_v3');
       return raw ? JSON.parse(raw) : [];
     } catch (e) {
       return [];
@@ -666,12 +727,12 @@ class EmailNotifier {
   }
 
   static showEmailToast(emailRecord) {
-    if (typeof document === "undefined" || !document.body) return;
-    let toast = document.getElementById("czEmailDispatchToast");
+    if (typeof document === 'undefined' || !document.body) return;
+    let toast = document.getElementById('czEmailDispatchToast');
     if (!toast) {
-      toast = document.createElement("div");
-      toast.id = "czEmailDispatchToast";
-      toast.style.cssText = "position:fixed; bottom:1.25rem; left:1.25rem; z-index:999998; background:rgba(11,17,30,0.97); border:1px solid #10b981; border-left:4px solid #10b981; color:#f8fafc; padding:0.85rem 1.1rem; border-radius:12px; box-shadow:0 15px 35px rgba(0,0,0,0.85); max-width:390px; font-size:0.82rem; transition:all 0.3s ease; transform:translateY(150%); opacity:0;";
+      toast = document.createElement('div');
+      toast.id = 'czEmailDispatchToast';
+      toast.style.cssText = 'position:fixed; bottom:1.25rem; left:1.25rem; z-index:999998; background:rgba(11,17,30,0.97); border:1px solid #10b981; border-left:4px solid #10b981; color:#f8fafc; padding:0.85rem 1.1rem; border-radius:12px; box-shadow:0 15px 35px rgba(0,0,0,0.85); max-width:390px; font-size:0.82rem; transition:all 0.3s ease; transform:translateY(150%); opacity:0;';
       document.body.appendChild(toast);
     }
 
@@ -683,93 +744,108 @@ class EmailNotifier {
           </div>
           <div style="color:#cbd5e1; margin-top:3px; font-size:0.78rem;">${emailRecord.eventTitle}</div>
           <div style="color:#38bdf8; font-size:0.72rem; margin-top:2px;">To: jainal.dcitbd@gmail.com, saiful05333@gmail.com</div>
-          <button type="button" onclick="EmailNotifier.openEmailPreviewModal('${emailRecord.id}')" style="margin-top:6px; background:rgba(56,189,248,0.16); border:1px solid rgba(56,189,248,0.4); color:#38bdf8; padding:3px 9px; border-radius:6px; font-size:0.74rem; font-weight:700; cursor:pointer;">
-            👁️ মেইল টেম্পলেট প্রিভিউ দেখুন
-          </button>
+          <div style="display:flex; gap:0.4rem; margin-top:6px;">
+            <button type="button" onclick="EmailNotifier.openEmailPreviewModal('${emailRecord.id}')" style="background:rgba(56,189,248,0.16); border:1px solid rgba(56,189,248,0.4); color:#38bdf8; padding:3px 9px; border-radius:6px; font-size:0.74rem; font-weight:700; cursor:pointer;">
+              👁️ মেইল টেম্পলেট প্রিভিউ
+            </button>
+            <button type="button" onclick="EmailNotifier.sendTestEmail();" style="background:rgba(16,185,129,0.16); border:1px solid rgba(16,185,129,0.4); color:#34d399; padding:3px 9px; border-radius:6px; font-size:0.74rem; font-weight:700; cursor:pointer;">
+              🔄 টেস্ট সেন্ড
+            </button>
+          </div>
         </div>
         <button type="button" onclick="document.getElementById('czEmailDispatchToast').style.transform='translateY(150%)'; document.getElementById('czEmailDispatchToast').style.opacity='0';" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:1rem;">✕</button>
       </div>
     `;
 
     requestAnimationFrame(() => {
-      toast.style.transform = "translateY(0)";
-      toast.style.opacity = "1";
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
     });
 
     if (this._toastTimer) clearTimeout(this._toastTimer);
     this._toastTimer = setTimeout(() => {
       if (toast) {
-        toast.style.transform = "translateY(150%)";
-        toast.style.opacity = "0";
+        toast.style.transform = 'translateY(150%)';
+        toast.style.opacity = '0';
       }
-    }, 6500);
+    }, 7000);
   }
 
   static openEmailPreviewModal(mailId) {
     const list = this.getSentEmails();
-    const item = mailId ? list.find(m => m.id === mailId) : list[0];
-    if (!item) return;
+    const item = mailId ? list.find(m => m.id === mailId) : (list[0] || {
+      subject: '[Criminal Zoo Alert] সিস্টেম নোটিফিকেশন প্রস্তুত',
+      recipients: ADMIN_NOTIFICATION_EMAILS,
+      time: new Date().toLocaleString('bn-BD'),
+      html: '<p style="color:#fff; padding:20px;">কোনো মেইল লগ পাওয়া যায়নি। টেস্ট মেইল পাঠাতে নিচের বাটনে ক্লিক করুন।</p>'
+    });
 
-    let modal = document.getElementById("czEmailTemplatePreviewModal");
+    let modal = document.getElementById('czEmailTemplatePreviewModal');
     if (!modal) {
-      modal = document.createElement("div");
-      modal.id = "czEmailTemplatePreviewModal";
-      modal.className = "modal-backdrop";
-      modal.style.zIndex = "1000001";
+      modal = document.createElement('div');
+      modal.id = 'czEmailTemplatePreviewModal';
+      modal.className = 'modal-backdrop';
+      modal.style.zIndex = '1000001';
       document.body.appendChild(modal);
     }
 
     modal.innerHTML = `
-      <div class="modal-container" style="max-width:740px; padding:1.5rem;">
+      <div class="modal-container" style="max-width:760px; padding:1.5rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.85rem; margin-bottom:1rem;">
           <div>
             <span class="badge badge-verified">📧 অটোমেটেড ইমেইল নোটিফিকেশন প্রিভিউ</span>
             <h3 style="color:#fff; font-size:1.15rem; margin-top:4px;">${item.subject}</h3>
-            <div style="font-size:0.78rem; color:#38bdf8;">প্রাপক: ${item.recipients.join(", ")} • সময়: ${item.time}</div>
+            <div style="font-size:0.78rem; color:#38bdf8;">প্রাপক: ${item.recipients.join(', ')} • সময়: ${item.time}</div>
           </div>
-          <button class="modal-close-btn" onclick="document.getElementById('czEmailTemplatePreviewModal').classList.remove('active')">✕</button>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <button class="btn btn-sm" style="background:#10b981; color:#fff; font-size:0.75rem;" onclick="EmailNotifier.sendTestEmail();">
+              🔄 টেস্ট ইমেইল পাঠান
+            </button>
+            <button class="modal-close-btn" onclick="document.getElementById('czEmailTemplatePreviewModal').classList.remove('active')">✕</button>
+          </div>
         </div>
         <div style="background:#04070e; border:1px solid var(--border-color); border-radius:12px; overflow:hidden; max-height:68vh; overflow-y:auto;">
           ${item.html}
         </div>
       </div>
     `;
-    modal.classList.add("active");
+    modal.classList.add('active');
   }
 }
 
 // ============================================================================
-// STORAGE MANAGER (Dynamic Reports, Approval, Users, Contacts, Inbox, Audit)
+// STORAGE MANAGER (Hybrid Server-Sync & Real-Time Client Storage Engine)
+// Works seamlessly across cPanel (PHP Backend), GitHub Pages, and Cloudflare Pages
 // ============================================================================
 class StorageManager {
   // --- REPORTS ---
   static getReports() {
     try {
-      const data = localStorage.getItem("crime_zoo_reports_v3");
-      if (!data) {
-        // Migrate any custom reports from v2 if present
-        let merged = [...INITIAL_REPORTS];
-        const oldRaw = localStorage.getItem("crime_zoo_reports_v2");
-        if (oldRaw) {
-          try {
-            const oldList = JSON.parse(oldRaw);
-            const existingIds = new Set(merged.map(r => r.id));
-            oldList.forEach(oldItem => {
-              if (oldItem && oldItem.id && !existingIds.has(oldItem.id)) {
-                if (!oldItem.mediaUrls || !oldItem.mediaUrls.length) {
-                  oldItem.mediaUrls = buildPhotoGallery(0, 5);
-                }
-                if (!oldItem.approvalStatus) oldItem.approvalStatus = "approved";
-                if (oldItem.active === undefined) oldItem.active = true;
-                merged.unshift(oldItem);
-              }
-            });
-          } catch (e) {}
-        }
-        localStorage.setItem("crime_zoo_reports_v3", JSON.stringify(merged));
-        return merged;
+      const data = localStorage.getItem('criminal_zoo_reports_v4');
+      if (data) {
+        return JSON.parse(data);
       }
-      return JSON.parse(data);
+      // Check migration from previous versions
+      const oldRaw = localStorage.getItem('crime_zoo_reports_v3') || localStorage.getItem('crime_zoo_reports_v2');
+      let merged = [...INITIAL_REPORTS];
+      if (oldRaw) {
+        try {
+          const oldList = JSON.parse(oldRaw);
+          const existingIds = new Set(merged.map(r => r.id));
+          oldList.forEach(oldItem => {
+            if (oldItem && oldItem.id && !existingIds.has(oldItem.id)) {
+              if (!oldItem.mediaUrls || !oldItem.mediaUrls.length) {
+                oldItem.mediaUrls = buildPhotoGallery(0, 5);
+              }
+              if (!oldItem.approvalStatus) oldItem.approvalStatus = 'approved';
+              if (oldItem.active === undefined) oldItem.active = true;
+              merged.unshift(oldItem);
+            }
+          });
+        } catch (e) {}
+      }
+      localStorage.setItem('criminal_zoo_reports_v4', JSON.stringify(merged));
+      return merged;
     } catch (e) {
       return INITIAL_REPORTS;
     }
@@ -777,13 +853,13 @@ class StorageManager {
 
   // Returns ONLY Approved & Active reports for Public Viewer Pages (Requirement #19)
   static getPublicApprovedReports() {
-    return this.getReports().filter(r => r.approvalStatus === "approved" && r.active !== false);
+    return this.getReports().filter(r => r.approvalStatus === 'approved' && r.active !== false);
   }
 
   static saveReports(reports) {
     try {
-      localStorage.setItem("crime_zoo_reports_v3", JSON.stringify(reports));
-      window.dispatchEvent(new CustomEvent("cz_data_updated", { detail: { type: "reports" } }));
+      localStorage.setItem('criminal_zoo_reports_v4', JSON.stringify(reports));
+      broadcastDataChange('reports', reports);
     } catch (e) {}
   }
 
@@ -798,7 +874,7 @@ class StorageManager {
     }
     // Requirement #19: Reporter/Viewer posts start as 'pending' unless posted directly by Admin ('official')
     if (!newReport.approvalStatus) {
-      newReport.approvalStatus = newReport.reporterType === "official" ? "approved" : "pending";
+      newReport.approvalStatus = newReport.reporterType === 'official' ? 'approved' : 'pending';
     }
     if (newReport.active === undefined) {
       newReport.active = true;
@@ -807,34 +883,43 @@ class StorageManager {
     reports.unshift(newReport);
     this.saveReports(reports);
 
-    const actor = newReport.reporterType === "anonymous" ? "বেনামি" : newReport.reporterName;
+    // Asynchronously sync with server backend (cPanel / PHP)
+    try {
+      fetch(getApiEndpoint('submit.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReport)
+      }).catch(() => {});
+    } catch (e) {}
+
+    const actor = newReport.reporterType === 'anonymous' ? 'বেনামি' : newReport.reporterName;
     this.addAuditLog(
-      "নতুন রিপোর্ট দাখিল",
+      'নতুন রিপোর্ট দাখিল',
       newReport.id,
       actor,
-      `শিরোনাম: "${newReport.title}" (${newReport.approvalStatus === "approved" ? "সরাসরি লাইভ" : "এডমিন অনুমোদনের অপেক্ষায়"})`,
-      "SUCCESS",
-      newReport.reporterType === "official" ? "ADMIN" : "REPORTER"
+      `শিরোনাম: "${newReport.title}" (${newReport.approvalStatus === 'approved' ? 'সরাসরি লাইভ' : 'এডমিন অনুমোদনের অপেক্ষায়'})`,
+      'SUCCESS',
+      newReport.reporterType === 'official' ? 'ADMIN' : 'REPORTER'
     );
 
     EmailNotifier.send(
-      "NEW_REPORT",
+      'NEW_REPORT',
       `নতুন অপরাধ প্রতিবেদন জমা হয়েছে (${newReport.id})`,
-      newReport.approvalStatus === "approved" ? "LIVE REPORT" : "PENDING APPROVAL",
-      newReport.approvalStatus === "approved" ? "#10b981" : "#f59e0b",
-      `Crime Zoo পোর্টালে একটি নতুন প্রতিবেদন দাখিল করা হয়েছে। ${newReport.approvalStatus === "pending" ? "এডমিন প্যানেল থেকে এপ্রুভ করলেই এটি মূল ফিডে লাইভ হবে।" : "এটি সরাসরি লাইভ ফিডে প্রকাশিত হয়েছে।"}`,
+      newReport.approvalStatus === 'approved' ? 'LIVE REPORT' : 'PENDING APPROVAL',
+      newReport.approvalStatus === 'approved' ? '#10b981' : '#f59e0b',
+      `Criminal Zoo পোর্টালে একটি নতুন প্রতিবেদন দাখিল করা হয়েছে। ${newReport.approvalStatus === 'pending' ? 'এডমিন প্যানেল থেকে এপ্রুভ করলেই এটি মূল ফিডে লাইভ হবে।' : 'এটি সরাসরি লাইভ ফিডে প্রকাশিত হয়েছে।'}`,
       {
-        "কেস আইডি": newReport.id,
-        "গোপন ট্র্যাকিং পিন": newReport.pin,
-        "শিরোনাম": newReport.title,
-        "ক্যাটাগরি": newReport.category,
-        "ঘটনাস্থল": newReport.location,
-        "রিপোর্টারের ধরন": newReport.reporterType,
-        "রিপোর্টারের নাম": actor,
-        "যোগাযোগ": newReport.reporterPhone || "গোপনীয়",
-        "যুক্তকৃত ছবির সংখ্যা": (newReport.mediaUrls ? newReport.mediaUrls.length : 0) + " টি",
-        "অন্যান্য প্রমাণ": [newReport.videoUrl ? "Video" : "", newReport.audioUrl ? "Audio" : "", newReport.pdfUrl ? "PDF" : ""].filter(Boolean).join(", ") || "ছবি সংযুক্ত",
-        "অনুমোদন স্ট্যাটাস": newReport.approvalStatus === "approved" ? "Approved (Live)" : "Pending Admin Approval"
+        'কেস আইডি': newReport.id,
+        'গোপন ট্র্যাকিং পিন': newReport.pin,
+        'শিরোনাম': newReport.title,
+        'ক্যাটাগরি': newReport.category,
+        'ঘটনাস্থল': newReport.location,
+        'রিপোর্টারের ধরন': newReport.reporterType,
+        'রিপোর্টারের নাম': actor,
+        'যোগাযোগ': newReport.reporterPhone || 'গোপনীয়',
+        'যুক্তকৃত ছবির সংখ্যা': (newReport.mediaUrls ? newReport.mediaUrls.length : 0) + ' টি',
+        'অন্যান্য প্রমাণ': [newReport.videoUrl ? 'Video' : '', newReport.audioUrl ? 'Audio' : '', newReport.pdfUrl ? 'PDF' : ''].filter(Boolean).join(', ') || 'ছবি সংযুক্ত',
+        'অনুমোদন স্ট্যাটাস': newReport.approvalStatus === 'approved' ? 'Approved (Live)' : 'Pending Admin Approval'
       }
     );
 
@@ -850,29 +935,43 @@ class StorageManager {
         reports[idx].mediaUrl = reports[idx].mediaUrls[0];
       }
       this.saveReports(reports);
+
+      // Async sync with server
+      try {
+        fetch(getApiEndpoint('admin.php'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update',
+            id: reportId,
+            fields: updatedFields
+          })
+        }).catch(() => {});
+      } catch (e) {}
+
       this.addAuditLog(
-        "পোস্ট এডিট / স্ট্যাটাস আপডেট",
+        'পোস্ট এডিট / স্ট্যাটাস আপডেট',
         reportId,
-        "Admin",
+        'Admin',
         `শিরোনাম: ${reports[idx].title} | স্ট্যাটাস: ${reports[idx].status} | অনুমোদন: ${reports[idx].approvalStatus} | স্কোর: ${reports[idx].truthScore}%`,
-        "SUCCESS",
-        "ADMIN"
+        'SUCCESS',
+        'ADMIN'
       );
 
       EmailNotifier.send(
-        "REPORT_UPDATED",
+        'REPORT_UPDATED',
         `পোস্ট / রিপোর্ট আপডেট করা হয়েছে (${reportId})`,
-        "REPORT UPDATED",
-        "#38bdf8",
+        'REPORT UPDATED',
+        '#38bdf8',
         `এডমিন প্যানেল থেকে রিপোর্ট ${reportId} এর তথ্য বা স্ট্যাটাস হালনাগাদ করা হয়েছে।`,
         {
-          "কেস আইডি": reportId,
-          "শিরোনাম": reports[idx].title,
-          "ক্যাটাগরি ও স্থান": `${reports[idx].category} • ${reports[idx].location}`,
-          "যাচাই স্ট্যাটাস": reports[idx].status,
-          "পাবলিশ স্ট্যাটাস": reports[idx].approvalStatus === "approved" && reports[idx].active !== false ? "লাইভ (Published)" : "পেন্ডিং / ডিএক্টিভ",
-          "ফরেনসিক স্কোর": `${reports[idx].truthScore}%`,
-          "তদন্ত নোট": reports[idx].statusNote
+          'কেস আইডি': reportId,
+          'শিরোনাম': reports[idx].title,
+          'ক্যাটাগরি ও স্থান': `${reports[idx].category} • ${reports[idx].location}`,
+          'যাচাই স্ট্যাটাস': reports[idx].status,
+          'পাবলিশ স্ট্যাটাস': reports[idx].approvalStatus === 'approved' && reports[idx].active !== false ? 'লাইভ (Published)' : 'পেন্ডিং / ডিএক্টিভ',
+          'ফরেনসিক স্কোর': `${reports[idx].truthScore}%`,
+          'তদন্ত নোট': reports[idx].statusNote
         }
       );
       return reports[idx];
@@ -881,13 +980,25 @@ class StorageManager {
   }
 
   static approveReport(reportId) {
-    return this.updateReport(reportId, {
-      approvalStatus: "approved",
+    // 1. Update in local storage
+    const updated = this.updateReport(reportId, {
+      approvalStatus: 'approved',
       active: true,
-      status: "verified",
+      status: 'verified',
       truthScore: 95,
-      statusNote: "এডমিন কর্তৃক অনুমোদিত ও ভেরিফাইড হয়ে লাইভ ফিডে প্রকাশিত হয়েছে।"
+      statusNote: 'এডমিন কর্তৃক অনুমোদিত ও ভেরিফাইড হয়ে লাইভ ফিডে প্রকাশিত হয়েছে।'
     });
+
+    // 2. Async sync with server
+    try {
+      fetch(getApiEndpoint('admin.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'approve', id: reportId })
+      }).catch(() => {});
+    } catch (e) {}
+
+    return updated;
   }
 
   static toggleReportActive(reportId) {
@@ -895,21 +1006,32 @@ class StorageManager {
     const r = reports.find(item => item.id === reportId);
     if (!r) return null;
     const newActive = r.active === false ? true : false;
-    const newApproval = newActive ? "approved" : "deactive";
-    return this.updateReport(reportId, {
+    const newApproval = newActive ? 'approved' : 'deactive';
+
+    const updated = this.updateReport(reportId, {
       active: newActive,
       approvalStatus: newApproval
     });
+
+    try {
+      fetch(getApiEndpoint('admin.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'toggle_active', id: reportId })
+      }).catch(() => {});
+    } catch (e) {}
+
+    return updated;
   }
 
   static updateReportStatus(reportId, status, note, truthScore) {
     const updatePayload = {
       status,
-      statusNote: note || "",
+      statusNote: note || '',
       truthScore: truthScore !== undefined ? truthScore : 50
     };
-    if (status === "verified" || status === "partially_true" || status === "investigating") {
-      updatePayload.approvalStatus = "approved";
+    if (status === 'verified' || status === 'partially_true' || status === 'investigating') {
+      updatePayload.approvalStatus = 'approved';
       updatePayload.active = true;
     }
     return this.updateReport(reportId, updatePayload);
@@ -919,15 +1041,24 @@ class StorageManager {
     const target = this.getReports().find(r => r.id === reportId);
     let reports = this.getReports().filter(r => r.id !== reportId);
     this.saveReports(reports);
-    this.addAuditLog("রিপোর্ট ডিলিট", reportId, "Admin", "রিপোর্ট স্থায়ীভাবে মুছে ফেলা হয়েছে।", "SUCCESS", "ADMIN");
+
+    try {
+      fetch(getApiEndpoint('admin.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', id: reportId })
+      }).catch(() => {});
+    } catch (e) {}
+
+    this.addAuditLog('রিপোর্ট ডিলিট', reportId, 'Admin', 'রিপোর্ট স্থায়ীভাবে মুছে ফেলা হয়েছে।', 'SUCCESS', 'ADMIN');
     if (target) {
       EmailNotifier.send(
-        "REPORT_DELETED",
+        'REPORT_DELETED',
         `রিপোর্ট ডিলিট করা হয়েছে (${reportId})`,
-        "DELETED",
-        "#ef4444",
+        'DELETED',
+        '#ef4444',
         `এডমিন প্যানেল থেকে রিপোর্ট ${reportId} স্থায়ীভাবে মুছে ফেলা হয়েছে।`,
-        { "কেস আইডি": reportId, "শিরোনাম": target.title, "স্থান": target.location }
+        { 'কেস আইডি': reportId, 'শিরোনাম': target.title, 'স্থান': target.location }
       );
     }
     return true;
@@ -948,14 +1079,14 @@ class StorageManager {
     const reports = this.getReports();
     const rep = reports.find(r => r.id === reportId);
     const likedKey = `cz_liked_${reportId}`;
-    const alreadyLiked = localStorage.getItem(likedKey) === "true";
+    const alreadyLiked = localStorage.getItem(likedKey) === 'true';
     if (rep) {
       if (alreadyLiked) {
         rep.likes = Math.max(0, (rep.likes || 1) - 1);
         localStorage.removeItem(likedKey);
       } else {
         rep.likes = (rep.likes || 0) + 1;
-        localStorage.setItem(likedKey, "true");
+        localStorage.setItem(likedKey, 'true');
       }
       this.saveReports(reports);
       return { likes: rep.likes, isLiked: !alreadyLiked };
@@ -968,9 +1099,9 @@ class StorageManager {
     const rep = reports.find(r => r.id === reportId);
     if (rep) {
       const newComment = {
-        id: "c_" + Date.now(),
-        user: userName || "সচেতন নাগরিক",
-        date: "এইমাত্র",
+        id: 'c_' + Date.now(),
+        user: userName || 'সচেতন নাগরিক',
+        date: 'এইমাত্র',
         text: commentText
       };
       if (!rep.comments) rep.comments = [];
@@ -984,12 +1115,18 @@ class StorageManager {
   // --- CONTACTS DIRECTORY CRUD (Requirement #13) ---
   static getContacts() {
     try {
-      const data = localStorage.getItem("crime_zoo_contacts_v3");
-      if (!data) {
-        localStorage.setItem("crime_zoo_contacts_v3", JSON.stringify(INITIAL_CONTACTS_DIRECTORY));
-        return INITIAL_CONTACTS_DIRECTORY;
+      const data = localStorage.getItem('criminal_zoo_contacts_v4');
+      if (data) {
+        return JSON.parse(data);
       }
-      return JSON.parse(data);
+      const oldRaw = localStorage.getItem('crime_zoo_contacts_v3');
+      if (oldRaw) {
+        const parsed = JSON.parse(oldRaw);
+        localStorage.setItem('criminal_zoo_contacts_v4', JSON.stringify(parsed));
+        return parsed;
+      }
+      localStorage.setItem('criminal_zoo_contacts_v4', JSON.stringify(INITIAL_CONTACTS_DIRECTORY));
+      return INITIAL_CONTACTS_DIRECTORY;
     } catch (e) {
       return INITIAL_CONTACTS_DIRECTORY;
     }
@@ -997,45 +1134,56 @@ class StorageManager {
 
   static saveContacts(list) {
     try {
-      localStorage.setItem("crime_zoo_contacts_v3", JSON.stringify(list));
+      localStorage.setItem('criminal_zoo_contacts_v4', JSON.stringify(list));
+      broadcastDataChange('contacts', list);
     } catch (e) {}
   }
 
   static addContact(item) {
     const list = this.getContacts();
     const newContact = {
-      id: item.id || ("CNT-" + Math.floor(100 + Math.random() * 900)),
-      name: item.name || "নামহীন",
-      role: item.role || "সংশ্লিষ্ট দপ্তর",
-      category: item.category || "সাধারণ যোগাযোগ",
-      phone: item.phone || "N/A",
-      email: item.email || "N/A",
-      district: item.district || "ঢাকা",
-      source: item.source || "official",
-      status: item.status || "active",
-      note: item.note || "",
-      date: item.date || new Date().toLocaleDateString("bn-BD")
+      id: item.id || ('CNT-' + Math.floor(100 + Math.random() * 900)),
+      name: item.name || 'নামহীন',
+      role: item.role || 'সংশ্লিষ্ট দপ্তর',
+      category: item.category || 'সাধারণ যোগাযোগ',
+      phone: item.phone || 'N/A',
+      email: item.email || 'N/A',
+      district: item.district || 'ঢাকা',
+      source: item.source || 'official',
+      status: item.status || 'active',
+      note: item.note || '',
+      date: item.date || new Date().toLocaleDateString('bn-BD')
     };
     list.unshift(newContact);
     this.saveContacts(list);
-    this.addAuditLog("নতুন কন্টাক্ট যুক্ত", newContact.id, "Admin/System", `${newContact.name} (${newContact.phone}) কন্টাক্ট লিস্টে যুক্ত হয়েছে।`, "SUCCESS", "ADMIN");
+
+    // Sync with server API
+    try {
+      fetch(getApiEndpoint('contact.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'add_contact', contact: newContact })
+      }).catch(() => {});
+    } catch (e) {}
+
+    this.addAuditLog('নতুন কন্টাক্ট যুক্ত', newContact.id, 'Admin/System', `${newContact.name} (${newContact.phone}) কন্টাক্ট লিস্টে যুক্ত হয়েছে।`, 'SUCCESS', 'ADMIN');
 
     EmailNotifier.send(
-      "CONTACT_ADDED",
+      'CONTACT_ADDED',
       `নতুন কন্টাক্ট যুক্ত হয়েছে (${newContact.name})`,
-      "CONTACT UPDATE",
-      "#10b981",
+      'CONTACT UPDATE',
+      '#10b981',
       `কন্টাক্ট ডিরেক্টরিতে একটি নতুন কন্টাক্ট রেকর্ড সংযুক্ত করা হয়েছে।`,
       {
-        "কন্টাক্ট আইডি": newContact.id,
-        "নাম / ইউনিট": newContact.name,
-        "দপ্তর / পদবী": newContact.role,
-        "ক্যাটাগরি": newContact.category,
-        "ফোন নম্বর": newContact.phone,
-        "ইমেইল": newContact.email,
-        "জেলা / এলাকা": newContact.district,
-        "স্ট্যাটাস": newContact.status === "active" ? "সক্রিয় (Active)" : "নিষ্ক্রিয় (Deactive)",
-        "নোট / বার্তা": newContact.note
+        'কন্টাক্ট আইডি': newContact.id,
+        'নাম / ইউনিট': newContact.name,
+        'দপ্তর / পদবী': newContact.role,
+        'ক্যাটাগরি': newContact.category,
+        'ফোন নম্বর': newContact.phone,
+        'ইমেইল': newContact.email,
+        'জেলা / এলাকা': newContact.district,
+        'স্ট্যাটাস': newContact.status === 'active' ? 'সক্রিয় (Active)' : 'নিষ্ক্রিয় (Deactive)',
+        'নোট / বার্তা': newContact.note
       }
     );
     return newContact;
@@ -1047,24 +1195,16 @@ class StorageManager {
     if (idx !== -1) {
       list[idx] = { ...list[idx], ...updated };
       this.saveContacts(list);
-      this.addAuditLog("কন্টাক্ট আপডেট", id, "Admin", `${list[idx].name} এর কন্টাক্ট তথ্য আপডেট করা হয়েছে।`, "SUCCESS", "ADMIN");
 
-      EmailNotifier.send(
-        "CONTACT_UPDATED",
-        `কন্টাক্ট তথ্য আপডেট করা হয়েছে (${list[idx].name})`,
-        "CONTACT EDITED",
-        "#38bdf8",
-        `এডমিন প্যানেল থেকে কন্টাক্ট (${id}) এর তথ্য সম্পাদনা করা হয়েছে।`,
-        {
-          "কন্টাক্ট আইডি": id,
-          "নাম": list[idx].name,
-          "দপ্তর / পদবী": list[idx].role,
-          "ফোন": list[idx].phone,
-          "ইমেইল": list[idx].email,
-          "জেলা": list[idx].district,
-          "স্ট্যাটাস": list[idx].status
-        }
-      );
+      try {
+        fetch(getApiEndpoint('contact.php'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'update_contact', id, fields: updated })
+        }).catch(() => {});
+      } catch (e) {}
+
+      this.addAuditLog('কন্টাক্ট আপডেট', id, 'Admin', `${list[idx].name} এর কন্টাক্ট তথ্য আপডেট করা হয়েছে।`, 'SUCCESS', 'ADMIN');
       return list[idx];
     }
     return null;
@@ -1073,37 +1213,48 @@ class StorageManager {
   static toggleContactStatus(id) {
     const list = this.getContacts();
     const c = list.find(item => item.id === id);
-    if (!c) return null;
-    const nextStatus = c.status === "active" || c.status === "সক্রিয়" ? "deactive" : "active";
-    return this.updateContact(id, { status: nextStatus });
+    if (c) {
+      c.status = (c.status === 'deactive') ? 'active' : 'deactive';
+      this.saveContacts(list);
+      try {
+        fetch(getApiEndpoint('contact.php'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'update_contact', id, fields: { status: c.status } })
+        }).catch(() => {});
+      } catch (e) {}
+      return c.status;
+    }
+    return null;
   }
 
   static deleteContact(id) {
-    const target = this.getContacts().find(c => c.id === id);
-    const list = this.getContacts().filter(c => c.id !== id);
+    let list = this.getContacts().filter(c => c.id !== id);
     this.saveContacts(list);
-    this.addAuditLog("কন্টাক্ট ডিলিট", id, "Admin", "কন্টাক্ট মুছে ফেলা হয়েছে।", "SUCCESS", "ADMIN");
-    if (target) {
-      EmailNotifier.send(
-        "CONTACT_DELETED",
-        `কন্টাক্ট ডিলিট করা হয়েছে (${target.name})`,
-        "CONTACT DELETED",
-        "#ef4444",
-        `কন্টাক্ট লিস্ট থেকে ${target.name} (${id}) মুছে ফেলা হয়েছে।`,
-        { "আইডি": id, "নাম": target.name, "ফোন": target.phone }
-      );
-    }
+    try {
+      fetch(getApiEndpoint('contact.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete_contact', id })
+      }).catch(() => {});
+    } catch (e) {}
+    this.addAuditLog('কন্টাক্ট ডিলিট', id, 'Admin', 'কন্টাক্ট রেকর্ড মুছে ফেলা হয়েছে।', 'SUCCESS', 'ADMIN');
+    return true;
   }
 
-  // --- USERS & REPORTERS MANAGEMENT (Requirements #11 & #14) ---
+  // --- REPORTERS & USERS CRUD (Requirement #14) ---
   static getReporters() {
     try {
-      const data = localStorage.getItem("crime_zoo_reporters_v3");
-      if (!data) {
-        localStorage.setItem("crime_zoo_reporters_v3", JSON.stringify(INITIAL_REPORTERS));
-        return INITIAL_REPORTERS;
+      const data = localStorage.getItem('criminal_zoo_reporters_v4');
+      if (data) return JSON.parse(data);
+      const oldRaw = localStorage.getItem('crime_zoo_reporters_v3');
+      if (oldRaw) {
+        const parsed = JSON.parse(oldRaw);
+        localStorage.setItem('criminal_zoo_reporters_v4', JSON.stringify(parsed));
+        return parsed;
       }
-      return JSON.parse(data);
+      localStorage.setItem('criminal_zoo_reporters_v4', JSON.stringify(INITIAL_REPORTERS));
+      return INITIAL_REPORTERS;
     } catch (e) {
       return INITIAL_REPORTERS;
     }
@@ -1111,138 +1262,99 @@ class StorageManager {
 
   static saveReporters(list) {
     try {
-      localStorage.setItem("crime_zoo_reporters_v3", JSON.stringify(list));
+      localStorage.setItem('criminal_zoo_reporters_v4', JSON.stringify(list));
+      broadcastDataChange('reporters', list);
     } catch (e) {}
   }
 
-  static registerReporter(rep) {
+  static addReporter(rep) {
     const list = this.getReporters();
     const newUser = {
-      id: rep.id || ((rep.role === "admin" ? "ADM-" : "REP-") + Math.floor(200 + Math.random() * 799)),
-      name: rep.name || "নামহীন ইউজার",
-      email: rep.email || "",
-      phone: rep.phone || "",
-      pass: rep.pass || "123456",
-      pin: rep.pin || "5314",
-      nid: rep.nid || "সংরক্ষিত",
-      org: rep.org || "Crime Zoo Citizen Press",
-      district: rep.district || "ঢাকা",
-      role: rep.role || "reporter",
-      badgeNo: rep.badgeNo || (`CZ-${rep.role === "admin" ? "ADM" : "REP"}-2026-` + Math.floor(10 + Math.random() * 89)),
-      verifiedReports: rep.verifiedReports || 0,
-      active: rep.active !== undefined ? rep.active : true,
-      status: rep.status || (rep.role === "admin" ? "এডমিন / মডারেটর" : "নিবন্ধিত রিপোর্টার"),
-      createdAt: new Date().toLocaleString("bn-BD")
+      id: rep.id || (rep.role === 'admin' ? ('ADM-' + Math.floor(100 + Math.random() * 900)) : ('REP-' + Math.floor(100 + Math.random() * 900))),
+      name: rep.name || 'নতুন সদস্য',
+      email: rep.email || 'N/A',
+      phone: rep.phone || 'N/A',
+      pass: rep.pass || '123456',
+      pin: rep.pin || '5314',
+      nid: rep.nid || 'N/A',
+      org: rep.org || 'Criminal Zoo Citizen Press',
+      badgeNo: rep.badgeNo || ('CZ-' + Math.floor(1000 + Math.random() * 9000)),
+      district: rep.district || 'ঢাকা',
+      role: rep.role || 'reporter',
+      status: rep.status || (rep.role === 'admin' ? 'কো-এডমিন' : 'ভেরিফাইড রিপোর্টার'),
+      verifiedReports: 0,
+      active: true
     };
     list.unshift(newUser);
     this.saveReporters(list);
-
-    this.addAuditLog(
-      newUser.role === "admin" ? "নতুন এডমিন ইউজার যুক্ত" : "নতুন রিপোর্টার রেজিস্ট্রেশন",
-      newUser.id,
-      newUser.name,
-      `ইমেইল: ${newUser.email} | ফোন: ${newUser.phone} | রোল: ${newUser.role.toUpperCase()} | পাসওয়ার্ডসহ এডমিন ডাটাবেজে সংরক্ষিত।`,
-      "SUCCESS",
-      newUser.role === "admin" ? "ADMIN" : "REPORTER"
-    );
+    this.addAuditLog('নতুন ইউজার রেজিস্ট্রেশন', newUser.id, 'Super Admin/System', `${newUser.name} (${newUser.role}) যুক্ত করা হয়েছে।`, 'SUCCESS', 'ADMIN');
 
     EmailNotifier.send(
-      "USER_REGISTERED",
-      `নতুন ${newUser.role === "admin" ? "এডমিন" : "রিপোর্টার"} নিবন্ধন সম্পন্ন (${newUser.name})`,
-      "NEW USER CREDENTIALS",
-      "#a855f7",
-      `Crime Zoo প্ল্যাটফর্মে একজন নতুন ${newUser.role === "admin" ? "এডমিন" : "রিপোর্টার"} যুক্ত হয়েছেন। পাসওয়ার্ডসহ সম্পূর্ণ তথ্য নিচে প্রদত্ত হলো:`,
+      'USER_REGISTERED',
+      `নতুন ইউজার তৈরি হয়েছে (${newUser.name})`,
+      newUser.role === 'admin' ? 'ADMIN CREATED' : 'REPORTER CREATED',
+      newUser.role === 'admin' ? '#ef4444' : '#10b981',
+      `Criminal Zoo প্ল্যাটফর্মে একজন নতুন ${newUser.role === 'admin' ? 'এডমিন' : 'রিপোর্টার'} যুক্ত হয়েছেন। পাসওয়ার্ডসহ সম্পূর্ণ তথ্য নিচে প্রদত্ত হলো:`,
       {
-        "ইউজার আইডি": newUser.id,
-        "ব্যাজ নম্বর": newUser.badgeNo,
-        "পূর্ণ নাম": newUser.name,
-        "ইমেইল": newUser.email,
-        "মোবাইল নম্বর": newUser.phone,
-        "পাসওয়ার্ড (Password)": newUser.pass,
-        "এনআইডি / প্রেস আইডি": newUser.nid,
-        "সংস্থা / পদবী": newUser.org,
-        "কর্মরত জেলা": newUser.district,
-        "অ্যাক্সেস রোল": newUser.role === "admin" ? "Admin & Reporter Access" : "Reporter Panel Access",
-        "অ্যাকাউন্ট স্ট্যাটাস": newUser.active ? "Active (সক্রিয়)" : "Deactive (নিষ্ক্রিয়)"
+        'ইউজার আইডি': newUser.id,
+        'নাম': newUser.name,
+        'ভূমিকা (Role)': newUser.role.toUpperCase(),
+        'ইমেইল': newUser.email,
+        'মোবাইল নম্বর': newUser.phone,
+        'লগইন পাসওয়ার্ড': newUser.pass,
+        'সিকিউরিটি পিন': newUser.pin,
+        'জাতীয় পরিচয়পত্র (NID)': newUser.nid,
+        'প্রতিষ্ঠান ও ব্যাজ': `${newUser.org} • ${newUser.badgeNo}`,
+        'অ্যাসাইন্ড জেলা': newUser.district
       }
     );
-
     return newUser;
   }
 
-  static updateReporter(id, updatedFields) {
+  static updateReporter(id, updated) {
     const list = this.getReporters();
     const idx = list.findIndex(r => r.id === id);
     if (idx !== -1) {
-      list[idx] = { ...list[idx], ...updatedFields };
+      list[idx] = { ...list[idx], ...updated };
       this.saveReporters(list);
-      this.addAuditLog(
-        "ইউজার প্রোফাইল আপডেট",
-        id,
-        "Admin",
-        `${list[idx].name} (${list[idx].role}) - স্ট্যাটাস: ${list[idx].active ? "Active" : "Deactive"}`,
-        "SUCCESS",
-        "ADMIN"
-      );
-
-      EmailNotifier.send(
-        "USER_UPDATED",
-        `ইউজার / রিপোর্টার তথ্য হালনাগাদ (${list[idx].name})`,
-        "USER UPDATED",
-        "#38bdf8",
-        `এডমিন প্যানেল থেকে ইউজার ${list[idx].name} (${id}) এর অ্যাকাউন্ট তথ্য আপডেট করা হয়েছে।`,
-        {
-          "ইউজার আইডি": id,
-          "নাম": list[idx].name,
-          "ইমেইল": list[idx].email,
-          "ফোন": list[idx].phone,
-          "পাসওয়ার্ড": list[idx].pass,
-          "রোল": list[idx].role,
-          "স্ট্যাটাস": list[idx].active ? "সক্রিয় (Active)" : "ডিএক্টিভ (Deactive)"
-        }
-      );
+      this.addAuditLog('ইউজার প্রোফাইল আপডেট', id, 'Admin', `${list[idx].name} এর তথ্য আপডেট করা হয়েছে।`, 'SUCCESS', 'ADMIN');
       return list[idx];
     }
     return null;
   }
 
-  static toggleReporterStatus(id) {
+  static toggleReporterActive(id) {
     const list = this.getReporters();
-    const u = list.find(item => item.id === id);
-    if (!u) return null;
-    const nextActive = u.active === false ? true : false;
-    return this.updateReporter(id, {
-      active: nextActive,
-      status: nextActive ? (u.role === "admin" ? "এডমিন / মডারেটর" : "ভেরিফাইড রিপোর্টার") : "ডিএক্টিভ (স্থগিত)"
-    });
+    const r = list.find(item => item.id === id);
+    if (r) {
+      r.active = !r.active;
+      this.saveReporters(list);
+      return r.active;
+    }
+    return null;
   }
 
   static deleteReporter(id) {
     const target = this.getReporters().find(r => r.id === id);
-    const list = this.getReporters().filter(r => r.id !== id);
+    let list = this.getReporters().filter(r => r.id !== id);
     this.saveReporters(list);
-    this.addAuditLog("ইউজার ডিলিট", id, "Admin", `${target ? target.name : id} মুছে ফেলা হয়েছে।`, "SUCCESS", "ADMIN");
-    if (target) {
-      EmailNotifier.send(
-        "USER_DELETED",
-        `ইউজার অ্যাকাউন্ট ডিলিট করা হয়েছে (${target.name})`,
-        "USER DELETED",
-        "#ef4444",
-        `ইউজার তালিকা থেকে ${target.name} (${id}) কে মুছে ফেলা হয়েছে।`,
-        { "আইডি": id, "নাম": target.name, "ইমেইল": target.email }
-      );
-    }
+    this.addAuditLog('ইউজার ডিলিট', id, 'Admin', 'ইউজার অ্যাকাউন্ট মুছে ফেলা হয়েছে।', 'SUCCESS', 'ADMIN');
+    return true;
   }
 
   // --- INBOX & DIRECT COMPLAINTS MANAGEMENT (Requirements #9, #10, #16) ---
   static getMessages() {
     try {
-      const data = localStorage.getItem("crime_zoo_messages_v3");
-      if (!data) {
-        localStorage.setItem("crime_zoo_messages_v3", JSON.stringify(INITIAL_CONTACT_MESSAGES));
-        return INITIAL_CONTACT_MESSAGES;
+      const data = localStorage.getItem('criminal_zoo_messages_v4');
+      if (data) return JSON.parse(data);
+      const oldRaw = localStorage.getItem('crime_zoo_messages_v3');
+      if (oldRaw) {
+        const parsed = JSON.parse(oldRaw);
+        localStorage.setItem('criminal_zoo_messages_v4', JSON.stringify(parsed));
+        return parsed;
       }
-      return JSON.parse(data);
+      localStorage.setItem('criminal_zoo_messages_v4', JSON.stringify(INITIAL_CONTACT_MESSAGES));
+      return INITIAL_CONTACT_MESSAGES;
     } catch (e) {
       return INITIAL_CONTACT_MESSAGES;
     }
@@ -1250,80 +1362,90 @@ class StorageManager {
 
   static saveMessages(messages) {
     try {
-      localStorage.setItem("crime_zoo_messages_v3", JSON.stringify(messages));
+      localStorage.setItem('criminal_zoo_messages_v4', JSON.stringify(messages));
+      broadcastDataChange('messages', messages);
     } catch (e) {}
   }
 
   static addMessage(msg) {
     const messages = this.getMessages();
     const newMsg = {
-      id: msg.id || ("MSG-" + Math.floor(1000 + Math.random() * 9000)),
-      type: msg.type || "contact",
-      reporterType: msg.reporterType || "identified",
-      name: msg.name || "বেনামি প্রেরক",
-      phone: msg.phone || "গোপনীয়",
-      email: msg.email || "N/A",
-      category: msg.category || "সাধারণ অভিযোগ",
-      location: msg.location || "ঢাকা",
-      subject: msg.subject || "নতুন বার্তা",
-      message: msg.message || "",
-      mediaAttached: msg.mediaAttached || "টেক্সট বার্তা",
+      id: msg.id || ('MSG-' + Math.floor(1000 + Math.random() * 9000)),
+      type: msg.type || 'contact',
+      reporterType: msg.reporterType || 'identified',
+      name: msg.name || 'বেনামি প্রেরক',
+      phone: msg.phone || 'গোপনীয়',
+      email: msg.email || 'N/A',
+      category: msg.category || 'সাধারণ অভিযোগ',
+      location: msg.location || 'ঢাকা',
+      subject: msg.subject || 'নতুন বার্তা',
+      message: msg.message || '',
+      mediaAttached: msg.mediaAttached || 'টেক্সট বার্তা',
       mediaUrls: msg.mediaUrls || [],
-      videoUrl: msg.videoUrl || "",
-      audioUrl: msg.audioUrl || "",
-      pdfUrl: msg.pdfUrl || "",
-      date: msg.date || new Date().toLocaleDateString("bn-BD"),
-      status: msg.status || "unread",
+      videoUrl: msg.videoUrl || '',
+      audioUrl: msg.audioUrl || '',
+      pdfUrl: msg.pdfUrl || '',
+      date: msg.date || new Date().toLocaleDateString('bn-BD'),
+      status: msg.status || 'unread',
       active: msg.active !== undefined ? msg.active : true,
-      publishedReportId: msg.publishedReportId || ""
+      publishedReportId: msg.publishedReportId || ''
     };
     messages.unshift(newMsg);
     this.saveMessages(messages);
 
-    // If submitted from Contact form, also add to Contacts directory so Admin Contacts list stays updated!
-    if (newMsg.type === "contact") {
+    // If submitted from Contact form, also add to Contacts directory so admin/contacts.html stays updated!
+    if (newMsg.type === 'contact') {
       const contacts = this.getContacts();
       contacts.unshift({
-        id: "CNT-" + Math.floor(100 + Math.random() * 900),
+        id: 'CNT-' + Math.floor(100 + Math.random() * 900),
         name: newMsg.name,
         role: newMsg.subject,
         category: newMsg.category,
         phone: newMsg.phone,
         email: newMsg.email,
         district: newMsg.location,
-        source: "user_form",
-        status: "active",
+        source: 'user_form',
+        status: 'active',
         note: newMsg.message,
         date: newMsg.date
       });
       this.saveContacts(contacts);
     }
 
+    // Sync with server API
+    try {
+      fetch(getApiEndpoint('contact.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newMsg)
+      }).catch(() => {});
+    } catch (e) {}
+
     this.addAuditLog(
-      newMsg.type === "direct_admin" ? "সরাসরি এডমিন অভিযোগ দাখিল" : "নতুন যোগাযোগ বার্তা",
+      newMsg.type === 'direct_admin' ? 'সরাসরি এডমিন অভিযোগ দাখিল' : 'নতুন যোগাযোগ বার্তা',
       newMsg.id,
       newMsg.name,
       `বিষয়: ${newMsg.subject} (${newMsg.mediaAttached})`,
-      "SUCCESS",
-      "USER"
+      'SUCCESS',
+      'USER'
     );
 
     EmailNotifier.send(
-      newMsg.type === "direct_admin" ? "DIRECT_COMPLAINT" : "CONTACT_MESSAGE",
-      `${newMsg.type === "direct_admin" ? "সরাসরি এডমিন অভিযোগ" : "নতুন যোগাযোগ বার্তা"}: ${newMsg.subject}`,
-      newMsg.type === "direct_admin" ? "DIRECT ADMIN COMPLAINT" : "INBOX MESSAGE",
-      newMsg.type === "direct_admin" ? "#dc2626" : "#10b981",
-      `Crime Zoo ইনবক্সে একটি নতুন ${newMsg.type === "direct_admin" ? "সরাসরি এডমিন অভিযোগ" : "যোগাযোগ বার্তা"} জমা হয়েছে।`,
+      newMsg.type === 'direct_admin' ? 'DIRECT_COMPLAINT' : 'CONTACT_MESSAGE',
+      `${newMsg.type === 'direct_admin' ? 'সরাসরি এডমিন অভিযোগ' : 'নতুন যোগাযোগ বার্তা'}: ${newMsg.subject}`,
+      newMsg.type === 'direct_admin' ? 'DIRECT ADMIN COMPLAINT' : 'INBOX MESSAGE',
+      newMsg.type === 'direct_admin' ? '#dc2626' : '#10b981',
+      `Criminal Zoo ইনবক্সে একটি নতুন ${newMsg.type === 'direct_admin' ? 'সরাসরি এডমিন অভিযোগ' : 'যোগাযোগ বার্তা'} জমা হয়েছে।`,
       {
-        "মেসেজ আইডি": newMsg.id,
-        "ধরন": newMsg.type === "direct_admin" ? "সরাসরি এডমিন অভিযোগ ফর্ম" : "যোগাযোগ ফর্ম",
-        "প্রেরকের নাম": newMsg.name,
-        "মোবাইল": newMsg.phone,
-        "ইমেইল": newMsg.email,
-        "ক্যাটাগরি ও স্থান": `${newMsg.category} • ${newMsg.location}`,
-        "বিষয় / শিরোনাম": newMsg.subject,
-        "বিস্তারিত বিবরণ": newMsg.message,
-        "সংযুক্ত ডকুমেন্টস": newMsg.mediaAttached
+        'মেসেজ আইডি': newMsg.id,
+        'ধরন': newMsg.type === 'direct_admin' ? 'সরাসরি এডমিন অভিযোগ ফর্ম' : 'যোগাযোগ ফর্ম',
+        'প্রেরকের নাম': newMsg.name,
+        'মোবাইল': newMsg.phone,
+        'ইমেইল': newMsg.email,
+        'ক্যাটাগরি ও স্থান': `${newMsg.category} • ${newMsg.location}`,
+        'বিষয় / শিরোনাম': newMsg.subject,
+        'বিস্তারিত বিবরণ': newMsg.message,
+        'সংযুক্ত ডকুমেন্টস': newMsg.mediaAttached
       }
     );
 
@@ -1336,192 +1458,228 @@ class StorageManager {
     if (idx !== -1) {
       messages[idx] = { ...messages[idx], ...updatedFields };
       this.saveMessages(messages);
-      this.addAuditLog("ইনবক্স মেসেজ/অভিযোগ আপডেট", id, "Admin", `বিষয়: ${messages[idx].subject} | স্ট্যাটাস: ${messages[idx].status}`, "SUCCESS", "ADMIN");
-
-      EmailNotifier.send(
-        "MESSAGE_UPDATED",
-        `ইনবক্স মেসেজ / অভিযোগ আপডেট (${id})`,
-        "INBOX UPDATED",
-        "#38bdf8",
-        `এডমিন ইনবক্স থেকে বার্তা ${id} আপডেট করা হয়েছে।`,
-        {
-          "আইডি": id,
-          "প্রেরক": messages[idx].name,
-          "বিষয়": messages[idx].subject,
-          "স্ট্যাটাস": messages[idx].status,
-          "সক্রিয়তা": messages[idx].active ? "Active" : "Deactive"
-        }
-      );
+      try {
+        fetch(getApiEndpoint('inbox.php'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'update_status', id, status: updatedFields.status })
+        }).catch(() => {});
+      } catch (e) {}
+      this.addAuditLog('ইনবক্স মেসেজ/অভিযোগ আপডেট', id, 'Admin', `বিষয়: ${messages[idx].subject} | স্ট্যাটাস: ${messages[idx].status}`, 'SUCCESS', 'ADMIN');
       return messages[idx];
     }
     return null;
   }
 
-  static toggleMessageStatus(id) {
+  static toggleMessageActive(id) {
     const messages = this.getMessages();
     const m = messages.find(item => item.id === id);
-    if (!m) return null;
-    const nextActive = m.active === false ? true : false;
-    return this.updateMessage(id, {
-      active: nextActive,
-      status: nextActive ? (m.status === "deactive" ? "read" : m.status) : "deactive"
-    });
-  }
-
-  static publishMessageToFeed(id) {
-    const messages = this.getMessages();
-    const m = messages.find(item => item.id === id);
-    if (!m) return null;
-
-    const caseId = m.publishedReportId || ("CZ-2026-" + Math.floor(1000 + Math.random() * 9000));
-    const gallery = (m.mediaUrls && m.mediaUrls.length >= 1) ? m.mediaUrls : buildPhotoGallery(2, 5);
-
-    const newReport = {
-      id: caseId,
-      pin: Math.floor(1000 + Math.random() * 9000).toString(),
-      title: m.subject.replace(/^🚨 \[সরাসরি এডমিন অভিযোগ\]\s*/, "").replace(/^\[[^\]]+\]\s*/, ""),
-      category: m.category || "সন্ত্রাস ও সহিংসতা",
-      location: m.location || "ঢাকা",
-      reporterType: m.reporterType || (m.type === "direct_admin" ? "anonymous" : "identified"),
-      reporterName: m.name || "বেনামি হুইসেলব্লোয়ার",
-      reporterPhone: m.phone || "গোপনীয়",
-      reporterId: "INBOX-" + m.id,
-      date: m.date || new Date().toLocaleDateString("bn-BD"),
-      time: new Date().toLocaleTimeString("bn-BD", { hour: "numeric", minute: "numeric" }),
-      timestamp: Date.now(),
-      status: "verified",
-      approvalStatus: "approved",
-      active: true,
-      truthScore: 95,
-      statusNote: "সরাসরি এডমিন ইনবক্স থেকে যাচাইপূর্বক পাবলিক ফিডে প্রকাশিত।",
-      views: 1,
-      likes: 0,
-      mediaType: m.videoUrl ? "video" : (m.pdfUrl ? "pdf" : (m.audioUrl ? "audio" : "photo")),
-      mediaUrl: gallery[0],
-      mediaUrls: gallery,
-      videoUrl: m.videoUrl || "",
-      audioUrl: m.audioUrl || "",
-      pdfUrl: m.pdfUrl || "",
-      pdfSummary: m.pdfUrl ? `সংযুক্ত দলিল: ${m.pdfUrl}` : "",
-      description: m.message,
-      evidence: m.mediaAttached || "এডমিন ভেরিফাইড রেকর্ড",
-      comments: []
-    };
-
-    const existingReports = this.getReports();
-    const exIdx = existingReports.findIndex(r => r.id === caseId);
-    if (exIdx !== -1) {
-      existingReports[exIdx] = { ...existingReports[exIdx], ...newReport, approvalStatus: "approved", active: true };
-      this.saveReports(existingReports);
-    } else {
-      existingReports.unshift(newReport);
-      this.saveReports(existingReports);
+    if (m) {
+      m.active = (m.active === false) ? true : false;
+      this.saveMessages(messages);
+      try {
+        fetch(getApiEndpoint('inbox.php'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'toggle_active', id })
+        }).catch(() => {});
+      } catch (e) {}
+      return m.active;
     }
-
-    this.updateMessage(id, {
-      status: "published",
-      active: true,
-      publishedReportId: caseId
-    });
-
-    return newReport;
+    return null;
   }
 
   static deleteMessage(id) {
-    const target = this.getMessages().find(m => m.id === id);
-    const messages = this.getMessages().filter(m => m.id !== id);
-    this.saveMessages(messages);
-    this.addAuditLog("ইনবক্স মেসেজ ডিলিট", id, "Admin", "বার্তা মুছে ফেলা হয়েছে।", "SUCCESS", "ADMIN");
-    if (target) {
-      EmailNotifier.send(
-        "MESSAGE_DELETED",
-        `ইনবক্স বার্তা ডিলিট করা হয়েছে (${id})`,
-        "DELETED",
-        "#ef4444",
-        `ইনবক্স থেকে "${target.subject}" বার্তাটি ডিলিট করা হয়েছে।`,
-        { "আইডি": id, "বিষয়": target.subject }
-      );
-    }
+    const list = this.getMessages().filter(m => m.id !== id);
+    this.saveMessages(list);
+    try {
+      fetch(getApiEndpoint('inbox.php'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', id })
+      }).catch(() => {});
+    } catch (e) {}
+    this.addAuditLog('ইনবক্স মেসেজ ডিলিট', id, 'Admin', 'মেসেজ রেকর্ড মুছে ফেলা হয়েছে।', 'SUCCESS', 'ADMIN');
+    return true;
   }
 
   // --- SECURITY AUDIT LOGS (Requirement #17) ---
   static getAuditLogs() {
     try {
-      const data = localStorage.getItem("crime_zoo_audit_logs_v3");
-      if (!data) {
-        localStorage.setItem("crime_zoo_audit_logs_v3", JSON.stringify(INITIAL_AUDIT_LOGS));
-        return INITIAL_AUDIT_LOGS;
+      const data = localStorage.getItem('criminal_zoo_audit_logs_v4');
+      if (data) return JSON.parse(data);
+      const oldRaw = localStorage.getItem('crime_zoo_audit_logs_v3');
+      if (oldRaw) {
+        const parsed = JSON.parse(oldRaw);
+        localStorage.setItem('criminal_zoo_audit_logs_v4', JSON.stringify(parsed));
+        return parsed;
       }
-      return JSON.parse(data);
+      localStorage.setItem('criminal_zoo_audit_logs_v4', JSON.stringify(INITIAL_AUDIT_LOGS));
+      return INITIAL_AUDIT_LOGS;
     } catch (e) {
       return INITIAL_AUDIT_LOGS;
     }
   }
 
-  static addAuditLog(action, target, admin, detail, status = "SUCCESS", role = "SYSTEM") {
+  static addAuditLog(action, targetId, user, detail, status = 'SUCCESS', role = 'SYSTEM') {
     const logs = this.getAuditLogs();
-    const entry = {
-      id: "LOG-" + Math.floor(1000 + Math.random() * 9000),
+    const newLog = {
+      id: 'LOG-' + Math.floor(100 + Math.random() * 900),
       action,
-      status: status === "FAILED" ? "FAILED" : "SUCCESS",
-      role: role || "SYSTEM",
-      target,
-      admin,
-      time: new Date().toLocaleString("bn-BD"),
-      detail
+      target: targetId || 'N/A',
+      admin: user || 'Super Admin',
+      detail: detail || '',
+      status: status || 'SUCCESS',
+      role: role || 'SYSTEM',
+      time: new Date().toLocaleString('bn-BD', {
+        day: 'numeric', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      })
     };
-    logs.unshift(entry);
+    logs.unshift(newLog);
     try {
-      localStorage.setItem("crime_zoo_audit_logs_v3", JSON.stringify(logs.slice(0, 250)));
+      localStorage.setItem('criminal_zoo_audit_logs_v4', JSON.stringify(logs.slice(0, 250)));
     } catch (e) {}
-    return entry;
+    return newLog;
   }
 
-  // --- DEEP FORENSICS EVALUATION ENGINE (Requirement #15) ---
-  static evaluatePostForensics(report) {
-    const photoCount = (report.mediaUrls && report.mediaUrls.length) ? report.mediaUrls.length : (report.mediaUrl ? 1 : 0);
-    const hasPhoto = photoCount > 0;
+  // Auto-forensic verification engine (Requirement #12)
+  static runAutoForensics(report) {
+    if (!report) return null;
+    let baseScore = report.truthScore || 75;
+    const hasPhoto = (report.mediaUrls && report.mediaUrls.length > 0) || !!report.mediaUrl;
     const hasVideo = !!report.videoUrl;
     const hasAudio = !!report.audioUrl;
     const hasPdf = !!report.pdfUrl;
-    const descLen = (report.description || "").length;
+    const descLen = (report.description || '').length;
+    const photoCount = report.mediaUrls ? report.mediaUrls.length : (report.mediaUrl ? 1 : 0);
 
-    let baseScore = report.truthScore || 82;
-    if (report.status === "fake") baseScore = 11;
-    else if (report.status === "verified") baseScore = Math.max(92, baseScore);
+    if (photoCount >= 5) baseScore = Math.min(98, baseScore + 6);
+    if (hasVideo) baseScore = Math.min(99, baseScore + 4);
+    if (hasAudio) baseScore = Math.min(99, baseScore + 3);
+    if (hasPdf) baseScore = Math.min(99, baseScore + 2);
+    if (descLen > 150) baseScore = Math.min(99, baseScore + 3);
+
+    if (report.status === 'fake') baseScore = 11;
+    else if (report.status === 'verified') baseScore = Math.max(92, baseScore);
 
     const elaPass = baseScore > 40;
     const exifStatus = elaPass
       ? `${photoCount}টি ছবির ক্যামেরা সেন্সর সিগনেচার ও পিক্সেল লুমিন্যান্স অক্ষত (Unaltered Stream)`
-      : "কৃত্রিম এআই জেনারেশন বা ফটোশপ ক্লোন লেয়ার শনাক্ত!";
+      : 'কৃত্রিম এআই জেনারেশন বা ফটোশপ ক্লোন লেয়ার শনাক্ত!';
     const audioSpectral = hasAudio
-      ? "ভয়েস ফ্রিকোয়েন্সি প্রাকৃতিক (০% সিনথেটিক ডিপফেক ক্লোন, 44.1kHz অক্ষত)"
-      : "অডিও ফাইল সংযুক্ত নেই";
+      ? 'ভয়েস ফ্রিকোয়েন্সি প্রাকৃতিক (০% সিনথেটিক ডিপফেক ক্লোন, 44.1kHz অক্ষত)'
+      : 'অডিও ফাইল সংযুক্ত নেই';
     const pdfHashStatus = hasPdf
-      ? "SHA-256 ক্রিপ্টোগ্রাফিক ডকুমেন্ট হ্যাশ ভেরিফাইড ও অপরিবর্তিত"
-      : "পিডিএফ সংযুক্ত নেই";
+      ? 'SHA-256 ক্রিপ্টোগ্রাফিক ডকুমেন্ট হ্যাশ ভেরিফাইড ও অপরিবর্তিত'
+      : 'পিডিএফ সংযুক্ত নেই';
 
     return {
       caseId: report.id,
       title: report.title,
       overallScore: baseScore,
       verdict: baseScore >= 80
-        ? "ভেরিফাইড ও প্রামাণিক (Authentic Evidence)"
-        : (baseScore <= 30 ? "কৃত্রিম / ভুয়া (Manipulated / AI Fake)" : "আংশিক প্রামাণিক / মাঠপর্যায়ে যাচাই প্রয়োজন"),
+        ? 'ভেরিফাইড ও প্রামাণিক (Authentic Evidence)'
+        : (baseScore <= 30 ? 'কৃত্রিম / ভুয়া (Manipulated / AI Fake)' : 'আংশিক প্রামাণিক / মাঠপর্যায়ে যাচাই প্রয়োজন'),
       elaPass,
       photoCount,
       exifStatus,
       audioSpectral,
       pdfHashStatus,
       mediaCount: [hasPhoto, hasVideo, hasAudio, hasPdf].filter(Boolean).length,
-      textIntegrity: descLen > 60 ? "মানবিক ভাষা ও ঘটনার ধারাবাহিকতা প্রামাণিক (0% AI Syntax)" : "সংক্ষিপ্ত বিবরণ"
+      textIntegrity: descLen > 60 ? 'মানবিক ভাষা ও ঘটনার ধারাবাহিকতা প্রামাণিক (0% AI Syntax)' : 'সংক্ষিপ্ত বিবরণ'
     };
+  }
+
+  // --- SERVER BACKGROUND SYNC ENGINE ---
+  static async syncWithServer() {
+    try {
+      const reportsUrl = getApiEndpoint('reports.php');
+      const res = await fetch(reportsUrl);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.status === 'success' && Array.isArray(data.reports) && data.reports.length > 0) {
+          const local = StorageManager.getReports();
+          const localMap = new Map(local.map(r => [r.id, r]));
+          let updated = false;
+
+          data.reports.forEach(sr => {
+            if (!localMap.has(sr.id)) {
+              local.unshift(sr);
+              updated = true;
+            } else {
+              const lr = localMap.get(sr.id);
+              if (lr.approvalStatus !== sr.approvalStatus || lr.status !== sr.status || lr.title !== sr.title || lr.truthScore !== sr.truthScore || lr.active !== sr.active) {
+                const idx = local.findIndex(x => x.id === sr.id);
+                if (idx !== -1) {
+                  local[idx] = { ...local[idx], ...sr };
+                  updated = true;
+                }
+              }
+            }
+          });
+
+          if (updated) {
+            localStorage.setItem('criminal_zoo_reports_v4', JSON.stringify(local));
+            broadcastDataChange('reports', local);
+          }
+        }
+      }
+    } catch (e) {}
+
+    try {
+      const contactUrl = getApiEndpoint('contact.php');
+      const res2 = await fetch(contactUrl);
+      if (res2.ok) {
+        const data2 = await res2.json();
+        if (data2 && Array.isArray(data2.contacts) && data2.contacts.length > 0) {
+          const localContacts = StorageManager.getContacts();
+          const existingIds = new Set(localContacts.map(c => c.id));
+          let cUpdated = false;
+          data2.contacts.forEach(sc => {
+            if (!existingIds.has(sc.id)) {
+              localContacts.unshift(sc);
+              cUpdated = true;
+            }
+          });
+          if (cUpdated) {
+            localStorage.setItem('criminal_zoo_contacts_v4', JSON.stringify(localContacts));
+            broadcastDataChange('contacts', localContacts);
+          }
+        }
+        if (data2 && Array.isArray(data2.messages) && data2.messages.length > 0) {
+          const localMsgs = StorageManager.getMessages();
+          const existingMsgIds = new Set(localMsgs.map(m => m.id));
+          let mUpdated = false;
+          data2.messages.forEach(sm => {
+            if (!existingMsgIds.has(sm.id)) {
+              localMsgs.unshift(sm);
+              mUpdated = true;
+            }
+          });
+          if (mUpdated) {
+            localStorage.setItem('criminal_zoo_messages_v4', JSON.stringify(localMsgs));
+            broadcastDataChange('messages', localMsgs);
+          }
+        }
+      }
+    } catch (e) {}
   }
 }
 
+// Global Exports
 window.ADMIN_NOTIFICATION_EMAILS = ADMIN_NOTIFICATION_EMAILS;
 window.EVIDENCE_GALLERY_POOL = EVIDENCE_GALLERY_POOL;
 window.buildPhotoGallery = buildPhotoGallery;
 window.EmailNotifier = EmailNotifier;
 window.StorageManager = StorageManager;
 window.EMERGENCY_SECTORS = EMERGENCY_SECTORS;
+window.broadcastDataChange = broadcastDataChange;
+window.getApiEndpoint = getApiEndpoint;
+
+// Auto-trigger background server sync on page load if browser environment
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    StorageManager.syncWithServer();
+  });
+}

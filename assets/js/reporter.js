@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - REPORTER AUTHENTICATION, SEPARATE LOGIN/REGISTER & DASHBOARD CONTROLLER
+ * CRIMINAL ZOO - REPORTER AUTHENTICATION, SEPARATE LOGIN/REGISTER & DASHBOARD CONTROLLER
  * Features:
  * - Separate Login (reporter-login.html) & Register (reporter-register.html) handling
  * - Logs all Success and Failed login attempts to Security Audit Log (Requirement #17)

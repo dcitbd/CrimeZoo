@@ -1,0 +1,57 @@
+[
+  {
+    "id": "DIR-101",
+    "type": "direct_admin",
+    "reporterType": "anonymous",
+    "name": "বেনামি হুইসেলব্লোয়ার",
+    "phone": "জিরো-লগ এনক্রিপ্টেড",
+    "email": "whistle@secure.tip",
+    "category": "চোরাচালান",
+    "location": "পতেঙ্গা, চট্টগ্রাম",
+    "subject": "কাস্টমস খালাসে জাল নথি ও কন্টেইনার বাইপাস",
+    "message": "নির্দিষ্ট একটি কন্টেইনারে আজ রাতে অবৈধ রাসায়নিক পণ্য খালাস করার গোপন পরিকল্পনা করা হচ্ছে। সংযুক্ত ৬টি ছবি ও পিডিএফ দেখুন।",
+    "mediaAttached": "6 Photos + PDF Evidence",
+    "mediaUrls": [
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1508873696983-2df5293cb32f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80"
+    ],
+    "videoUrl": "",
+    "audioUrl": "",
+    "pdfUrl": "customs-secret-manifest.pdf",
+    "date": "০৬ নভেম্বর ২০২৬",
+    "status": "pending",
+    "active": true,
+    "publishedReportId": ""
+  },
+  {
+    "id": "MSG-102",
+    "type": "contact",
+    "reporterType": "identified",
+    "name": "মাহমুদুল হাসান",
+    "phone": "০১৭১২-৩৩৪৪৫৫",
+    "email": "hasan@gmail.com",
+    "category": "সাইবার ক্রাইম",
+    "location": "মিরপুর, ঢাকা",
+    "subject": "[অনুসন্ধান ও প্রমাণ প্রেরণ] অনলাইন ই-কমার্স প্রতারণার শিকার",
+    "message": "একটি ভুয়া ফেসবুক পেজ অগ্রিম টাকা নিয়ে ব্লক করেছে। পেমেন্ট রসিদ ও কথোপকথনের স্ক্রিনশট সংযুক্ত করলাম।",
+    "mediaAttached": "Audio + Image",
+    "mediaUrls": [
+      "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1508873696983-2df5293cb32f?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=80"
+    ],
+    "videoUrl": "",
+    "audioUrl": "scam-call-record.mp3",
+    "pdfUrl": "",
+    "date": "০৫ নভেম্বর ২০২৬",
+    "status": "unread",
+    "active": true,
+    "publishedReportId": ""
+  }
+]

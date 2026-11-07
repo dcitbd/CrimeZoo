@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - MASTER ADMIN PANEL, FULL POST EDITOR, DYNAMIC APPROVAL
+ * CRIMINAL ZOO - MASTER ADMIN PANEL, FULL POST EDITOR, DYNAMIC APPROVAL
  * & 6-LAYER AI MEDIA FORENSICS CONTROLLER
  */
 
@@ -19,7 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
   checkAdminAuth();
   initAdminDashboard();
   initAdminMobileSidebar();
+  if (typeof BroadcastChannel !== "undefined") {
+    const adminChannel = new BroadcastChannel("criminal_zoo_channel");
+    adminChannel.onmessage = function (ev) {
+      if (ev.data && (ev.data.type === "reports" || ev.data.type === "messages" || ev.data.type === "contacts")) {
+        initAdminDashboard();
+      }
+    };
+  }
   window.addEventListener("storage", function () {
+    initAdminDashboard();
+  });
+  window.addEventListener("cz_data_updated", function () {
     initAdminDashboard();
   });
 });
@@ -176,7 +187,7 @@ function verifyAdminStep2TimeLock(inputCode) {
       `এডমিন প্যানেলে সফল লগইন (${actor})`,
       "ADMIN LOGIN SUCCESS",
       "#10b981",
-      `Crime Zoo এডমিন কন্ট্রোল প্যানেলে এইমাত্র সফলভাবে লগইন করা হয়েছে।`,
+      `Criminal Zoo এডমিন কন্ট্রোল প্যানেলে এইমাত্র সফলভাবে লগইন করা হয়েছে।`,
       {
         "লগইনকারী এডমিন": actor,
         "লগইন ধাপ": "১ম ধাপ ও ২য় ধাপ ভেরিফাইড",
@@ -413,7 +424,7 @@ function injectGlobalAdminModals() {
       <div class="modal-container" style="max-width: 680px; padding: 1.75rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.25rem;">
           <div>
-            <span class="badge badge-official">Crime Zoo অটো ফরেনসিক যাচাই মডিউল</span>
+            <span class="badge badge-official">Criminal Zoo অটো ফরেনসিক যাচাই মডিউল</span>
             <h3 style="color:#fff; font-size:1.3rem; margin-top:0.35rem;" id="avModalTitle">ফরেনসিক স্ক্যান রিপোর্ট</h3>
           </div>
           <button class="modal-close-btn" onclick="closeAutoVerifyPopup()">✕</button>
@@ -485,7 +496,7 @@ function injectGlobalAdminModals() {
             </div>
             <div class="form-group">
               <label class="form-label">রিপোর্টারের নাম (প্রযোজ্য হলে)</label>
-              <input type="text" id="dynPostReporter" class="form-control" placeholder="Crime Zoo ডেস্ক">
+              <input type="text" id="dynPostReporter" class="form-control" placeholder="Criminal Zoo ডেস্ক">
             </div>
           </div>
 
@@ -749,7 +760,7 @@ window.openAutoVerifyPopup = function (reportId) {
       <div style="display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:space-between; align-items:center;">
         <span style="font-size:0.82rem; color:var(--text-secondary);">অটো যাচাই ফলাফল অনুযায়ী সরাসরি স্ট্যাটাস ও লাইভ সেট করুন:</span>
         <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
-          <button class="btn btn-sm" style="background:#10b981; color:#fff;" onclick="applyAutoVerifyStatus('${r.id}', 'verified', 96, 'Crime Zoo অটো ফরেনসিক ইঞ্জিন কর্তৃক শতভাগ সত্যতা যাচাইকৃত ও অনুমোদিত।')">✓ ভেরিফাইড ও লাইভ করুন</button>
+          <button class="btn btn-sm" style="background:#10b981; color:#fff;" onclick="applyAutoVerifyStatus('${r.id}', 'verified', 96, 'Criminal Zoo অটো ফরেনসিক ইঞ্জিন কর্তৃক শতভাগ সত্যতা যাচাইকৃত ও অনুমোদিত।')">✓ ভেরিফাইড ও লাইভ করুন</button>
           <button class="btn btn-sm" style="background:#0284c7; color:#fff;" onclick="applyAutoVerifyStatus('${r.id}', 'partially_true', 65, 'আংশিক সত্য; অতিরিক্ত মাঠপর্যায়ের তথ্যের জন্য পর্যবেক্ষণাধীন।')">⚖️ আংশিক সত্য</button>
           <button class="btn btn-sm" style="background:#dc2626; color:#fff;" onclick="applyAutoVerifyStatus('${r.id}', 'fake', 8, 'ফরেনসিক পরীক্ষায় কৃত্রিম/ভুয়া প্রমাণিত হওয়ায় ফ্ল্যাগ করা হয়েছে।')">✕ ভুয়া চিহ্নিত করুন</button>
         </div>
@@ -854,7 +865,7 @@ window.submitAdminDynamicPost = function () {
   const cat = document.getElementById("dynPostCat").value;
   const status = document.getElementById("dynPostStatus").value;
   const loc = document.getElementById("dynPostLoc").value.trim();
-  const reporter = document.getElementById("dynPostReporter").value.trim() || (type === "anonymous" ? "বেনামি" : "Crime Zoo ডেস্ক");
+  const reporter = document.getElementById("dynPostReporter").value.trim() || (type === "anonymous" ? "বেনামি" : "Criminal Zoo ডেস্ক");
   const video = (document.getElementById("dynPostVideo")?.value || "").trim();
   const audio = (document.getElementById("dynPostAudio")?.value || "").trim();
   const pdf = (document.getElementById("dynPostPdf")?.value || "").trim();

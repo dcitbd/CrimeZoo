@@ -1,5 +1,5 @@
 /**
- * CRIME ZOO - REPORTER-EXCLUSIVE TRUTH TRACKING CONTROLLER (Requirement #6)
+ * CRIMINAL ZOO - REPORTER-EXCLUSIVE TRUTH TRACKING CONTROLLER (Requirement #6)
  * Only users who are logged in as a Reporter (or Admin) can access Truth Tracking
  * and view/use Secret Tracking Codes.
  */

@@ -1,4 +1,4 @@
-const CACHE_NAME = "crime-zoo-v3";
+const CACHE_NAME = "criminal-zoo-v3";
 const STATIC_ASSETS = [
   "./",
   "./index.html",

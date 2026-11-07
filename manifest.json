@@ -1,6 +1,6 @@
 {
-  "name": "Crime Zoo - অপরাধ অনুসন্ধান ও জনসচেতনতা পোর্টাল",
-  "short_name": "Crime Zoo",
+  "name": "Criminal Zoo - অপরাধ অনুসন্ধান ও জনসচেতনতা পোর্টাল",
+  "short_name": "Criminal Zoo",
   "description": "লাইভ অপরাধ প্রতিবেদন, মাল্টি-মিডিয়া প্রমাণ, সত্যতা যাচাই ও হুইসেলব্লোয়ার প্ল্যাটফর্ম",
   "start_url": "./index.html",
   "display": "standalone",

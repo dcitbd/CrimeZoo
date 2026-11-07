@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CRIME ZOO - MAXIMUM SECURITY, WATERMARK & ANTI-DOWNLOAD SHIELD
+   CRIMINAL ZOO - MAXIMUM SECURITY, WATERMARK & ANTI-DOWNLOAD SHIELD
    ========================================================================== */
 
 /* 1. Strict Anti-Copy & Selection Lock */
@@ -37,17 +37,18 @@ img, video, audio, iframe, canvas {
   background: transparent;
 }
 
-/* 3. Global Crime Zoo Logo Watermark Layer (Low Visibility Across Entire Site) */
+/* 3. Global Criminal Zoo Logo Watermark Layer (Low Visibility Across Entire Site) */
 .security-watermark-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 99990;
   overflow: hidden;
-  opacity: 0.045;
+  opacity: 0.02;
   background-image: url('../icons/logo.png');
-  background-size: 240px auto;
-  background-repeat: space;
+  background-size: 320px auto;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .security-watermark-text {
